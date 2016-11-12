@@ -22,6 +22,11 @@ public class Main {
 		System.out.println(llist);
 		System.out.println(">>>>-------->>>>>");
 		System.out.println(llist.informacio(4));
+		// Apliquem el descompte a un producte
+		llist.getLlista()[0].aplicarDescompte();
+		System.out.println(llist.getLlista()[0]);
+		
+		
 
 	}
 

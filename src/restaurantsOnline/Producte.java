@@ -24,7 +24,7 @@ public abstract class Producte {
 	 */
 	public Producte(String nom, double preu, double descompte) {
 		this.nom = nom;
-		this.preu = preu * (1 - descompte / 100);
+		this.preu = preu;
 		this.descompte = descompte;
 		numProducte++;
 		this.codi = numProducte;
@@ -82,7 +82,6 @@ public abstract class Producte {
 	 */
 	public void setDescompte(float descompte) {
 		this.descompte = descompte;
-		this.preu = preu * (1 - descompte / 100);
 	}
 
 	/**
@@ -92,6 +91,14 @@ public abstract class Producte {
 	 */
 	public static int getNumProducte() {
 		return numProducte;
+	}
+	
+	/**
+	 * Mètode per modificar el preu segons el percentage del descompte.
+	 * 
+	 */
+	public void aplicarDescompte(){
+		preu = preu * (1 - descompte / 100);
 	}
 
 	/**

@@ -31,6 +31,15 @@ public class LlistaProducte {
 	public int getnElem() {
 		return nElem;
 	}
+	
+	/**
+	 * Getter de l'atribut llista.
+	 *
+	 * @return el la llista de producte.
+	 */
+	public Producte[] getLlista() {
+		return llista;
+	}
 
 	/**
 	 * Mètode per afegir un producte a la llista.
