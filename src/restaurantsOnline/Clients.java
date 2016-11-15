@@ -1,4 +1,4 @@
-
+package restaurantsOnline;
 public class Clients {
 
 	//ATRIBUTS
