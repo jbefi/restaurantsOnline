@@ -46,7 +46,7 @@ public class LlistaProducte {
 	 *
 	 * @param p El producte a afegir.
 	 */
-	public void afegirProducte(Producte p) {
+	public void afegirProducte(Producte p) {//anadir producte
 		if (nElem < llista.length) {
 			llista[nElem] = p;
 			nElem++;
@@ -122,6 +122,8 @@ public class LlistaProducte {
 			}
 		}
 	}
+	
+	
 	
 	/**
 	 * Mètode toString() per retornar les informacions de l'objecte de la Classe instanciada.
