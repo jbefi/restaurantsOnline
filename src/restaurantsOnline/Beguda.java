@@ -1,6 +1,7 @@
 package restaurantsOnline;
 
 
+
 /**
  * Class que implementa un producte de tipus Beguda.
  * 
@@ -14,7 +15,7 @@ public class Beguda extends Producte {
 	private boolean teAlcohol;
 
 	/**
-	 * Constructor.
+	 * Constructor per la 1a fase. Sense l'atribut 'codi' en el paràmetre.
 	 *
 	 * @param nom El nom de la beguda.
 	 * @param preu El preu de la beguda sense el descompte.
@@ -24,6 +25,23 @@ public class Beguda extends Producte {
 	 */
 	public Beguda(String nom, double preu, double descompte, int volum, boolean teAlcohol) {
 		super(nom, preu, descompte);
+		this.volum = volum;
+		this.teAlcohol = teAlcohol;
+
+	}
+	
+	/**
+	 * Constructor per la 2a fase. Amb l'atribut 'codi' en el paràmetre.
+	 *
+	 * @param codi L'identificador del producte.
+	 * @param nom El nom de la beguda.
+	 * @param preu El preu de la beguda sense el descompte.
+	 * @param descompte La rebaixa que apliquem a la beguda.
+	 * @param volum El volum de la beguda.
+	 * @param teAlcohol Si conté alcohol o no.
+	 */
+	public Beguda(int codi,String nom, double preu, double descompte, int volum, boolean teAlcohol) {
+		super(codi,nom, preu, descompte);
 		this.volum = volum;
 		this.teAlcohol = teAlcohol;
 
@@ -70,7 +88,7 @@ public class Beguda extends Producte {
 	 */
 	@Override
 	public String toString() {
-		return super.toString() + " volum: " + volum + "\t teAlcohol: " + teAlcohol + "\n";
+		return super.toString() + " volum: " + volum + "ml\n És alcohòlica: " + teAlcohol + "\n";
 	}
 
 }

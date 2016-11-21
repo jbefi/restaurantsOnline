@@ -1,6 +1,6 @@
 package restaurantsOnline;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class Producte.
  * 
@@ -16,7 +16,7 @@ public abstract class Producte {
 	protected static int numProducte; // Atribut estàtica per implementar el codi de cada producte.
 
 	/**
-	 * Constructor.
+	 * Constructor per la Fase. Sense 'codi' en el paràmetre.
 	 *
 	 * @param nom El nom del producte.
 	 * @param preu El preu del producte sense el descompte.
@@ -28,6 +28,21 @@ public abstract class Producte {
 		this.descompte = descompte;
 		numProducte++;
 		this.codi = numProducte;
+	}
+	
+	/**
+	 * Constructor per 2a Fase. Amb el paràmetre 'codi's.
+	 *
+	 * @param codi L'identificador del producte.
+	 * @param nom El nom del producte.
+	 * @param preu El preu del producte sense el descompte.
+	 * @param descompte La rebaixa que apliquem al producte.
+	 */
+	public Producte(int codi,String nom, double preu, double descompte) {
+		this.nom = nom;
+		this.preu = preu;
+		this.descompte = descompte;
+		this.codi = codi;
 	}
 
 	/**
@@ -105,7 +120,7 @@ public abstract class Producte {
 	 * Mètode toString() per retornar les informacions de l'objecte de la Classe instanciada.
 	 */
 	public String toString() {
-		return "\n Codi:" + codi + "\t Nom: " + nom + "\t  Preu: " + preu + "€\t Descompte: " + descompte + "% \n";
+		return "\n " + codi + ": " + nom + " ............................ " + preu + "€\n Descompte: " + descompte + "% \n";
 	}
 
 }

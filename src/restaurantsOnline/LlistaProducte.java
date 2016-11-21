@@ -32,21 +32,13 @@ public class LlistaProducte {
 		return nElem;
 	}
 	
-	/**
-	 * Getter de l'atribut llista.
-	 *
-	 * @return el la llista de producte.
-	 */
-	public Producte[] getLlista() {
-		return llista;
-	}
 
 	/**
 	 * Mètode per afegir un producte a la llista.
 	 *
 	 * @param p El producte a afegir.
 	 */
-	public void afegirProducte(Producte p) {//anadir producte
+	public void afegirProducte(Producte p) {
 		if (nElem < llista.length) {
 			llista[nElem] = p;
 			nElem++;
@@ -57,9 +49,8 @@ public class LlistaProducte {
 	 * Mètodes privat per retornar la posició en la llista a partir del codi passat pel paràmetre
 	 *
 	 * @param codi L'identificador únic del producte.
-	 * @return la posició d'aquest element amb el seu codi corresponent.
+	 * @return la posició d'aquest element amb el seu codi corresponent. En cas contrari, es retornarà -1.
 	 */
-	// 
 	private int retPosLLista(int codi) {
 		if (nElem == 0) {
 			return -1;
@@ -113,17 +104,36 @@ public class LlistaProducte {
 			if (pos == -1) {
 				return "";
 			} else {
-				if (llista[pos] instanceof Plat)
-					return ((Plat)llista[pos]).toString();
-				else if (llista[pos] instanceof Beguda)
-					return ((Beguda)llista[pos]).toString();
-				else 
-					return ""; // No entrarà mai aquí al 99,99%
+				return (llista[pos].toString());
 			}
 		}
 	}
 	
-	
+	/**
+	 * Mètodes  per retornar la posició en la llista a partir del nom passat pel paràmetre.
+	 *
+	 * @param nom El nom del producte.
+	 * @return la posició d'aquest element amb el seu nom corresponent. En cas contrari, es retornarà -1.
+	 */
+	public int posicioProducte(String nom){
+		if (nElem == 0) {
+			return -1;
+		} else {
+			boolean trobat = false;
+			int i = 0, posTrobat = 0;
+			while (!trobat && (i < nElem)) {
+				if (llista[i].getNom().equalsIgnoreCase(nom)) {
+					posTrobat = i;
+					trobat = true;
+				}
+				i++;
+			}
+			if (trobat)
+				return posTrobat;
+			else
+				return -1;
+		}
+	}
 	
 	/**
 	 * Mètode toString() per retornar les informacions de l'objecte de la Classe instanciada.
@@ -134,10 +144,7 @@ public class LlistaProducte {
 		} else {
 			String frase = "";
 			for (int i=0; i<nElem; i++) {
-				if (llista[i] instanceof Plat)
-					frase+= ((Plat)llista[i]).toString();
-				else if (llista[i] instanceof Beguda)
-					frase+=  ((Beguda)llista[i]).toString();
+					frase+= llista[i].toString();
 			}
 			
 			return frase;
