@@ -1,6 +1,7 @@
 package restaurantsOnline;
 
 /**
+ * Classe de la Comanda
  * Created by Kidu15 on 11/11/16.
  */
 public class LlistaComanda {
@@ -11,18 +12,26 @@ public class LlistaComanda {
     final int maxElementos = 100;
 
 
-
+    /**
+     * Constructor de la LlistaComanda
+     */
     public LlistaComanda(){
-
-    }
+            nElem=0;
+     }
     //mètodes
 
-    public void afegirComanda(String resumComanda, int quantitat, boolean confirmarDescuento, float descuento) {  //metode per afegir la comanda
+
+    /**
+     * Constructor de la LlistaComanda
+     * @param  , nom del producte
+     * @param producte  , quantitat del producte a afegir a la llista
+     */
+    public void afegirComanda(LlistaProducte[] producte) {  //metode per afegir la comanda
 
 
         if (nElem < maxElementos) {
 
-            llista[nElem] = new Comanda(resumComanda, quantitat, confirmarDescuento, descuento);
+            llista[nElem] = new Comanda(producte);
             nElem++;
         }
 

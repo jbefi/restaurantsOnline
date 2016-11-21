@@ -1,6 +1,7 @@
 package restaurantsOnline;
 
 import java.util.Scanner;
+<<<<<<< Updated upstream
 public class Main {
 
 	static Scanner teclat = new Scanner(System.in);
@@ -97,6 +98,123 @@ public class Main {
 		        	
 	    	
 	    }
+=======
+
+public class Main {
+
+	public static void main(String[] args) {
+
+		Beguda b1 = new Beguda("cola",2,10,30,false);
+		Beguda b2 = new Beguda("fanta",1.5,20,30,false);
+		Plat p1 = new Plat("Amanida", 5, 20);
+		String[] alergies = {"lactosa", "celiacs", "fruits secs"};
+		Plat p2 = new Plat("Sopa", 10, 5, alergies);
+		LlistaProducte llist = new LlistaProducte(10);
+		
+		llist.afegirProducte(b1);
+		llist.afegirProducte(b2);
+		llist.afegirProducte(p1);
+		System.out.println(llist);
+		llist.eliminarProducte(3);
+		System.out.println("--------");
+		System.out.println(llist);
+		llist.afegirProducte(p2);
+		System.out.println("-------->>>>>");
+		System.out.println(llist);
+		System.out.println(">>>>-------->>>>>");
+		System.out.println(llist.informacio(4));
+		// Apliquem el descompte a un producte
+		llist.getLlista()[0].aplicarDescompte();
+		System.out.println(llist.getLlista()[0]);
+
+		Scanner teclat=new Scanner(System.in);
+		int opcio; //creo les variable enteres que utilitzo per a les opcions que dono al client
+		int quantitat;
+		String nom; //variable utilitzada per al nom del producte
+		boolean confirmar, plats, begudes;  //creo les variables booleanes que necessito per a fer el meu programa
+		confirmar = false;
+		plats = false;
+		begudes = false;
+
+
+
+		System.out.println("** Crear comanda **") ;
+
+		while(!confirmar) {
+
+
+			int i;
+			while(!plats) {
+
+				System.out.println("Introdueix els plat que vols") ;
+
+				nom=teclat.nextLine();
+
+				System.out.println("Introdueix la quantitat") ;
+
+				quantitat=teclat.nextInt();
+
+				for (i=0;i<=quantitat; i++) {
+
+					Comanda.afegirElement(nom);
+
+				}
+
+				System.out.println("Si vols mes plats, posa l'1, si no, el 2");
+				opcio=teclat.nextInt();
+				if (opcio==2){
+					plats=true;
+				}
+			}
+			while (!begudes) {
+
+				System.out.println("Introdueix les begudes que vols") ;
+
+				nom=teclat.nextLine();
+
+				System.out.println("Introdueix la quantitat") ;
+
+				quantitat=teclat.nextInt();
+
+				for (i=0;i<=quantitat; i++) {
+
+					Comanda.afegirElement(nom);
+
+				}
+				System.out.println("Si vols mes begudes, posa l'1, si no, el 2");
+				opcio=teclat.nextInt();
+				if (opcio==2){
+					begudes=true;
+				}
+			}
+
+			System.out.println("Per veure el resum de la comanda, posa l'1, per més productes posa el 2") ;
+
+			opcio=teclat.nextInt();
+
+			if (opcio==1){
+
+
+				LlistaComanda.afegirComanda(producte);
+
+				// resum comanda
+
+				System.out.println("Si vols confirmar la comanda, posa l'1, si vols més productes el 2 ");
+
+				opcio=teclat.nextInt();
+				if (opcio==1){
+					confirmar=true;
+				}
+
+			}
+
+		}
+
+
+
+
+	}
+>>>>>>> Stashed changes
 
 	    public static void consultarInformacio(LlistaProducte llistP)
 	    {
