@@ -1,7 +1,6 @@
 package restaurantsOnline;
 
 
-
 /**
  * Class que implementa un producte de tipus Beguda.
  * 
