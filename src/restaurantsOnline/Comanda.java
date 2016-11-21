@@ -8,29 +8,28 @@ public class Comanda {
 
     //definicio de variables a la classe Comanda
 
-    private LlistaProducte producte;
-    //    private LlistaProducte producte = new LlistaProducte(100);
+    //private LlistaProducte producte;
+     private LlistaProducte producte = new LlistaProducte(100);
     private Date hora;
     private float descuento;
     private boolean confirmarDescuento;
     private static int identComanda=0;
     private String nom;
+    private static int nElem=0;
 
-    public Comanda(LlistaProducte[] producte), Date hora){
 
-        int i;
-        for (i =0; i <=producte.length; i++) this.producte[i] = producte[i];
-        this.confirmarDescuento = confirmarDescuento;
-        this.descuento = descuento;
+
+    public Comanda(LlistaProducte[] producte, Date hora){
+        
         identComanda=identComanda+1;
     }
 
-    public static void afegirElement(String nom) {
+    public void afegirElement(String nom) {  //completar con informacion chino
 
+        LlistaProducte.retPosLlista(nom);
 
-        producte.afegirProducte(nom);
-
-
+       // producte[nElem].afegirProducte(nom);  //copiar
+        nElem++;
     }
 
 

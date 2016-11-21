@@ -9,7 +9,7 @@ public class LlistaComanda {
     //definicio de variables
     private int nElem;
     private Comanda[] llista;
-    final int maxElementos = 100;
+    private final int maxElementos = 100;
 
 
     /**
@@ -23,7 +23,6 @@ public class LlistaComanda {
 
     /**
      * Constructor de la LlistaComanda
-     * @param  , nom del producte
      * @param producte  , quantitat del producte a afegir a la llista
      */
     public void afegirComanda(LlistaProducte[] producte) {  //metode per afegir la comanda
@@ -35,16 +34,15 @@ public class LlistaComanda {
             nElem++;
         }
 
-        return;
-
     }
 
     public void eliminarComanda(int identificador) {   //metode per eliminar la comanda
 
         int i=0, j;
-        boolean be=false;
+        boolean be;
+        be = false;
 
-        while(i<nElem && be==false){
+        while(i<nElem && !be){
 
             if(identificador==(llista[i].getIdentComanda())){
                 for(j=i;j<-1;j++){
@@ -57,7 +55,6 @@ public class LlistaComanda {
             i++;
         }
         nElem--;
-        return;
     }
 
     public void ordenarComandes() {     // metode per ordenar comandes
