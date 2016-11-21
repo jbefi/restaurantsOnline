@@ -25,12 +25,12 @@ public class LlistaComanda {
      * Constructor de la LlistaComanda
      * @param producte  , quantitat del producte a afegir a la llista
      */
-    public void afegirComanda(LlistaProducte[] producte) {  //metode per afegir la comanda
+    public void afegirComanda(LlistaProducte[] producte, Date hora) {  //metode per afegir la comanda
 
 
         if (nElem < maxElementos) {
 
-            llista[nElem] = new Comanda(producte);
+            llista[nElem] = new Comanda(producte, hora );
             nElem++;
         }
 

@@ -16,13 +16,14 @@ public class Comanda {
     private static int identComanda=0;
     private String nom;
     private static int nElem=0;
-
+    private int posicion;
 
 
     public Comanda(LlistaProducte[] producte, Date hora){
         
         identComanda=identComanda+1;
     }
+
 
     public void afegirElement(String nom) {  //completar con informacion chino
 
@@ -32,6 +33,18 @@ public class Comanda {
         nElem++;
     }
 
+    public int precioProducto (int posicion){
+
+        int aux1;
+        int aux;
+        int aux2;
+        aux2 = producte[posicion].getPreu();
+        aux1 = producte[posicion].getDescompte();
+
+        aux= aux - (aux2*aux1);
+
+        return aux;
+    }
 
     public Date getHora() {
         return hora;
