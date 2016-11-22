@@ -3,7 +3,7 @@ public class Clients {
 
 	//ATRIBUTS
 	private String Nom_client;
-	private String Adreça;
+	private String Adreca;
 	private int Telefon;
 	private String Usuari;
 	private int Contrasenya;
@@ -16,9 +16,9 @@ public class Clients {
 	
 	
 	
-	public Clients(String Nom_client, String Adreça, int Telefon, String Usuari, int Contrasenya, String[] Restriccions, LlistaComanda[] Comandes) {
+	public Clients(String Nom_client, String Adreca, int Telefon, String Usuari, int Contrasenya, String[] Restriccions, LlistaComanda[] Comandes) {
 		this.Nom_client = Nom_client;
-		this.Adreça = Adreça;
+		this.Adreca = Adreca;
 		this.Telefon = Telefon;
 		this.Usuari = Usuari;
 		this.Contrasenya = Contrasenya;
@@ -43,8 +43,8 @@ public class Clients {
 	}
 
 
-	public String getAdreça() {
-		return Adreça;
+	public String getAdreca() {
+		return Adreca;
 	}
 
 
@@ -98,8 +98,8 @@ public class Clients {
 	}
 
 
-	public void setAdreça(String adreça) {
-		Adreça = adreça;
+	public void setAdreca(String Adreca) {
+		Adreca = Adreca;
 	}
 
 
@@ -146,10 +146,14 @@ public class Clients {
 	public void setnComandes(int nComandes) {
 		this.nComandes = nComandes;
 	}
-	
-	
-	
-	
+
+
+	@Override
+	public String toString() {
+		return "Clients [Nom_client=" + Nom_client + ", Adreca=" + Adreca + ", Telefon=" + Telefon + ", Usuari="
+				+ Usuari + ", Contrasenya=" + Contrasenya + ", Restriccions=" + Arrays.toString(Restriccions)
+				+ ", Preferent=" + Preferent + ", Identificador=" + Identificador + ", nComandes=" + nComandes + "]";
+	}
 	
 	
 }
