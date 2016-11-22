@@ -17,7 +17,7 @@ public class LlistaClients {
 	}
 	
 	
-	public int Consultar_Client(String Nom_client)
+	public int consultar_Client(String Nom_client)
 	{
 		int i = 0;
 		boolean trobat = false;
@@ -42,11 +42,11 @@ public class LlistaClients {
 	}
 	
 	
-	public LlistaComanda Consultar_Comandes(String Nom_client)
+	public LlistaComanda consultar_Comandes(String Nom_client)
 	{
 		int i;
 		
-		i = Consultar_Client(Nom_client);
+		i = consultar_Client(Nom_client);
 		if (i != -1)
 		{
 			return (llista[i].getComandes());
@@ -58,7 +58,7 @@ public class LlistaClients {
 	}
 	
 	
-	public void Passa_Preferent (Clients Client)
+	public void passa_Preferent (Clients Client)
 	{
 		
 		if (Client.getnComandes() > 5)
@@ -70,7 +70,7 @@ public class LlistaClients {
 	
 	
 	
-	public boolean Conte_Restriccions (Clients Client, String Restriccions[])
+	public boolean conte_Restriccions (Clients Client, String Restriccions[])
 	{
 		int i = 0;
 		int j = 0;
@@ -98,15 +98,21 @@ public class LlistaClients {
 	}
 	
 	
-	public Comandes Copiar_Comanda(String Nom_Client, int identComanda)
+	public String[] copiar_Comanda(String Nom_Client, int identComanda)
 	{
 		
 		int i = 0;
 		int j;
-		j = Consultar_Client(Nom_Client);
+		j = consultar_Client(Nom_Client);
 		boolean trobat = false;
+		
+		// Obtenir llista comandes del client
+		// Buscar la comanda comparant codis (int)
+		
+		
 		while ((!trobat) && (i<this.nClients))
 		{
+			
 			trobat = Objects.equals(this.llista[i].getidentComanda(), identComanda);
 			if (!trobat)
 			{
@@ -116,8 +122,8 @@ public class LlistaClients {
 		
 		if (trobat)
 		{
-			
-			return (Llista_comandes[i]);
+			String[] comanda_aux = this.llista[i];
+			return (comanda_aux);
 		}
 		else
 		{

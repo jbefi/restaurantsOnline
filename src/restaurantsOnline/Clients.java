@@ -3,7 +3,7 @@ public class Clients {
 
 	//ATRIBUTS
 	private String Nom_client;
-	private String Adreça;
+	private String Adreca;
 	private int Telefon;
 	private String Usuari;
 	private int Contrasenya;
@@ -11,14 +11,14 @@ public class Clients {
 	private boolean Preferent;
 	private int Identificador;
 	private static int ID_Clients = 1;
-	private LlistaComanda[] Comandes;
+	private LlistaComanda comandes;
 	private int nComandes;
 	
 	
 	
-	public Clients(String Nom_client, String Adreça, int Telefon, String Usuari, int Contrasenya, String[] Restriccions, LlistaComanda[] Comandes) {
+	public Clients(String Nom_client, String Adreca, int Telefon, String Usuari, int Contrasenya, String[] Restriccions, Comanda[] Comandes) {
 		this.Nom_client = Nom_client;
-		this.Adreça = Adreça;
+		this.Adreca = Adreca;
 		this.Telefon = Telefon;
 		this.Usuari = Usuari;
 		this.Contrasenya = Contrasenya;
@@ -27,11 +27,8 @@ public class Clients {
 			this.Restriccions[i] = Restriccions[i];
 		}
 		
-		for (int i=0; i<this.Comandes.length; i++)
-		{
-			this.Comandes[i] = Comandes[i];
-		}
-		this.nComandes = 0;
+		this.comandes = new LlistaComanda(Comandes);
+		this.nComandes = Comandes.length;
 		
 		this.Preferent = false;
 		this.Identificador = ID_Clients++;
@@ -43,8 +40,8 @@ public class Clients {
 	}
 
 
-	public String getAdreça() {
-		return Adreça;
+	public String getAdreca() {
+		return Adreca;
 	}
 
 
@@ -83,8 +80,8 @@ public class Clients {
 	}
 
 
-	public LlistaComanda[] getComandes() {
-		return Comandes;
+	public LlistaComanda getComandes() {
+		return comandes;
 	}
 
 
@@ -98,8 +95,8 @@ public class Clients {
 	}
 
 
-	public void setAdreça(String adreça) {
-		Adreça = adreça;
+	public void setAdreca(String Adreca) {
+		Adreca = Adreca;
 	}
 
 
@@ -138,18 +135,23 @@ public class Clients {
 	}
 
 
-	public void setComandes(LlistaComanda[] comandes) {
-		Comandes = comandes;
+	public void setComandes(LlistaComanda comandes) {
+		this.comandes = comandes;
 	}
 
 
 	public void setnComandes(int nComandes) {
 		this.nComandes = nComandes;
 	}
-	
-	
-	
-	
+
+
+	@Override
+	public String toString() {
+		return "Clients [Nom_client=" + Nom_client + ", Adreca=" + Adreca + ", Telefon=" + Telefon + ", Usuari="
+				+ Usuari + ", Contrasenya=" + Contrasenya + ", Restriccions=" +
+				// Acabar de fer el toString retornant la llista de restriccions
+				 ", Preferent=" + Preferent + ", Identificador=" + Identificador + ", nComandes=" + nComandes + "]";
+	}
 	
 	
 }

@@ -13,7 +13,8 @@ public class Plat extends Producte {
 	private String[] restriccions;
 
 	/**
-	 * Constructor del plat sense restricció alimentària.
+	 * Constructor del plat sense restricció alimentària. 
+	 * Sense l'atribut 'codi' en el paràmetre (1a Fase).
 	 *
 	 * @param nom El nom del plat.
 	 * @param preu El preu del plat sense el descompte.
@@ -27,6 +28,7 @@ public class Plat extends Producte {
 
 	/**
 	 * Constructor del plat amb restricció alimentària.
+	 * Sense l'atribut 'codi' en el paràmetre (1a Fase).
 	 *
 	 * @param nom El nom del plat.
 	 * @param preu El preu del plat sense el descompte.
@@ -39,6 +41,28 @@ public class Plat extends Producte {
 		this.restriccions = new String[restriccions.length];
 		for (int i = 0; i < restriccions.length; i++)
 			this.restriccions[i] = restriccions[i];
+
+	}
+	
+	/**
+	 * Constructor del plat per la 2a Fase.
+	 *
+	 * @param nom El nom del plat.
+	 * @param preu El preu del plat sense el descompte.
+	 * @param descompte La rebaixa que apliquem al plat.
+	 * @param restriccions Diferents tipus de restrccions alimentàries.
+	 */
+	public Plat(int codi,String nom, double preu, double descompte, String[] restriccions) {
+		super(codi,nom, preu, descompte);
+		this.teRestriccio = true;
+		this.restriccions = new String[restriccions.length];
+		for (int i = 0; i < restriccions.length; i++)
+			this.restriccions[i] = restriccions[i];
+		if (restriccions[0].equals("NoRestriccions"))
+			teRestriccio = false;
+		else 
+			teRestriccio = true;
+		
 
 	}
 
@@ -86,10 +110,15 @@ public class Plat extends Producte {
 		String frase;
 		frase = super.toString();
 		if (teRestriccio){
-			frase += "Restriccions alimentàries: \t";
-			for (int i=0; i<this.restriccions.length; i++)
-				frase += restriccions[i] + ",\t";
+			frase += " Al·lèrgies:  ";
+			for (int i=0; i<this.restriccions.length; i++){
+				frase += restriccions[i];
+				if (i != (this.restriccions.length -1))
+					frase += ", ";
+			}
+			
 		}
+		frase += "\n";
 		return  frase;
 	}
 
