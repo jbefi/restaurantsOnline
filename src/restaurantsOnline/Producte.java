@@ -89,6 +89,7 @@ public abstract class Producte {
 	public void setPreu(double preu) {
 		this.preu = preu;
 	}
+	
 
 	/**
 	 * Setter de descompte.
