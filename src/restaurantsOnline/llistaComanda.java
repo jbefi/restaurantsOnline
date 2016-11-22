@@ -25,7 +25,8 @@ public class llistaComanda {
         nElem=comandes.length;
     }
     
-    public int getnElem (){return nElem;}
+    public int getnElem ()
+    {return nElem;}
     
     //mètodes
 
@@ -35,7 +36,7 @@ public class llistaComanda {
      * @param producte  , quantitat del producte a afegir a la llista
      */
 
-    public void afegirComanda(LlistaProducte[] producte, Date hora) {  //metode per afegir la comanda
+    public void afegirComanda(LlistaProducte producte, Date hora) {  //metode per afegir la comanda
         if (nElem < maxElementos) {
 
             llista[nElem] = new Comanda(producte, hora);
