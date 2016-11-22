@@ -5,7 +5,7 @@ import java.util.Date;
  * Classe de la Comanda
  * Created by Kidu15 on 11/11/16.
  */
-public class llistaComanda {
+public class LlistaComanda {
 
     //definicio de variables
     private int nElem;
@@ -16,11 +16,11 @@ public class llistaComanda {
     /**
      * Constructor de la LlistaComanda
      */
-    public llistaComanda(){
+    public LlistaComanda(){
         nElem=0;
     }
     
-    public llistaComanda(Comanda[] comandes){
+    public LlistaComanda(Comanda[] comandes){
     	llista=comandes;
         nElem=comandes.length;
     }
