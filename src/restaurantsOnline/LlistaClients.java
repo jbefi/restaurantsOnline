@@ -42,7 +42,7 @@ public class LlistaClients {
 	}
 	
 	
-	public LlistaComanda consultar_Comandes(String Nom_client)
+	public llistaComanda consultar_Comandes(String Nom_client)
 	{
 		int i;
 		
@@ -113,7 +113,7 @@ public class LlistaClients {
 		while ((!trobat) && (i<this.nClients))
 		{
 			
-			trobat = Objects.equals(this.llista[i].getidentComanda(), identComanda);
+			trobat = Objects.equals(this.llista[i].getIdentComanda(), identComanda);
 			if (!trobat)
 			{
 				i++;
