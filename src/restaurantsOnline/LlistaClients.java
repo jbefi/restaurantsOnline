@@ -16,6 +16,11 @@ public class LlistaClients {
 		
 	}
 	
+	public void creaClient(Clients client)
+	{
+		this.llista[nClients] = client;
+		nClients++;
+	}
 	
 	public int consultar_Client(String Nom_client)
 	{
@@ -98,7 +103,7 @@ public class LlistaClients {
 	}
 	
 	
-	public String[] copiar_Comanda(String Nom_Client, int identComanda)
+	public Comanda copiar_Comanda(String Nom_Client, int identComanda)
 	{
 		
 		int i = 0;
@@ -109,12 +114,15 @@ public class LlistaClients {
 		// Obtenir llista comandes del client
 		// Buscar la comanda comparant codis (int)
 		
+		llistaComanda llista_comandes = this.llista[j].getComandes();
 		
-		while ((!trobat) && (i<this.nClients))
+		while ((!trobat) && (i<llista_comandes.getnElem()))
 		{
-			
-			trobat = Objects.equals(this.llista[i].getIdentComanda(), identComanda);
-			if (!trobat)
+			if (llista_comandes.getLlista()[i].getIdentComanda() == identComanda)
+			{
+				trobat = true;
+			}
+			else
 			{
 				i++;
 			}
@@ -122,8 +130,7 @@ public class LlistaClients {
 		
 		if (trobat)
 		{
-			String[] comanda_aux = this.llista[i];
-			return (comanda_aux);
+			return (llista_comandes.getLlista()[i]);
 		}
 		else
 		{

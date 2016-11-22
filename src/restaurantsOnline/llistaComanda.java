@@ -44,7 +44,13 @@ public class llistaComanda {
 
     }
 
-    public void eliminarComanda(int identificador) {   //metode per eliminar la comanda
+    
+    
+    public Comanda[] getLlista() {
+		return llista;
+	}
+
+	public void eliminarComanda(int identificador) {   //metode per eliminar la comanda
 
         int i=0, j;
         boolean be;
