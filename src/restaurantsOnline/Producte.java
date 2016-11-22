@@ -80,6 +80,24 @@ public abstract class Producte {
 	public double getPreu() {
 		return preu;
 	}
+	
+	/**
+	 * Setter de preu.
+	 *
+	 * @param preu El nou valor del preu.
+	 */
+	public void setPreu(double preu) {
+		this.preu = preu;
+	}
+
+	/**
+	 * Setter de descompte.
+	 *
+	 * @return descompte El nou valor de decompte.
+	 */
+	public void setDescompte(double descompte) {
+		this.descompte = descompte;
+	}
 
 	/**
 	 * Getter de descompte.

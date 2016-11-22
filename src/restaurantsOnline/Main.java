@@ -1,7 +1,7 @@
 package restaurantsOnline;
 
 import java.util.Scanner;
-<<<<<<< Updated upstream
+
 public class Main {
 
 	static Scanner teclat = new Scanner(System.in);
@@ -37,7 +37,7 @@ public class Main {
 	    	
 	    	
 	        Beguda aux= new Beguda(nom,preu,descompte,volum,false);
-	        Plat aux1= new Plat(nom,preu,descompte,false,null);//arreglar
+	        Plat aux1= new Plat(nom,preu,descompte);//arreglar
 	        
 	     String Product="beguda";
 	     Product=teclat.nextLine();
@@ -98,7 +98,7 @@ public class Main {
 		        	
 	    	
 	    }
-=======
+
 
 public class Main {
 
@@ -214,7 +214,7 @@ public class Main {
 
 
 	}
->>>>>>> Stashed changes
+
 
 	    public static void consultarInformacio(LlistaProducte llistP)
 	    {
