@@ -15,12 +15,9 @@ public class Comanda {
     private float descuento;
     private boolean confirmarDescuento;
     private static int identComanda=0;
-    private String nom;
-    private static int nElem=0;
-    private int posicion;
 
 
-    public Comanda(LlistaProducte[] producte, Date hora){
+    public Comanda(LlistaProducte producte, Date hora){
         identComanda=identComanda+1;
         this.hora=hora;
     }
@@ -32,9 +29,7 @@ public class Comanda {
         aux = producte.posicioProducte(nom);
 
         if  (aux>=0){
-
                 this.producte.afegirProducte(producte.getLlista()[aux]);
-                nElem++;
         }
         return aux;
     }

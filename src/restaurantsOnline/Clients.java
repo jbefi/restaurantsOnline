@@ -96,7 +96,7 @@ public class Clients {
 
 
 	public void setAdreca(String Adreca) {
-		Adreca = Adreca;
+		this.Adreca = Adreca;
 	}
 
 

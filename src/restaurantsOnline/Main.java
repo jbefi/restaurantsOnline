@@ -5,7 +5,9 @@ import java.util.Date;
 
 public class Main {
 	
-	
+	public LlistaProducte llistaProducte;
+	public llistaComanda llistaComandes;
+	public LlistaClients llistaClients;
 
 	static Scanner teclat = new Scanner(System.in);
 	 public static void mostraMenu()
@@ -14,7 +16,6 @@ public class Main {
 	        System.out.println("\n\nOpcions del menu:");
 	        System.out.println("\n\t1. Afegir nous productes");
 	        System.out.println("\n\t2. Eliminar producte");    
-	        System.out.println("\t3. Carregar els productes a partir d'un fitxer de dades");
 	        System.out.println("\t4. Consultar la informacio que es demana al registre ");
 	        System.out.println("\t5. Crear un nou client "); 
 	        System.out.println("\t6. Consultar un client "); 
@@ -33,18 +34,16 @@ public class Main {
 	    	String nom;
 	    	Double preu;
 	    	Double descompte;
-	    	
-	    	
-	       
-	       
+	    	Plat p;
 	        
 	     String Product="beguda";
-	     Product=teclat.nextLine();
 	     
+	     // TODO Que demanes
+	     
+	     Product=teclat.nextLine();
 	      
 	      switch(Product){
 	    	  case "beguda":
-	    		  Beguda b;
 	    		  int volum;
 	  	    	boolean tAlcohol;
 	    		  System.out.print("\n\n\tIndica el nom de biguda que vols agefir :\t");
@@ -57,12 +56,12 @@ public class Main {
 	    	      volum=teclat.nextInt();
 	    	      System.out.print("\n\n\tIndica si la beguda te alcol  :\t");
 	    	      tAlcohol=teclat.nextBoolean();
-	    	      Beguda b1= new Beguda(nom,preu,descompte,volum,false);
+	    	      Beguda b1= new Beguda(nom,preu,descompte,volum,tAlcohol);
 	    	      llistP.afegirProducte(b1);
 	    	    break;
 	    	  case "plat":
 	    		  boolean tRestr;
-	  	    	String[] res;
+	  	    	String[] res = null;
 	    	     System.out.print("\n\n\tIndica el nom del plat que vols afegir:\t");
 	    	     nom=teclat.next();
  	         System.out.print("\n\n\tIndica el preu del plat que vols agefir :\t");
@@ -72,9 +71,18 @@ public class Main {
 	    	      System.out.print("\n\n\tIndica si el plat te retriccions  :\t");
 	    	      
 	    	      tRestr=teclat.nextBoolean();
-	    	      System.out.print("\n\n\tIndica si el plat te retriccions  :\t");
+	    	      if (tRestr){
+	    	    	  System.out.print("\n\n\tIndica si el plat te retriccions  :\t");
+	    	    	  
+	    	    	  
+	    	    	  //TODO DEmanar REstriccions
+	    	    	  
+	    	    	  p= new Plat(nom,preu,descompte, res);
+	    	      }else
+	    	      	p= new Plat(nom,preu,descompte);
+	    	      
 	    	     
-	    	      Plat p= new Plat(nom,preu,descompte);
+	    	      
 	    	      llistP.afegirProducte(p);
 	      }
 	    }
@@ -102,7 +110,6 @@ public class Main {
 
 	public static void afegirComanda() {
 
-		Scanner teclat=new Scanner(System.in);
 		int opcio; //creo les variable enteres que utilitzo per a les opcions que dono al client
 		int quantitat;
 		String nom; //variable utilitzada per al nom del producte
@@ -183,7 +190,8 @@ public class Main {
 	    public static void consultarInformacio(LlistaProducte llistP)
 	    {
 	    	
-	    	//Demanar codi
+	    	
+	    	//TODO Demanar codi
 	    	
 	    	int i; 
 			for (i=0; i<100; i++ ){
@@ -215,11 +223,14 @@ public class Main {
 	        System.out.print("\n\n\tIndica si ele client te alguna restreccions:\t");
 	        System.out.println("1.");
 	        
-	        // ACABAR DEMANAR RESTRICCIONS
+	        // TODO ACABAR DEMANAR RESTRICCIONS
 	        
 	        
 	        
 	        Clients client=new Clients(nom,adreca,tel,usuari,contr,tRestr, new llistaComanda());
+	        
+	        
+	        //TODO Afegir a la llista de Clients
 	        
 	    }
 
@@ -253,6 +264,9 @@ public class Main {
             System.out.print("\n\n\tIndica el identificador  del comanda que vols copiar :\t");
 	        iden = Integer.parseInt(teclat.nextLine());
 	    	
+	        
+	        // TODO Agefir a la llista de comandes del client
+	        
 		   //llistCl.Copiar_Comanda(nom,iden);
 	    }
 	    
@@ -267,6 +281,16 @@ public class Main {
 	    
 	    public static void main(String[] args)
 	    {
+	    	
+	    	
+	    	//TODO Llegir fitxer Comandes - Catalin
+	    	
+	    	//TODO Llegit Fitxxer Productes - Enyu
+	    	
+	    	//TODO Llegir fitxer Clients - Pablo
+	    	
+	    	
+	    	//TODO 1 Excepcio cada un Catalin, Enyu, Pablo
 	    	
 	    	
 	    	// Carregar de fitxer
@@ -296,17 +320,16 @@ public class Main {
 	    	LlistaClients llistCl = new LlistaClients();
 	    	llistaComanda llistCo = new llistaComanda();
 
-	    	int opcio;
-
+	    	int opcio=0;
+	    	while(opcio != 11)
+	    	{  		
 	    	mostraMenu();
 	    	opcio = Integer.parseInt(teclat.nextLine());
-	    	while(opcio != 11)
-	    	{
-
+	    	System.out.println(opcio);
 	    		switch(opcio)
 	    		{
 	    		case 1:
-	    			afegirProducte(llistP);break;
+	    			System.out.println("HOLA");afegirProducte(llistP);;break;
 	    		case 2:
 	    			eliminarProducte(llistP);break;
 	    		case 4:

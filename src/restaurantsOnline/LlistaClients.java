@@ -111,9 +111,6 @@ public class LlistaClients {
 		j = consultar_Client(Nom_Client);
 		boolean trobat = false;
 		
-		// Obtenir llista comandes del client
-		// Buscar la comanda comparant codis (int)
-		
 		llistaComanda llista_comandes = this.llista[j].getComandes();
 		
 		while ((!trobat) && (i<llista_comandes.getnElem()))
