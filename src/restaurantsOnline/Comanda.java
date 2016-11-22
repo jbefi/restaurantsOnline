@@ -20,9 +20,9 @@ public class Comanda {
     private int posicion;
 
 
-    public Comanda(LlistaProducte[] producte){
-
+    public Comanda(LlistaProducte[] producte, Date hora){
         identComanda=identComanda+1;
+        this.hora=hora;
     }
 
 
@@ -38,7 +38,6 @@ public class Comanda {
         }
         return aux;
     }
-
 
     public Date getHora() {
         return hora;

@@ -11,7 +11,7 @@ public class Clients {
 	private boolean Preferent;
 	private int Identificador;
 	private static int ID_Clients = 1;
-	private LlistaComanda comandes;
+	private llistaComanda comandes;
 	private int nComandes;
 	
 	
@@ -27,7 +27,7 @@ public class Clients {
 			this.Restriccions[i] = Restriccions[i];
 		}
 		
-		this.comandes = new LlistaComanda(Comandes);
+		this.comandes = new llistaComanda(Comandes);
 		this.nComandes = Comandes.length;
 		
 		this.Preferent = false;
@@ -80,7 +80,7 @@ public class Clients {
 	}
 
 
-	public LlistaComanda getComandes() {
+	public llistaComanda getComandes() {
 		return comandes;
 	}
 
@@ -135,7 +135,7 @@ public class Clients {
 	}
 
 
-	public void setComandes(LlistaComanda comandes) {
+	public void setComandes(llistaComanda comandes) {
 		this.comandes = comandes;
 	}
 

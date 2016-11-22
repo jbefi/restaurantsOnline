@@ -1,12 +1,11 @@
 package restaurantsOnline;
 
-
 import java.util.Date;
 /**
  * Classe de la Comanda
  * Created by Kidu15 on 11/11/16.
  */
-public class LlistaComanda {
+public class llistaComanda {
 
     //definicio de variables
     private int nElem;
@@ -17,11 +16,11 @@ public class LlistaComanda {
     /**
      * Constructor de la LlistaComanda
      */
-    public LlistaComanda(){
+    public llistaComanda(){
         nElem=0;
     }
     
-    public LlistaComanda(Comanda[] comandes){
+    public llistaComanda(Comanda[] comandes){
     	llista=comandes;
         nElem=comandes.length;
     }
@@ -35,12 +34,11 @@ public class LlistaComanda {
      * Constructor de la LlistaComanda
      * @param producte  , quantitat del producte a afegir a la llista
      */
+
     public void afegirComanda(LlistaProducte[] producte, Date hora) {  //metode per afegir la comanda
-
-
         if (nElem < maxElementos) {
 
-            llista[nElem] = new Comanda(producte, hora );
+            llista[nElem] = new Comanda(producte, hora);
             nElem++;
         }
 
