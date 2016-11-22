@@ -10,7 +10,6 @@ public class Comanda {
     //definicio de variables a la classe Comanda
 
     private LlistaProducte producte;
-    //private LlistaProducte producte = new LlistaProducte(100);
     private Date hora;
     private float descuento;
     private boolean confirmarDescuento;
@@ -23,7 +22,7 @@ public class Comanda {
     }
 
 
-    public int afegirElement(String nom) {  //completar con informacion En Yu
+    public int afegirElement(String nom) {  
 
         int aux;
         aux = producte.posicioProducte(nom);

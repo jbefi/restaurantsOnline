@@ -6,7 +6,7 @@ import java.util.Date;
 public class Main {
 	
 	public LlistaProducte llistaProducte;
-	public llistaComanda llistaComandes;
+	public LlistaComanda llistaComandes;
 	public LlistaClients llistaClients;
 
 	static Scanner teclat = new Scanner(System.in);
@@ -126,6 +126,7 @@ public class Main {
 		while(!confirmar) {
 
 			int i;
+			int aux; 
 			while(!plats) {
 
 				System.out.println("Introdueix els plat que vols") ;
@@ -137,7 +138,11 @@ public class Main {
 				quantitat=teclat.nextInt();
 
 				for (i=0;i<=quantitat; i++) {
-					nova.afegirElement(nom);
+					aux=nova.afegirElement(nom);
+					if(aux==-1){
+						System.out.println("No hi ha l'element"); 
+					}
+					
 				}
 
 				System.out.println("Si vols mes plats, posa l'1, si no, el 2");
@@ -218,7 +223,7 @@ public class Main {
 	        tel=teclat.next();
 	        System.out.print("\n\n\tIndica el nom del usuari client:\t");
 	        usuari=teclat.next();
-	        System.out.print("\n\n\tIndica la contrasiña del client:\t");
+	        System.out.print("\n\n\tIndica la contrasiï¿½a del client:\t");
 	        contr=teclat.nextInt();
 	        System.out.print("\n\n\tIndica si ele client te alguna restreccions:\t");
 	        System.out.println("1.");
@@ -227,7 +232,7 @@ public class Main {
 	        
 	        
 	        
-	        Clients client=new Clients(nom,adreca,tel,usuari,contr,tRestr, new llistaComanda());
+	        Clients client=new Clients(nom,adreca,tel,usuari,contr,tRestr, new LlistaComanda());
 	        
 	        
 	        //TODO Afegir a la llista de Clients
@@ -244,7 +249,7 @@ public class Main {
 		        llistCl.consultar_Client(nom);
 	    }
 	    
-	    private static void eliminarComanda(llistaComanda llistCo)
+	    private static void eliminarComanda(LlistaComanda llistCo)
 	  
 	    {
 	    	int iden;
@@ -271,7 +276,7 @@ public class Main {
 	    }
 	    
 	    
-	    private static void ordenarComandes(llistaComanda llistCo)
+	    private static void ordenarComandes(LlistaComanda llistCo)
 		  
 	    {
 	        System.out.print("\n\n\t La llista de comanda ordenat\t");
@@ -318,7 +323,7 @@ public class Main {
 	    	llistP.afegirProducte(p2);
 
 	    	LlistaClients llistCl = new LlistaClients();
-	    	llistaComanda llistCo = new llistaComanda();
+	    	LlistaComanda llistCo = new LlistaComanda();
 
 	    	int opcio=0;
 	    	while(opcio != 11)

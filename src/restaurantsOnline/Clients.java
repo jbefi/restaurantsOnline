@@ -11,12 +11,12 @@ public class Clients {
 	private boolean Preferent;
 	private int Identificador;
 	private static int ID_Clients = 1;
-	private llistaComanda comandes;
+	private LlistaComanda comandes;
 	private int nComandes;
 	
 	
 	
-	public Clients(String Nom_client, String Adreca, String Telefon, String Usuari, int Contrasenya, String[] Restriccions, llistaComanda Comandes) {
+	public Clients(String Nom_client, String Adreca, String Telefon, String Usuari, int Contrasenya, String[] Restriccions, LlistaComanda Comandes) {
 		this.Nom_client = Nom_client;
 		this.Adreca = Adreca;
 		this.Telefon = Telefon;
@@ -80,7 +80,7 @@ public class Clients {
 	}
 
 
-	public llistaComanda getComandes() {
+	public LlistaComanda getComandes() {
 		return comandes;
 	}
 
@@ -135,7 +135,7 @@ public class Clients {
 	}
 
 
-	public void setComandes(llistaComanda comandes) {
+	public void setComandes(LlistaComanda comandes) {
 		this.comandes = comandes;
 	}
 

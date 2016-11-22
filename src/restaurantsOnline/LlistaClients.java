@@ -47,7 +47,7 @@ public class LlistaClients {
 	}
 	
 	
-	public llistaComanda consultar_Comandes(String Nom_client)
+	public LlistaComanda consultar_Comandes(String Nom_client)
 	{
 		int i;
 		
@@ -111,7 +111,7 @@ public class LlistaClients {
 		j = consultar_Client(Nom_Client);
 		boolean trobat = false;
 		
-		llistaComanda llista_comandes = this.llista[j].getComandes();
+		LlistaComanda llista_comandes = this.llista[j].getComandes();
 		
 		while ((!trobat) && (i<llista_comandes.getnElem()))
 		{
