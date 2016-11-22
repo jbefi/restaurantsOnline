@@ -1,4 +1,4 @@
-package restaurantsOnline;
+
 import java.util.Date;
 /**
  * Created by Kidu15 on 11/11/16.
@@ -8,8 +8,8 @@ public class Comanda {
 
     //definicio de variables a la classe Comanda
 
-    //private LlistaProducte producte;
-     private LlistaProducte producte = new LlistaProducte(100);
+    private LlistaProducte producte;
+    //private LlistaProducte producte = new LlistaProducte(100);
     private Date hora;
     private float descuento;
     private boolean confirmarDescuento;
@@ -20,17 +20,21 @@ public class Comanda {
 
 
     public Comanda(LlistaProducte[] producte, Date hora){
-        
+
         identComanda=identComanda+1;
     }
 
 
-    public void afegirElement(String nom) {  //completar con informacion chino
+    public static void afegirElement(String nom) {  //completar con informacion En Yu
 
-        LlistaProducte.retPosLlista(nom);
+        int aux;
+        aux =
+        // producte[nElem].afegirProducte(nom);
 
-       // producte[nElem].afegirProducte(nom);  //copiar
+                // copiar
+
         nElem++;
+
     }
 
     public int precioProducto (int posicion){
@@ -38,10 +42,13 @@ public class Comanda {
         int aux1;
         int aux;
         int aux2;
-        aux2 = producte[posicion].getPreu();
-        aux1 = producte[posicion].getDescompte();
+        aux=0;
+        aux2 = producte.getLlista()[posicion].getPreu();
+        aux1 = producte.getLlista()[posicion].getDescompte();
 
         aux= aux - (aux2*aux1);
+
+        // precio
 
         return aux;
     }
