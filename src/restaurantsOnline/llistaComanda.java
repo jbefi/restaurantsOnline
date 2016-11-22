@@ -1,6 +1,9 @@
 package restaurantsOnline;
 
+
+import java.util.Date;
 /**
+ * Classe de la Comanda
  * Created by Kidu15 on 11/11/16.
  */
 public class LlistaComanda {
@@ -8,34 +11,48 @@ public class LlistaComanda {
     //definicio de variables
     private int nElem;
     private Comanda[] llista;
-    final int maxElementos = 100;
+    private static final int maxElementos = 100;
 
 
-
+    /**
+     * Constructor de la LlistaComanda
+     */
     public LlistaComanda(){
-
+        nElem=0;
     }
+    
+    public LlistaComanda(Comanda[] comandes){
+    	llista=comandes;
+        nElem=comandes.length;
+    }
+    
+    public int getnElem (){return nElem;}
+    
     //mètodes
 
-    public void afegirComanda(String resumComanda, int quantitat, boolean confirmarDescuento, float descuento) {  //metode per afegir la comanda
+
+    /**
+     * Constructor de la LlistaComanda
+     * @param producte  , quantitat del producte a afegir a la llista
+     */
+    public void afegirComanda(LlistaProducte[] producte, Date hora) {  //metode per afegir la comanda
 
 
         if (nElem < maxElementos) {
 
-            llista[nElem] = new Comanda(resumComanda, quantitat, confirmarDescuento, descuento);
+            llista[nElem] = new Comanda(producte, hora );
             nElem++;
         }
-
-        return;
 
     }
 
     public void eliminarComanda(int identificador) {   //metode per eliminar la comanda
 
         int i=0, j;
-        boolean be=false;
+        boolean be;
+        be = false;
 
-        while(i<nElem && be==false){
+        while(i<nElem && !be){
 
             if(identificador==(llista[i].getIdentComanda())){
                 for(j=i;j<-1;j++){
@@ -48,7 +65,6 @@ public class LlistaComanda {
             i++;
         }
         nElem--;
-        return;
     }
 
     public void ordenarComandes() {     // metode per ordenar comandes
