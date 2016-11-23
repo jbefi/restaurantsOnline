@@ -11,45 +11,41 @@ public class LlistaComanda {
     private int nElem;
     private Comanda[] llista;
     private static final int maxElementos = 100;
-
-
+    
     /**
      * Constructor de la LlistaComanda
+     * @param comandes, que es una llista de la classe comanda
      */
     public LlistaComanda(){
-        nElem=0;
+    	nElem++; 
     }
-    
     public LlistaComanda(Comanda[] comandes){
     	llista=comandes;
         nElem=comandes.length;
     }
-    
-    public int getnElem ()
-    {return nElem;}
-    
+
     //mètodes
 
 
     /**
-     * Constructor de la LlistaComanda
-     * @param producte  , quantitat del producte a afegir a la llista
+     * Metode que afegeix una comanda i que rep els seguents parametres
+     * @param producte  , la llista de productes que conte la comanda
+     * @param hora, la hora en que es fa la comanda 
      */
 
-    public void afegirComanda(LlistaProducte producte, Date hora) {  //metode per afegir la comanda
+    public void afegirComanda(LlistaProducte producte, Date hora) { 
         if (nElem < maxElementos) {
 
-            llista[nElem] = new Comanda(producte, hora);
+            llista[nElem] = new Comanda(producte, hora); // en cada lloc de la llista poso una nova comanda amb els parametres que hi passo 
             nElem++;
         }
 
     }
-
     
-    
-    public Comanda[] getLlista() {
-		return llista;
-	}
+    /**
+     * Metode que elimina les comandes posant-li el identificador de comanda 
+     * @param indentificador, numero de la comanda que es autogenerat a la classe comanda i que el treiem amb el getter getIdentComanda(); 
+     */
 
 	public void eliminarComanda(int identificador) {   //metode per eliminar la comanda
 
@@ -57,13 +53,13 @@ public class LlistaComanda {
         boolean be;
         be = false;
 
-        while(i<nElem && !be){
+        while(i<nElem && !be){ //bucle while que m'ajuda a recorrer tota la llista per a eliminar 
 
-            if(identificador==(llista[i].getIdentComanda())){
+            if(identificador==(llista[i].getIdentComanda())){    // si el identificador coincideix...
                 for(j=i;j<-1;j++){
 
-                    llista[j]=llista[j+1];
-                    be=true;
+                    llista[j]=llista[j+1];  //cada comanda passa a ser la seguent, per tant, la primera ja no existira
+                    be=true; // surto del bucle 
                 }
 
             }
@@ -71,13 +67,15 @@ public class LlistaComanda {
         }
         nElem--;
     }
-
+	 /**
+     * metode que ordena les comandes 
+     */
     public void ordenarComandes() {     // metode per ordenar comandes
 
         int i=0;
         int j;
-        while (i<nElem) {
-
+        while (i<nElem) { //bucle while que m'ajuda a recorrer tota la llista per a ordenar
+        	
             for(j=i;j<-1;j++){
 
                 llista[j]=llista[j+1];
@@ -86,5 +84,15 @@ public class LlistaComanda {
             i++;
         }
     }
+    
+    //getters de la classe 
+    
+    public Comanda[] getLlista() {
+		return llista;
+	}
 
+    
+    public int getnElem ()
+    {return nElem;}
+    
 }

@@ -2,6 +2,7 @@ package restaurantsOnline;
 
 import java.util.Scanner;
 import java.util.Date;
+import java.io.*;
 
 public class Main {
 	
@@ -107,36 +108,56 @@ public class Main {
 		        
 		     llistP.informacio(codi);//encara falta el fitxer
 	    }
-
+	    /**
+	     * Metode al main que crea una comanda 
+	     * Created by Kidu15 on 11/11/16.
+	     */
 	public static void afegirComanda() {
 
 		int opcio; //creo les variable enteres que utilitzo per a les opcions que dono al client
-		int quantitat;
-		String nom; //variable utilitzada per al nom del producte
+		int quantitat = 0;
+		String nom = null; //variable utilitzada per al nom del producte
 		boolean confirmar, plats, begudes;  //creo les variables booleanes que necessito per a fer el meu programa
 		confirmar = false;
 		plats = false;
 		begudes = false;
 		
 
-		Comanda nova = new Comanda(null, null);
+		Comanda nova = new Comanda(null, null); 
 		
-		System.out.println("** Crear comanda **") ;
+		System.out.println("** Crear comanda **") ; 
 
-		while(!confirmar) {
+		while(!confirmar) { // bucle que confirma la comanda 
 
 			int i;
 			int aux; 
-			while(!plats) {
+			while(!plats) { // comencem amb els plats 
+				
+				try{		//excepcio de escriure numeros i no lletres									
+																			// demanem a l'usuari els plats i la seva quantitat 
+					System.out.println("Introdueix els plat que vols") ; 
+					nom=teclat.nextLine();
+				
+				}
+			    catch (InputMismatchException e) {
 
-				System.out.println("Introdueix els plat que vols") ;
+			        System.out.println("Introdueix els plats que vols ");
 
-				nom=teclat.nextLine();
+			     }
+				
+				try{ 
+				
+					System.out.println("Introdueix la quantitat") ;
 
-				System.out.println("Introdueix la quantitat") ;
-
-				quantitat=teclat.nextInt();
-
+					quantitat=teclat.nextInt();
+				
+				}
+				catch (InputMismatchException e) {
+					
+					System.out.println("Introdueix la quantitat") ;
+					
+				}
+				
 				for (i=0;i<=quantitat; i++) {
 					aux=nova.afegirElement(nom);
 					if(aux==-1){
