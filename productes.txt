@@ -1,0 +1,4 @@
+1,PLAT,Amanida,10,10,Celiacs,Lactosa
+2,PLAT,Bistec,20,10,NoRestriccions
+3,BEGUDA,Cocacola,2.5,5,250,NO
+4,BEGUDA,Vi,4,5,1000,SI
