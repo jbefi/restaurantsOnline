@@ -42,6 +42,7 @@ public class Comanda {
         }
         return aux;
     }
+    
     //getters de la classe
     public Date getHora() {
         return hora;

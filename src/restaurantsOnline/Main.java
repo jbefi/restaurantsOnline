@@ -1,8 +1,8 @@
 package restaurantsOnline;
 
-import java.util.Scanner;
 import java.util.Date;
 import java.io.*;
+import java.util.*;
 
 public class Main {
 	
@@ -126,38 +126,32 @@ public class Main {
 		Comanda nova = new Comanda(null, null); 
 		
 		System.out.println("** Crear comanda **") ; 
+		Calendar horaComanda = new GregorianCalendar();
+		int hora, minuto; 
+		
+		hora =horaComanda.get(Calendar.HOUR_OF_DAY);
+		minuto = horaComanda.get(Calendar.MINUTE);
+		
+		System.out.printf("la hora es esta:" +hora, +minuto);
+		
+		
 
 		while(!confirmar) { // bucle que confirma la comanda 
 
 			int i;
 			int aux; 
 			while(!plats) { // comencem amb els plats 
-				
-				try{		//excepcio de escriure numeros i no lletres									
+												
 																			// demanem a l'usuari els plats i la seva quantitat 
-					System.out.println("Introdueix els plat que vols") ; 
-					nom=teclat.nextLine();
-				
-				}
-			    catch (InputMismatchException e) {
-
-			        System.out.println("Introdueix els plats que vols ");
-
-			     }
-				
-				try{ 
-				
-					System.out.println("Introdueix la quantitat") ;
-
-					quantitat=teclat.nextInt();
-				
-				}
-				catch (InputMismatchException e) {
+				System.out.println("Introdueix els plat que vols") ;
 					
-					System.out.println("Introdueix la quantitat") ;
-					
-				}
+				nom=teclat.nextLine();
 				
+				System.out.println("Introdueix la quantitat") ;
+
+				quantitat=teclat.nextInt();		
+
+					
 				for (i=0;i<=quantitat; i++) {
 					aux=nova.afegirElement(nom);
 					if(aux==-1){
@@ -204,14 +198,16 @@ public class Main {
 
 				opcio=teclat.nextInt();
 				if (opcio==1){
+				
+			
+					//TODO hay que añadir la comanda dentro de la lista de comandas del cliente actual
 					confirmar=true;
+		
 				}
-
 			}
 
 		}
 	}
-
 
 	    public static void consultarInformacio(LlistaProducte llistP)
 	    {
@@ -305,12 +301,23 @@ public class Main {
 	    }
 	   
 	    
-	    public static void main(String[] args)
-	    {
+	    public static void main(String[] args) throws IOException {
+	    
 	    	
 	    	
-	    	//TODO Llegir fitxer Comandes - Catalin
+	    	//TODO Llegir fitxer Comandes - Catalin 
 	    	
+	    	try{
+	    		
+		    	
+		    	Scanner f=new Scanner(new File("Comandes.txt")); 
+		    	int identificador=0;
+		    	String plat; 
+		    	String beguda; 
+		    	int hora=0, minut=0; 
+		    	
+		    	
+		    	}
 	    	//TODO Llegit Fitxxer Productes - Enyu
 	    	
 	    	//TODO Llegir fitxer Clients - Pablo

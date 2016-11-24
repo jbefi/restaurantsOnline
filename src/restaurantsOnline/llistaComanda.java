@@ -10,15 +10,18 @@ public class LlistaComanda {
     //definicio de variables
     private int nElem;
     private Comanda[] llista;
+	private int identClient;
     private static final int maxElementos = 100;
     
     /**
      * Constructor de la LlistaComanda
      * @param comandes, que es una llista de la classe comanda
      */
+    
     public LlistaComanda(){
     	nElem++; 
     }
+    
     public LlistaComanda(Comanda[] comandes){
     	llista=comandes;
         nElem=comandes.length;
@@ -26,18 +29,18 @@ public class LlistaComanda {
 
     //mètodes
 
-
     /**
      * Metode que afegeix una comanda i que rep els seguents parametres
      * @param producte  , la llista de productes que conte la comanda
      * @param hora, la hora en que es fa la comanda 
      */
 
-    public void afegirComanda(LlistaProducte producte, Date hora) { 
+    public void afegirComanda(LlistaProducte producte, Date hora, int identClient) { 
         if (nElem < maxElementos) {
 
             llista[nElem] = new Comanda(producte, hora); // en cada lloc de la llista poso una nova comanda amb els parametres que hi passo 
             nElem++;
+            this.identClient=identClient; 
         }
 
     }
@@ -94,5 +97,11 @@ public class LlistaComanda {
     
     public int getnElem ()
     {return nElem;}
+    
+    
+    public int getIdentClient () { 
+    	return identClient; 
+    }
+    
     
 }
