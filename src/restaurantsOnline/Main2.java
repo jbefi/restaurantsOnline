@@ -99,6 +99,55 @@ public class Main2 {
 		}
 		f.close();
 	}
+	
+	
+	public static LlistaClients llegirFitxerClients() throws IOException , FileNotFoundException {
+
+		LlistaClients llista = new LlistaClients();
+		Clients client;
+		String nom_client, adreca, usuari;
+		int telefon, contrasenya, identificador;
+		BufferedReader f = new BufferedReader(new FileReader("clients.txt"));
+		String frase = "";
+		frase = f.readLine();
+		while (frase != null) {
+			StringTokenizer st = new StringTokenizer(frase, ",");
+			while (st.hasMoreTokens()) {
+				
+				identificador = Integer.parseInt(st.nextToken());
+				nom_client = st.nextToken();
+				adreca = st.nextToken();
+				telefon = Integer.parseInt(st.nextToken());
+				usuari = st.nextToken();
+				contrasenya = Integer.parseInt(st.nextToken());
+				
+				client = new Clients(nom_client, adreca, telefon, usuari, contrasenya, identificador);
+				llista.creaClient(client);
+					
+			}
+			frase = f.readLine();
+		}
+		
+		f.close();
+		return llista;
+		
+	}
+
+	public static void escriureFitxerClients(LlistaClients clients)throws IOException{
+		BufferedWriter f = new BufferedWriter(new FileWriter("clients_output.txt"));
+		for (int i=0; i<clients.getnClients();i++){
+		
+			f.write(clients.getLlista()[i].getIdentificador()+",");
+			f.write(clients.getLlista()[i].getNom_client()+",");
+			f.write(clients.getLlista()[i].getAdreca()+",");
+			f.write(clients.getLlista()[i].getTelefon()+",");
+			f.write(clients.getLlista()[i].getUsuari()+",");
+			f.write(clients.getLlista()[i].getContrasenya()+",");
+
+			f.newLine();
+		}
+		f.close();
+	}
 
 	public static void main(String[] args) {
 		try {
@@ -113,6 +162,18 @@ public class Main2 {
 			System.out.println("Excepcions: " + e);
 		}
 		
+		
+		try {
+			
+			LlistaClients llista = llegirFitxerClients();
+			System.out.println(llista);
+			escriureFitxerClients(llista);
+			
+		} catch(FileNotFoundException e) {
+			System.out.println("L'arxiu d'entrada no existeix");
+		}catch (IOException e) {
+			System.out.println("Excepcions: " + e);
+		}
 
 
 	}
