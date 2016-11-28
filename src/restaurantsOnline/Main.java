@@ -123,18 +123,9 @@ public class Main {
 		begudes = false;
 		
 
-		Comanda nova = new Comanda(null, null,null); 
+		Comanda nova = new Comanda(null, 0, 0); 
 		
 		System.out.println("** Crear comanda **") ; 
-		Calendar horaComanda = new GregorianCalendar();
-		int hora, minuto; 
-		
-		hora =horaComanda.get(Calendar.HOUR_OF_DAY);
-		minuto = horaComanda.get(Calendar.MINUTE);
-		
-		System.out.printf("la hora es esta:" +hora, +minuto);
-		
-		
 
 		while(!confirmar) { // bucle que confirma la comanda 
 
@@ -199,7 +190,13 @@ public class Main {
 				opcio=teclat.nextInt();
 				if (opcio==1){
 				
-			
+					Calendar horaComanda = new GregorianCalendar();
+					int hora, minuto; 
+					
+					hora =horaComanda.get(Calendar.HOUR_OF_DAY);
+					minuto = horaComanda.get(Calendar.MINUTE);
+					
+					
 					//TODO hay que añadir la comanda dentro de la lista de comandas del cliente actual
 					confirmar=true;
 		
@@ -306,26 +303,7 @@ public class Main {
 	    	
 	    	
 	    	//TODO Llegir fitxer Comandes - Catalin 
-	    	
-	    	 try{
-		        	File comandas = new File("/Users/Kidu15/Documents/restaurantsOnline/Comandas.txt");
-		        	String beguda,plat; 
-		        	int identComanda; 
-		        	int hora, minut; 
-		 	        
-		        	Scanner f=new Scanner(new File("Comandas.txt"));
-		 	        
-		        	f.useDelimiter("."); 
-		        	identComanda=f.nextInt(); 
-		        		
-		        }
-		        catch(FileNotFoundException e){
-		        	System.out.println("El fitxer d'entrada no existeix");
-		        	    }
-		        catch(IOException e) {
-		    	   System.out.println("Excepcio d'E/S: "+e.toString()); }
-		        
-	    	
+
 	    	//TODO Llegit Fitxer Productes - Enyu
 	    	
 	    	//TODO Llegir fitxer Clients - Pablo
