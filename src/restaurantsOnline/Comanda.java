@@ -12,6 +12,7 @@ public class Comanda {
 
     private LlistaProducte producte;
     private Date hora;
+    private Date minut; 
     private float descuento;
     private boolean confirmarDescuento;
     private static int identComanda=0;
@@ -22,9 +23,10 @@ public class Comanda {
      * @param hora -> l'hora en que es fa la comanda 
      */
 
-    public Comanda(LlistaProducte producte, Date hora){
+    public Comanda(LlistaProducte producte, Date hora, Date minut){
         identComanda=identComanda+1;
         this.hora=hora;
+        this.minut=minut; 
     }
 
     /**
@@ -46,6 +48,9 @@ public class Comanda {
     //getters de la classe
     public Date getHora() {
         return hora;
+    }
+    public Date getMinut() {
+        return minut;
     }
 
     public float getDescuento() {

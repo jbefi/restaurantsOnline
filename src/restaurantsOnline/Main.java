@@ -123,7 +123,7 @@ public class Main {
 		begudes = false;
 		
 
-		Comanda nova = new Comanda(null, null); 
+		Comanda nova = new Comanda(null, null,null); 
 		
 		System.out.println("** Crear comanda **") ; 
 		Calendar horaComanda = new GregorianCalendar();
@@ -307,18 +307,26 @@ public class Main {
 	    	
 	    	//TODO Llegir fitxer Comandes - Catalin 
 	    	
-	    	try{
-	    		
-		    	
-		    	Scanner f=new Scanner(new File("Comandes.txt")); 
-		    	int identificador=0;
-		    	String plat; 
-		    	String beguda; 
-		    	int hora=0, minut=0; 
-		    	
-		    	
-		    	}
-	    	//TODO Llegit Fitxxer Productes - Enyu
+	    	 try{
+		        	File comandas = new File("/Users/Kidu15/Documents/restaurantsOnline/Comandas.txt");
+		        	String beguda,plat; 
+		        	int identComanda; 
+		        	int hora, minut; 
+		 	        
+		        	Scanner f=new Scanner(new File("Comandas.txt"));
+		 	        
+		        	f.useDelimiter("."); 
+		        	identComanda=f.nextInt(); 
+		        		
+		        }
+		        catch(FileNotFoundException e){
+		        	System.out.println("El fitxer d'entrada no existeix");
+		        	    }
+		        catch(IOException e) {
+		    	   System.out.println("Excepcio d'E/S: "+e.toString()); }
+		        
+	    	
+	    	//TODO Llegit Fitxer Productes - Enyu
 	    	
 	    	//TODO Llegir fitxer Clients - Pablo
 	    	
