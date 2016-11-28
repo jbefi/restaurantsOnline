@@ -45,8 +45,9 @@ public class Plat extends Producte {
 	}
 	
 	/**
-	 * Constructor del plat per la 2a Fase.
+	 * Constructor del plat per la 2a Fase amb restriccions alimentàries.
 	 *
+	 * @param codi El codi del plat.
 	 * @param nom El nom del plat.
 	 * @param preu El preu del plat sense el descompte.
 	 * @param descompte La rebaixa que apliquem al plat.
@@ -55,15 +56,37 @@ public class Plat extends Producte {
 	public Plat(int codi,String nom, double preu, double descompte, String[] restriccions) {
 		super(codi,nom, preu, descompte);
 		this.teRestriccio = true;
-		this.restriccions = new String[restriccions.length];
-		for (int i = 0; i < restriccions.length; i++)
-			this.restriccions[i] = restriccions[i];
+		int compt = 0, i = 0;
+		while ( i<restriccions.length){
+			if (restriccions[i] != null)
+				compt++;
+			i++;	
+		}
+		this.restriccions = new String[compt];
+		for (i = 0; i < compt; i++){
+				this.restriccions[i] = restriccions[i];
+		}
 		if (restriccions[0].equals("NoRestriccions"))
 			teRestriccio = false;
 		else 
 			teRestriccio = true;
 		
 
+	}
+	
+	/**
+	 * Constructor del plat per la 2a Fase sense restriccions alimentàries.
+	 * 
+	 * @param codi El codi del plat.
+	 * @param nom El nom del plat.
+	 * @param preu El preu del plat sense el descompte.
+	 * @param descompte La rebaixa que apliquem al plat.
+	 * 
+	 */
+	public Plat(int codi,String nom, double preu, double descompte) {
+		super(codi,nom, preu, descompte);
+		this.teRestriccio = false;
+		this.restriccions = null;
 	}
 
 	/**

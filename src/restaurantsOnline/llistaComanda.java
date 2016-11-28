@@ -1,6 +1,5 @@
 package restaurantsOnline;
 
-import java.util.Date;
 /**
  * Classe de la Comanda
  * Created by Kidu15 on 11/11/16.
@@ -35,12 +34,12 @@ public class LlistaComanda {
      * @param hora, la hora en que es fa la comanda 
      */
 
-    public void afegirComanda(LlistaProducte producte, Date hora, int identClient) { 
+    public void afegirComanda(LlistaProducte producte, int hora, int minut) { 
         if (nElem < maxElementos) {
 
-            llista[nElem] = new Comanda(producte, hora); // en cada lloc de la llista poso una nova comanda amb els parametres que hi passo 
+            llista[nElem] = new Comanda(producte, hora, minut); // en cada lloc de la llista poso una nova comanda amb els parametres que hi passo 
             nElem++;
-            this.identClient=identClient; 
+            
         }
 
     }

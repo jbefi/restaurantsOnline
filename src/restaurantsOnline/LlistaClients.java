@@ -16,6 +16,31 @@ public class LlistaClients {
 		
 	}
 	
+	
+	public int getnClients() {
+		return nClients;
+	}
+
+
+
+	public Clients[] getLlista() {
+		return llista;
+	}
+
+
+
+	public void setnClients(int nClients) {
+		this.nClients = nClients;
+	}
+
+
+
+	public void setLlista(Clients[] llista) {
+		this.llista = llista;
+	}
+
+
+
 	public void creaClient(Clients client)
 	{
 		this.llista[nClients] = client;
@@ -135,3 +160,4 @@ public class LlistaClients {
 		}
 	}
 }
+

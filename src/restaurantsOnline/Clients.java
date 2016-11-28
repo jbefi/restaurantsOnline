@@ -4,7 +4,7 @@ public class Clients {
 	//ATRIBUTS
 	private String Nom_client;
 	private String Adreca;
-	private String Telefon;
+	private int Telefon;
 	private String Usuari;
 	private int Contrasenya;
 	private String[] Restriccions;
@@ -16,7 +16,7 @@ public class Clients {
 	
 	
 	
-	public Clients(String Nom_client, String Adreca, String Telefon, String Usuari, int Contrasenya, String[] Restriccions, LlistaComanda Comandes) {
+	public Clients(String Nom_client, String Adreca, int Telefon, String Usuari, int Contrasenya, String[] Restriccions, LlistaComanda Comandes) {
 		this.Nom_client = Nom_client;
 		this.Adreca = Adreca;
 		this.Telefon = Telefon;
@@ -33,7 +33,15 @@ public class Clients {
 		this.Preferent = false;
 		this.Identificador = ID_Clients++;
 	}
-
+	
+	public Clients(String Nom_client, String Adreca, int Telefon, String Usuari, int Contrasenya, int Identificador) {
+		this.Nom_client = Nom_client;
+		this.Adreca = Adreca;
+		this.Telefon = Telefon;
+		this.Usuari = Usuari;
+		this.Contrasenya = Contrasenya;
+		this.Identificador = Identificador;
+	}
 
 	public String getNom_client() {
 		return Nom_client;
@@ -45,7 +53,7 @@ public class Clients {
 	}
 
 
-	public String getTelefon() {
+	public int getTelefon() {
 		return Telefon;
 	}
 
@@ -100,7 +108,7 @@ public class Clients {
 	}
 
 
-	public void setTelefon(String telefon) {
+	public void setTelefon(int telefon) {
 		Telefon = telefon;
 	}
 

@@ -124,18 +124,9 @@ public class Main {
 		begudes = false;
 		
 
-		Comanda nova = new Comanda(null, null); 
+		Comanda nova = new Comanda(null, 0, 0); 
 		
 		System.out.println("** Crear comanda **") ; 
-		Calendar horaComanda = new GregorianCalendar();
-		int hora, minuto; 
-		
-		hora =horaComanda.get(Calendar.HOUR_OF_DAY);
-		minuto = horaComanda.get(Calendar.MINUTE);
-		
-		System.out.printf("la hora es esta:" +hora, +minuto);
-		
-		
 
 		while(!confirmar) { // bucle que confirma la comanda 
 
@@ -200,7 +191,13 @@ public class Main {
 				opcio=teclat.nextInt();
 				if (opcio==1){
 				
-			
+					Calendar horaComanda = new GregorianCalendar();
+					int hora, minuto; 
+					
+					hora =horaComanda.get(Calendar.HOUR_OF_DAY);
+					minuto = horaComanda.get(Calendar.MINUTE);
+					
+					
 					//TODO hay que añadir la comanda dentro de la lista de comandas del cliente actual
 					confirmar=true;
 		
@@ -307,6 +304,7 @@ public class Main {
 	    	
 	    	
 	    	//TODO Llegir fitxer Comandes - Catalin 
+<<<<<<< HEAD
 	    	
 	    	/*try{
 	    		
@@ -321,6 +319,10 @@ public class Main {
 	    	}                          */
 	    
 	    	//TODO Llegit Fitxxer Productes - Enyu
+=======
+
+	    	//TODO Llegit Fitxer Productes - Enyu
+>>>>>>> origin/master
 	    	
 	    	//TODO Llegir fitxer Clients - Pablo
 	    	
