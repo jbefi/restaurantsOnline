@@ -139,7 +139,7 @@ public abstract class Producte {
 	 * Mètode toString() per retornar les informacions de l'objecte de la Classe instanciada.
 	 */
 	public String toString() {
-		return "\n " + codi + ": " + nom + " ............................ " + preu + "€\n Descompte: " + descompte + "% \n";
+		return ("\n " + codi + ": " + nom + " ............................ " + preu + "€\n Descompte: " + descompte + "% \n");
 	}
 
 }

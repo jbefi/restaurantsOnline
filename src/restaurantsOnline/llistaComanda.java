@@ -18,6 +18,7 @@ public class LlistaComanda {
      */
     
     public LlistaComanda(){
+    	llista = new Comanda[maxElementos];
     	nElem++; 
     }
     
@@ -38,6 +39,16 @@ public class LlistaComanda {
         if (nElem < maxElementos) {
 
             llista[nElem] = new Comanda(producte, hora, minut); // en cada lloc de la llista poso una nova comanda amb els parametres que hi passo 
+            nElem++;
+            
+        }
+
+    }
+    
+    public void afegirComanda(Comanda nou) { 
+        if (nElem < maxElementos) {
+
+            llista[nElem] = nou; // en cada lloc de la llista poso una nova comanda amb els parametres que hi passo 
             nElem++;
             
         }

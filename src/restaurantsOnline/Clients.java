@@ -4,7 +4,7 @@ public class Clients {
 	//ATRIBUTS
 	private String Nom_client;
 	private String Adreca;
-	private int Telefon;
+	private String Telefon;
 	private String Usuari;
 	private int Contrasenya;
 	private String[] Restriccions;
@@ -16,12 +16,13 @@ public class Clients {
 	
 	
 	
-	public Clients(String Nom_client, String Adreca, int Telefon, String Usuari, int Contrasenya, String[] Restriccions, LlistaComanda Comandes) {
+	public Clients(String Nom_client, String Adreca, String Telefon, String Usuari, int Contrasenya, String[] Restriccions, LlistaComanda Comandes) {
 		this.Nom_client = Nom_client;
 		this.Adreca = Adreca;
 		this.Telefon = Telefon;
 		this.Usuari = Usuari;
 		this.Contrasenya = Contrasenya;
+		this.Restriccions = new String[Restriccions.length];
 		for (int i=0; i<this.Restriccions.length; i++)
 		{
 			this.Restriccions[i] = Restriccions[i];
@@ -34,11 +35,12 @@ public class Clients {
 		this.Identificador = ID_Clients++;
 	}
 	
-	public Clients(String Nom_client, String Adreca, int Telefon, String Usuari, int Contrasenya, int Identificador) {
+	public Clients(String Nom_client, String Adreca, String Telefon, String Usuari, int Contrasenya, int Identificador) {
 		this.Nom_client = Nom_client;
 		this.Adreca = Adreca;
 		this.Telefon = Telefon;
 		this.Usuari = Usuari;
+		this.comandes = new LlistaComanda();
 		this.Contrasenya = Contrasenya;
 		this.Identificador = Identificador;
 	}
@@ -53,7 +55,7 @@ public class Clients {
 	}
 
 
-	public int getTelefon() {
+	public String getTelefon() {
 		return Telefon;
 	}
 
@@ -108,7 +110,7 @@ public class Clients {
 	}
 
 
-	public void setTelefon(int telefon) {
+	public void setTelefon(String telefon) {
 		Telefon = telefon;
 	}
 
@@ -152,12 +154,11 @@ public class Clients {
 		this.nComandes = nComandes;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Clients [Nom_client=" + Nom_client + ", Adreca=" + Adreca + ", Telefon=" + Telefon + ", Usuari="
 				+ Usuari + ", Contrasenya=" + Contrasenya + ", Restriccions=" +
-				// Acabar de fer el toString retornant la llista de restriccions
+				//TODO: Acabar de fer el toString retornant la llista de restriccions
 				 ", Preferent=" + Preferent + ", Identificador=" + Identificador + ", nComandes=" + nComandes + "]";
 	}
 	

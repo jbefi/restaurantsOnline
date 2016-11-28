@@ -34,7 +34,7 @@ public class Comanda {
      * de productes 
      * @param nom, un string que es el nom del producte que es vol buscar 
      */
-    public int afegirElement(String nom) {  
+    public int afegirElement(String nom, LlistaProducte producte) {  
 
         int aux;
         aux = producte.posicioProducte(nom); // busco la posicio del producte dins de la llista per a poder copiarlo

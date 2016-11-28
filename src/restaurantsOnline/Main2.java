@@ -4,6 +4,10 @@ import java.util.*;
 
 public class Main2 {
 
+	static LlistaClients llista;
+	//TODO: variables globales e las listas
+	
+	
 	public static LlistaProducte llegirFitxerProductes() throws IOException , FileNotFoundException {
 		final String PLAT = "PLAT";
 		final String BEGUDA = "BEGUDA";
@@ -103,10 +107,10 @@ public class Main2 {
 	
 	public static LlistaClients llegirFitxerClients() throws IOException , FileNotFoundException {
 
-		LlistaClients llista = new LlistaClients();
+		llista = new LlistaClients();
 		Clients client;
-		String nom_client, adreca, usuari;
-		int telefon, contrasenya, identificador;
+		String nom_client, adreca, usuari, telefon;
+		int contrasenya, identificador;
 		BufferedReader f = new BufferedReader(new FileReader("clients.txt"));
 		String frase = "";
 		frase = f.readLine();
@@ -117,7 +121,7 @@ public class Main2 {
 				identificador = Integer.parseInt(st.nextToken());
 				nom_client = st.nextToken();
 				adreca = st.nextToken();
-				telefon = Integer.parseInt(st.nextToken());
+				telefon = st.nextToken();
 				usuari = st.nextToken();
 				contrasenya = Integer.parseInt(st.nextToken());
 				
@@ -179,7 +183,7 @@ public class Main2 {
 				while ((paraula = next.nextToken())!= ","){
 					
 					beguda = next.nextToken(); 
-					comandaguardada.afegirElement(beguda);
+					comandaguardada.afegirElement(beguda, llistaProducte);
 						
 				}
 			}
@@ -187,6 +191,8 @@ public class Main2 {
 			comandaguardada.setHora(hora);
 			minut = Integer.parseInt(next.nextToken()); 
 			comandaguardada.setMinut(minut);
+			int id = llista.consultar_Client(identClient);
+			llista.afegirComandaClient(id, comandaguardada);
 		
 		}
 		f.close();

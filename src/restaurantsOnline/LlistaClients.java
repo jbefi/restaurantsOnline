@@ -47,13 +47,13 @@ public class LlistaClients {
 		nClients++;
 	}
 	
-	public int consultar_Client(String Nom_client)
+	public int consultar_Client(int id)
 	{
 		int i = 0;
 		boolean trobat = false;
 		while ((!trobat) && (i<nClients))
 		{
-			trobat = Objects.equals(llista[i].getNom_client(), Nom_client);
+			trobat = Objects.equals(llista[i].getIdentificador(), id);
 			if (!trobat)
 			{
 				i++;
@@ -71,12 +71,35 @@ public class LlistaClients {
 		}
 	}
 	
+	public String imprimirClient(int id)
+	{
+		int i = 0;
+		boolean trobat = false;
+		while ((!trobat) && (i<nClients))
+		{
+			trobat = Objects.equals(llista[i].getIdentificador(), id);
+			if (!trobat)
+			{
+				i++;
+			}
+		}
+		
+		if (trobat)
+		{
+			return (llista[i].toString());
+		}
+		else
+		{
+			return ("No trobat");
+		}
+	}
 	
-	public LlistaComanda consultar_Comandes(String Nom_client)
+	
+	public LlistaComanda consultar_Comandes(int id)
 	{
 		int i;
 		
-		i = consultar_Client(Nom_client);
+		i = consultar_Client(id);
 		if (i != -1)
 		{
 			return (llista[i].getComandes());
@@ -128,12 +151,12 @@ public class LlistaClients {
 	}
 	
 	
-	public Comanda copiar_Comanda(String Nom_Client, int identComanda)
+	public Comanda copiar_Comanda(int id, int identComanda)
 	{
 		
 		int i = 0;
 		int j;
-		j = consultar_Client(Nom_Client);
+		j = consultar_Client(id);
 		boolean trobat = false;
 		
 		LlistaComanda llista_comandes = this.llista[j].getComandes();
@@ -158,6 +181,12 @@ public class LlistaClients {
 		{
 			return (null);
 		}
+	}
+	
+	public void afegirComandaClient (int id, Comanda comandaguardada)
+	{
+		int i = consultar_Client(id);
+		llista[i].getComandes().afegirComanda(comandaguardada);
 	}
 }
 
