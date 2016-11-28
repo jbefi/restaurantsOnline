@@ -37,16 +37,17 @@ public class Main {
 	    	Double descompte;
 	    	Plat p;
 	        
-	     String Product="beguda";
+	     int opcio;
 	     
 	     // TODO Que demanes
-	     
-	     Product=teclat.nextLine();
+	     System.out.print("\n\n\tSi vols agefir una  beguda posa el numero 1 si vols afegir un plat posa numero 2:\t");
+	     opcio=teclat.nextInt();
 	      
-	      switch(Product){
-	    	  case "beguda":
+	      switch(opcio){
+	    	  case 1:
 	    		  int volum;
-	  	    	boolean tAlcohol;
+	  	    	  boolean tAlcohol;
+	  	    	  System.out.print("\n\n\tSi vols agefir una  begida posa el numero 1:\t");
 	    		  System.out.print("\n\n\tIndica el nom de biguda que vols agefir :\t");
 	    		  nom=teclat.next();
 	    	      System.out.print("\n\n\tIndica el preu de biguda que vols agefir :\t");
@@ -59,33 +60,38 @@ public class Main {
 	    	      tAlcohol=teclat.nextBoolean();
 	    	      Beguda b1= new Beguda(nom,preu,descompte,volum,tAlcohol);
 	    	      llistP.afegirProducte(b1);
-	    	    break;
-	    	  case "plat":
+	    	      break;
+	    	  case 2:
 	    		  boolean tRestr;
-	  	    	String[] res = null;
-	    	     System.out.print("\n\n\tIndica el nom del plat que vols afegir:\t");
-	    	     nom=teclat.next();
- 	         System.out.print("\n\n\tIndica el preu del plat que vols agefir :\t");
- 	         preu=teclat.nextDouble();
+	  	    	  String[] res = null;
+	  	    	  System.out.print("\n\n\tSi vols agefir una  begida posa el numero 2:\t");
+	    	      System.out.print("\n\n\tIndica el nom del plat que vols afegir:\t");
+	    	      nom=teclat.next();
+ 	              System.out.print("\n\n\tIndica el preu del plat que vols agefir :\t");
+ 	              preu=teclat.nextDouble();
 	    	      System.out.print("\n\n\tIndica el descompte que te el plat :\t");
 	    	      descompte=teclat.nextDouble();
 	    	      System.out.print("\n\n\tIndica si el plat te retriccions  :\t");
 	    	      
 	    	      tRestr=teclat.nextBoolean();
 	    	      if (tRestr){
-	    	    	  System.out.print("\n\n\tIndica si el plat te retriccions  :\t");
+	    	    	  System.out.print("\n\n\tIndica quina retriccions te aquet plat  :\t");// DEmanar REstriccions  
+	    	    	  System.out.print("1.Celias  :\t");
+	    	    	  res[0]=teclat.next();
+	    	    	  System.out.print("2.lactosa  :\t");
+	    	    	  res[1]=teclat.next();
+	    	    	  System.out.print("3.fruit secs :\t");
+	    	    	  res[2]=teclat.next();
 	    	    	  
-	    	    	  
-	    	    	  //TODO DEmanar REstriccions
-	    	    	  
-	    	    	  p= new Plat(nom,preu,descompte, res);
+	   
 	    	      }else
+	    	        p=null;
 	    	      	p= new Plat(nom,preu,descompte);
-	    	      
-	    	     
-	    	      
-	    	      llistP.afegirProducte(p);
+	    	        llistP.afegirProducte(p);
+	    	        
+	    	        break;
 	      }
+	   
 	    }
 
 	    
@@ -95,18 +101,13 @@ public class Main {
 	        
 	        System.out.print("\n\n\tIndica el codi del  prodcute  que vols eliminar:\t");
 	        codi =Integer.parseInt(teclat.nextLine());
-	        System.out.print("\n\n\tel producte s'ha eleminat amb exit\t");
+	        System.out.print("\n\n\tEl producte s'ha eleminat amb exit\t");
 	        llistP.eliminarProducte(codi);
 	    }
 	    
 	    public static void carregarProducte(LlistaProducte llistP)
 	    {
-	    	int codi;
-	    	
-	    	 System.out.print("\n\n\tIndica el codi del  prodcute  que vols carregar:\t");
-		     codi =Integer.parseInt(teclat.nextLine());
-		        
-		     llistP.informacio(codi);//encara falta el fitxer
+	    	//encara falta el fitxer
 	    }
 	    /**
 	     * Metode al main que crea una comanda 
@@ -212,15 +213,11 @@ public class Main {
 	    public static void consultarInformacio(LlistaProducte llistP)
 	    {
 	    	
-	    	
-	    	//TODO Demanar codi
-	    	
-	    	int i; 
-			for (i=0; i<100; i++ ){
-				System.out.println(llistP.toString());
-			}
-	    }
-	    
+	    	int codi;
+	    	 System.out.print("\n\n\tIndica el codi del  prodcute  que vols consultar:\t");
+		     codi =teclat.nextInt();
+		     llistP.informacio(codi);
+			} 
 
 	    public static void crearClient(LlistaClients llistCl)
 	    {
@@ -242,21 +239,21 @@ public class Main {
 	        usuari=teclat.next();
 	        System.out.print("\n\n\tIndica la contrasi�a del client:\t");
 	        contr=teclat.nextInt();
-	        System.out.print("\n\n\tIndica si ele client te alguna restreccions:\t");
-	        System.out.println("1.");
+	        System.out.print("\n\n\tIndica si el client te alguna restriccions:\t");  // DEMANAR RESTRICCIONS
+	      
+	    	  System.out.print("1.Celias  :\t");
+	    	  tRestr[0]=teclat.next();
+	    	  System.out.print("2.lactosa  :\t");
+	    	  tRestr[1]=teclat.next();
+	    	  System.out.print("3.fruit secs :\t");
+	    	  tRestr[2]=teclat.next();
+	      
+	          Clients client=new Clients(nom,adreca,tel,usuari,contr,tRestr, new LlistaComanda());
 	        
-	        // TODO ACABAR DEMANAR RESTRICCIONS
-	        
-	        
-	        
-	        Clients client=new Clients(nom,adreca,tel,usuari,contr,tRestr, new LlistaComanda());
-	        
-	        
-	        //TODO Afegir a la llista de Clients
+	          llistCl.creaClient(client);  //Afegir a la llista de Clients              
 	        
 	    }
 
-	    
 	    
 	    public static void consultarClient(LlistaClients llistCl)
 	    {
@@ -266,15 +263,22 @@ public class Main {
 		        llistCl.consultar_Client(nom);
 	    }
 	    
+	    public static void teDescompte()
+	    {
+	  
+        }
+	     		
+	    
 	    private static void eliminarComanda(LlistaComanda llistCo)
 	  
 	    {
 	    	int iden;
 	  	    System.out.print("\n\n\tIndica el identificador  per eliminar la comanda :\t");
-	        iden = Integer.parseInt(teclat.nextLine());
+	        iden = teclat.nextInt();
 	        System.out.print("\n\n\tLa comanda s'ha eliminat amb exit\t");
 	        llistCo.eliminarComanda(iden);
 	    }
+	    
 	    
 	    private static void copiarComanda(LlistaClients llistCl)
 		  
@@ -283,13 +287,10 @@ public class Main {
 	    	int iden;
 	    	System.out.print("\n\n\tIndica nom del client:\t");
 		    nom = teclat.nextLine();
-            System.out.print("\n\n\tIndica el identificador  del comanda que vols copiar :\t");
-	        iden = Integer.parseInt(teclat.nextLine());
-	    	
-	        
-	        // TODO Agefir a la llista de comandes del client
-	        
-		   //llistCl.Copiar_Comanda(nom,iden);
+            System.out.print("\n\n\tIndica el identificador  de la comanda que vols copiar :\t");
+	        iden = teclat.nextInt();
+	        System.out.print("\n\n\tLa comanda s'ha copiat amb exit \t");
+		    llistCl.copiar_Comanda(nom,iden);                      // Agefir a la llista de comandes del client
 	    }
 	    
 	    
@@ -307,7 +308,7 @@ public class Main {
 	    	
 	    	//TODO Llegir fitxer Comandes - Catalin 
 	    	
-	    	try{
+	    	/*try{
 	    		
 		    	
 		    	Scanner f=new Scanner(new File("Comandes.txt")); 
@@ -317,7 +318,8 @@ public class Main {
 		    	int hora=0, minut=0; 
 		    	
 		    	
-		    	}
+	    	}                          */
+	    
 	    	//TODO Llegit Fitxxer Productes - Enyu
 	    	
 	    	//TODO Llegir fitxer Clients - Pablo
@@ -344,13 +346,25 @@ public class Main {
 	    	llista[2] = p1;
 	    	llista[3] = p2;
 
-	    	LlistaProducte llistP = new LlistaProducte(15);
+	    	LlistaProducte llistP = new LlistaProducte(12);
 	    	llistP.afegirProducte(b1);
 	    	llistP.afegirProducte(b2);
 	    	llistP.afegirProducte(p1);
 	    	llistP.afegirProducte(p2);
 
+	    	
+	    	
+	    	Clients[] llistaCl=new Clients[3];
+	    	String[] tRestr = {"celiacs","lactosa","fruits secs"};
+	    
+	    	Date data=new Date(11,11,2016);
+	    	
+	    	Clients Client1=new Clients("Jose"," avenida Barcelona","666999444","jose32",234,tRestr,new LlistaComanda());
+	    	Clients Client2=new Clients("Alex","avenida Jaume1","666777444","alex32",123,tRestr,new LlistaComanda());
+	    	Clients Client3=new Clients("Jordi","avenida Ramon","666888444","jordi32",543,tRestr,new LlistaComanda());
 	    	LlistaClients llistCl = new LlistaClients();
+	    	
+	    	Comanda comanda1=new Comanda(llistP,data);
 	    	LlistaComanda llistCo = new LlistaComanda();
 
 	    	int opcio=0;
