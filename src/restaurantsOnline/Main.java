@@ -1,4 +1,4 @@
-package restaurantsOnline;
+﻿package restaurantsOnline;
 
 import java.util.Date;
 import java.io.*;
@@ -43,7 +43,9 @@ public class Main {
 	     // TODO Que demanes
 	     System.out.print("\n\n\tSi vols agefir una  beguda posa el numero 1 si vols afegir un plat posa numero 2:\t");
 	     opcio=teclat.nextInt();
+
 	     teclat.nextLine();
+
 	      
 	      switch(opcio){
 	    	  case 1:
@@ -72,10 +74,12 @@ public class Main {
 	  	    	  String[] res = null;
 	  	    	  System.out.print("\n\n\tSi vols agefir una  begida posa el numero 2:\t");
 	    	      System.out.print("\n\n\tIndica el nom del plat que vols afegir:\t");
+
 	    	      nom=teclat.nextLine();
  	              System.out.print("\n\n\tIndica el preu del plat que vols agefir :\t");
  	              preu=teclat.nextDouble();
  	              teclat.nextLine();
+
 	    	      System.out.print("\n\n\tIndica el descompte que te el plat :\t");
 	    	      descompte=teclat.nextDouble();
 	    	      teclat.nextLine();
@@ -84,6 +88,7 @@ public class Main {
 	    	      tRestr=teclat.nextBoolean();
 	    	      if (tRestr){
 	    	    	  System.out.print("\n\n\tIndica quina retriccions te aquet plat  :\t");// DEmanar REstriccions  
+
 	    	    	  System.out.print("1.Celiacs  (s/n):\t");
 	    	    	  //TODO: hacer que reconozca la respuesta
 	    	    	  res[0]=teclat.nextLine();
@@ -91,6 +96,7 @@ public class Main {
 	    	    	  res[1]=teclat.nextLine();
 	    	    	  System.out.print("3.fruit secs :\t");
 	    	    	  res[2]=teclat.nextLine();
+
 	    	    	  
 	   
 	    	      }else
@@ -230,6 +236,7 @@ public class Main {
 		     codi =teclat.nextInt();
 		     teclat.nextLine();
 		     System.out.println(llistP.informacio(codi));
+
 			} 
 
 	    public static void crearClient()
@@ -252,9 +259,11 @@ public class Main {
 	        usuari=teclat.nextLine();
 	        System.out.print("\n\n\tIndica la contrasi�a del client:\t");
 	        contr=teclat.nextInt();
+
 	        teclat.nextLine();
 	        System.out.print("\n\n\tIndica si el client te alguna restriccions:\t");  // DEMANAR RESTRICCIONS
 	        //TODO: opciones restricciones (si/no)
+
 	    	  System.out.print("1.Celias  :\t");
 	    	  tRestr[0]=teclat.next();
 	    	  System.out.print("2.lactosa  :\t");
@@ -263,13 +272,15 @@ public class Main {
 	    	  tRestr[2]=teclat.next();
 	      
 	          Clients client=new Clients(nom,adreca,tel,usuari,contr,tRestr, new LlistaComanda());
-	        
+
 	          llistaClients.creaClient(client);  //Afegir a la llista de Clients              
+
 	        
 	    }
 
 	    
 	    public static void consultarClient()
+
 	    {
 	    	int id;
 	    	System.out.print("\n\n\tIndica id del client que vols consultar:\t");
@@ -290,7 +301,9 @@ public class Main {
 	    	int iden;
 	  	    System.out.print("\n\n\tIndica el identificador  per eliminar la comanda :\t");
 	        iden = teclat.nextInt();
+
 	        teclat.nextLine();
+
 	        System.out.print("\n\n\tLa comanda s'ha eliminat amb exit\t");
 	        llistCo.eliminarComanda(iden);
 	    }
@@ -308,6 +321,8 @@ public class Main {
 	        teclat.nextLine();
 	        System.out.print("\n\n\tLa comanda s'ha copiat amb exit \t");
 	        llistaClients.copiar_Comanda(id,iden);                      // Agefir a la llista de comandes del client
+
+
 	    }
 	    
 	    
@@ -320,7 +335,6 @@ public class Main {
 	   
 	    
 	    public static void main(String[] args) throws IOException {
-	    
 
 	    	Producte[] llista=new Producte[4];
 	    	Beguda b1 = new Beguda("sprite",2,10,20,false);
@@ -341,8 +355,6 @@ public class Main {
 	    	llistP.afegirProducte(p1);
 	    	llistP.afegirProducte(p2);
 
-	    	
-	    	
 	    	String[] tRestr = {"celiacs","lactosa","fruits secs"};
 	   
 	    	int hora = 0, min = 0;
