@@ -6,6 +6,7 @@ public class Main2 {
 
 	static LlistaClients llista;
 	static LlistaProducte llistacomanda; 
+	static LlistaComanda llistaclients; 
 	//TODO: variables globales e las listas
 	
 	
@@ -201,6 +202,28 @@ public class Main2 {
 		
 	}
 	
+	public static void escriureFitxerComandes(LlistaClients comandes)throws IOException{
+		
+		BufferedWriter f = new BufferedWriter(new FileWriter("comandes_output.txt"));
+		
+		int i,j;
+		int id; 
+		
+		for (i=0; i<comandes.getnClients();i++){
+		
+			f.write(comandes.getLlista()[i].getIdentificador()+",");
+			id= comandes.getLlista()[i].getIdentificador();
+			llistaclients = comandes.consultar_Comandes(id);  
+			for ( j=0; j<llistaclients.getnElem();j++){
+				
+				f.write(llistaclients[j]+","); 
+				
+			}
+			
+			
+		}
+		f.close();
+	}
 	
 	
 	
