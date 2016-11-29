@@ -5,6 +5,7 @@ import java.util.*;
 public class Main2 {
 
 	static LlistaClients llista;
+	static LlistaProducte llistacomanda; 
 	//TODO: variables globales e las listas
 	
 	
@@ -178,12 +179,12 @@ public class Main2 {
 				while ((paraula = next.nextToken())!= ","){
 					
 					plat = next.nextToken(); 
-					comandaguardada.afegirElement(plat); 
+					comandaguardada.afegirElement(plat,llistacomanda); 
 				}
 				while ((paraula = next.nextToken())!= ","){
 					
 					beguda = next.nextToken(); 
-					comandaguardada.afegirElement(beguda, llistaProducte);
+					comandaguardada.afegirElement(beguda, llistacomanda);
 						
 				}
 			}
@@ -200,40 +201,7 @@ public class Main2 {
 		
 	}
 	
-	public static void escriureFitxerComandes(LlistaProducte productes)throws IOException{
-		BufferedWriter f = new BufferedWriter(new FileWriter("productes_output.txt"));
-		for (int i=0; i<productes.getnElem();i++){
-			f.write(productes.getLlista()[i].getCodi()+",");
-			if (productes.getLlista()[i] instanceof Plat){
-				f.write("PLAT,");
-				f.write(productes.getLlista()[i].getNom()+",");
-				f.write(productes.getLlista()[i].getPreu()+",");
-				f.write(productes.getLlista()[i].getDescompte()+",");
-				if(((Plat)productes.getLlista()[i]).getTeRestriccio()){
-					for (int j=0; j<((Plat)productes.getLlista()[i]).getRestriccions().length; j++){
-						f.write(((Plat)productes.getLlista()[i]).getRestriccions()[j]);
-						if (j != ((Plat)productes.getLlista()[i]).getRestriccions().length - 1)
-							f.write(",");
-					}
-				} else {
-					f.write("NoRestriccions");
-				}
-			} else if (productes.getLlista()[i] instanceof Beguda){
-				f.write("BEGUDA,");
-				f.write(productes.getLlista()[i].getNom()+",");
-				f.write(productes.getLlista()[i].getPreu()+",");
-				f.write(productes.getLlista()[i].getDescompte()+",");
-				f.write(((Beguda)productes.getLlista()[i]).getVolum()+",");
-				if (((Beguda)productes.getLlista()[i]).getTeAlcohol()){
-					f.write("SI");
-				} else {
-					f.write("NO");
-				}
-			}
-			f.newLine();
-		}
-		f.close();
-	}
+	
 	
 	
 	public static void main(String[] args) {

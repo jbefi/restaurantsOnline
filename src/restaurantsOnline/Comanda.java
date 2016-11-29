@@ -37,15 +37,16 @@ public class Comanda {
     public int afegirElement(String nom, LlistaProducte producte) {  
 
         int aux;
+        System.out.println("aqui");
         aux = producte.posicioProducte(nom); // busco la posicio del producte dins de la llista per a poder copiarlo
-
+        System.out.println("aqui");
         if  (aux>=0){
                 this.producte.afegirProducte(producte.getLlista()[aux]);  // afegeixo el producte de la posicio ''aux'' de dins de la LlistaProducte a la llista producte que he creat 
         }
         return aux;
     }
-    
-    //getters de la classe
+
+	//getters de la classe
     public int getHora() {
         return hora;
     }
@@ -75,6 +76,15 @@ public class Comanda {
 
 	public void setIdentComanda(int identComanda) {
 		this.identComanda = identComanda;
+	}
+
+	public String toString() {
+		return "El resum de la teva comanda es el següent:\n  "
+				+ ""
+				+ "*************************************"
+				+ ""
+				+ producte.toString() +
+				 " \nLa hora de la comanda es =" + hora + "," + minut + "el teu identificador de comanda es el seguent" + identComanda + "";
 	}
 
 

@@ -158,6 +158,7 @@ public class Main {
 
 				for (i = 0; i <= quantitat; i++) {
 					aux = nova.afegirElement(nom, llistaProducte);
+					
 					if (aux == -1) {
 						System.out.println("No hi ha l'element");
 					}
@@ -200,21 +201,29 @@ public class Main {
 
 			if (opcio == 1) {
 
-				// resum comanda
+				Calendar horaComanda = new GregorianCalendar();
+				int hora, minut;
+
+				hora = horaComanda.get(Calendar.HOUR_OF_DAY);
+				minut = horaComanda.get(Calendar.MINUTE);
+				
+				nova.setHora(hora);
+				nova.setMinut(minut);
+				
+				nova.toString();
+				
 
 				System.out.println("Si vols confirmar la comanda, posa l'1, si vols més productes el 2 ");
 
 				opcio = teclat.nextInt();
 				teclat.nextLine();
 				if (opcio == 1) {
-
-					Calendar horaComanda = new GregorianCalendar();
-					int hora, minuto;
-
-					hora = horaComanda.get(Calendar.HOUR_OF_DAY);
-					minuto = horaComanda.get(Calendar.MINUTE);
-
-					// TODO hay que añadir la comanda dentro de la lista de comandas del cliente actual
+					
+					//afegim comanda nova a la llista de clients 
+					int identClient = 0;
+					int id = llistaClients.consultar_Client(identClient);
+					llistaClients.afegirComandaClient(id, nova);
+					
 					confirmar = true;
 
 				}

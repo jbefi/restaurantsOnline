@@ -44,6 +44,7 @@ public class LlistaComanda {
         }
 
     }
+  
     
     public void afegirComanda(Comanda nou) { 
         if (nElem < maxElementos) {
