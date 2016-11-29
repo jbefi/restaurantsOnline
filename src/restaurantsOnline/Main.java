@@ -62,6 +62,7 @@ public class Main {
 			System.out.print("\n\n\tIndica si la beguda te alcol (si/no) :\t");
 			if (teclat.nextLine().trim().equalsIgnoreCase("si"))
 				tAlcohol = true;
+			
 			else 
 				tAlcohol = false;
 			Beguda b1 = new Beguda(nom, preu, descompte, volum, tAlcohol);
