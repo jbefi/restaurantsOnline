@@ -87,7 +87,14 @@ public class Beguda extends Producte {
 	 */
 	@Override
 	public String toString() {
-		return super.toString() + " volum: " + volum + "ml\n És alcohòlica: " + teAlcohol + "\n";
+		String frase;
+		
+		frase = super.toString() + " volum: " + volum + "ml\n És alcohòlica: ";
+		if (teAlcohol)
+			frase += " si " + "\n";
+		else 
+			frase += " no " + "\n";
+		return frase;
 	}
 
 }
