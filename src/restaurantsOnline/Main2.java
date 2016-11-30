@@ -217,7 +217,7 @@ public class Main2 {
 			for ( j=0; j<llistaclients.getnElem();j++){
 				
 				f.write(llistaclients[j]+","); 
-				
+				 
 			}
 			
 			

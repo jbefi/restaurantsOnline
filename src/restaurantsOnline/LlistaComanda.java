@@ -33,6 +33,7 @@ public class LlistaComanda {
      * Metode que afegeix una comanda i que rep els seguents parametres
      * @param producte  , la llista de productes que conte la comanda
      * @param hora, la hora en que es fa la comanda 
+     * @param minut, minut en que es fa la comanda
      */
 
     public void afegirComanda(LlistaProducte producte, int hora, int minut) { 
@@ -45,7 +46,10 @@ public class LlistaComanda {
 
     }
   
-    
+    /**
+     * Metode afegeix una comanda nova sense tots els parametres que demano abans
+     * @param comanda  , una nova comanda
+     */
     public void afegirComanda(Comanda nou) { 
         if (nElem < maxElementos) {
 
