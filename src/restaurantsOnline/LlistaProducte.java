@@ -42,7 +42,7 @@ public class LlistaProducte {
 	}
 
 	/**
-	 * Mètode per afegir un producte a la llista.
+	 * Mï¿½tode per afegir un producte a la llista.
 	 *
 	 * @param p El producte a afegir.
 	 */
@@ -54,10 +54,10 @@ public class LlistaProducte {
 	}
 
 	/**
-	 * Mètodes privat per retornar la posició en la llista a partir del codi passat pel paràmetre
+	 * Mï¿½todes privat per retornar la posiciï¿½ en la llista a partir del codi passat pel parï¿½metre
 	 *
-	 * @param codi L'identificador únic del producte.
-	 * @return la posició d'aquest element amb el seu codi corresponent. En cas contrari, es retornarà -1.
+	 * @param codi L'identificador ï¿½nic del producte.
+	 * @return la posiciï¿½ d'aquest element amb el seu codi corresponent. En cas contrari, es retornarï¿½ -1.
 	 */
 	private int retPosLLista(int codi) {
 		if (nElem == 0) {
@@ -80,9 +80,9 @@ public class LlistaProducte {
 	}
 
 	/**
-	 *  Mètode per eliminar un producte a partir del seu codi.
+	 *  Mï¿½tode per eliminar un producte a partir del seu codi.
 	 *
-	 * @param codi L'identificador únic del producte.
+	 * @param codi L'identificador ï¿½nic del producte.
 	 */
 	//
 	public void eliminarProducte(int codi) {
@@ -98,9 +98,9 @@ public class LlistaProducte {
 	}
 
 	/**
-	 * Mètode per informar un producte a partir del seu codi.
+	 * Mï¿½tode per informar un producte a partir del seu codi.
 	 *
-	 * @param codi L'identificador únic del producte.
+	 * @param codi L'identificador ï¿½nic del producte.
 	 * @return una cadena amb les seves informacions corresponents. 
 	 */
 	// 
@@ -118,10 +118,10 @@ public class LlistaProducte {
 	}
 	
 	/**
-	 * Mètodes  per retornar la posició en la llista a partir del nom passat pel paràmetre.
+	 * Mï¿½todes  per retornar la posiciï¿½ en la llista a partir del nom passat pel parï¿½metre.
 	 *
 	 * @param nom El nom del producte.
-	 * @return la posició d'aquest element amb el seu nom corresponent. En cas contrari, es retornarà -1.
+	 * @return la posiciï¿½ d'aquest element amb el seu nom corresponent. En cas contrari, es retornarï¿½ -1.
 	 */
 	public int posicioProducte(String nom){
 		if (nElem == 0) {
@@ -136,6 +136,7 @@ public class LlistaProducte {
 				}
 				i++;
 			}
+			System.out.println(posTrobat);
 			if (trobat)
 				return posTrobat;
 			else
@@ -144,7 +145,7 @@ public class LlistaProducte {
 	}
 	
 	/**
-	 * Mètode toString() per retornar les informacions de l'objecte de la Classe instanciada.
+	 * Mï¿½tode toString() per retornar les informacions de l'objecte de la Classe instanciada.
 	 */
 	public String toString() {
 		if (nElem == 0) {

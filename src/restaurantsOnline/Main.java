@@ -142,9 +142,10 @@ public class Main {
 		existeix2=false;
 		buscantclient=true; 
 		int pas; 
+		int posiciousuari = 0; 
 		String usuari=null;
 		
-		Comanda nova = new Comanda(null, 0, 0);
+		Comanda nova = new Comanda(new LlistaProducte(50), 0, 0);
 
 		System.out.println("** Crear comanda **");
 		
@@ -168,6 +169,7 @@ public class Main {
 			
 				if (existeix1 && existeix2){
 					buscantclient=false; 
+					posiciousuari=i; 
 					
 				}
 			}
@@ -177,20 +179,20 @@ public class Main {
 		
 			while (!confirmar) { // bucle que confirma la comanda
 				
-				int aux;
+				int aux=0;
 				while (!plats) { // comencem amb els plats
 					mostrarProducte(1); // Muestra todas las bebidas al usuario 
 					// demanem a l'usuari els plats i la seva quantitat
 					System.out.println("Introdueix el nom del plat: ");
-					nom = teclat.nextLine(); //*******
+					nom = teclat.nextLine(); 
 					teclat.nextLine();
 					System.out.println("Introdueix la quantitat");
 					
 					quantitat = teclat.nextInt();
 					teclat.nextLine();
 	
-					for (i = 0; i <= quantitat; i++) {
-						aux = nova.afegirElement(nom, llistaProducte); //  TODO no em torna la posicio 
+					for (i = 0; i < quantitat; i++) {
+						aux = nova.afegirElement(nom, llistaProducte); 
 						
 						if (aux == -1) {
 							System.out.println("No hi ha l'element");
@@ -216,7 +218,7 @@ public class Main {
 					quantitat = teclat.nextInt();
 					teclat.nextLine();
 	
-					for (i = 0; i <= quantitat; i++) {
+					for (i = 0; i < quantitat; i++) {
 						nova.afegirElement(nom, llistaProducte);
 					}
 					System.out.println("Si vols mes begudes, posa l'1, si no, el 2");
@@ -227,7 +229,7 @@ public class Main {
 					}
 				}
 	
-				System.out.println("Per veure el resum de la comanda, posa l'1, per més productes posa el 2");
+				System.out.println("Per veure el resum de la comanda, posa l'1, per eliminar la comanda, el 2");
 	
 				opcio = teclat.nextInt();
 				teclat.nextLine();
@@ -244,6 +246,7 @@ public class Main {
 					nova.setMinut(minut);
 					
 					nova.toString();
+					System.out.println(nova);
 					
 	
 					System.out.println("Si vols confirmar la comanda, posa l'1, si vols més productes el 2 ");
@@ -253,15 +256,17 @@ public class Main {
 					if (opcio == 1) {
 						
 						//afegim comanda nova a la llista de clients 
-						int identClient = 0;
-						int id = llistaClients.consultar_Client(identClient); // d'on trec la id del client?? 
+						
+						int id = llistaClients.getLlista()[posiciousuari].getIdentificador(); 
 						llistaClients.afegirComandaClient(id, nova);
 						
 						confirmar = true;
 	
 					}
 				}
-	
+				if (opcio==2){
+					confirmar=true; 
+				}
 			}
 		}
 		else 
@@ -304,11 +309,11 @@ public class Main {
 		teclat.nextLine();
 		System.out.print("\n\n\tIndica si el client te alguna restriccions:\t"); // DEMANAR RESTRICCIONS
 	
-		System.out.print("1.Celias  :\t");
+		System.out.print("1.Celiac  :\t");
 		tRestr[0] = teclat.next();
-		System.out.print("2.lactosa  :\t");
+		System.out.print("2.Lactosa  :\t");
 		tRestr[1] = teclat.next();
-		System.out.print("3.fruit secs :\t");
+		System.out.print("3.Fruit secs :\t");
 		tRestr[2] = teclat.next();
 
 		Clients client = new Clients(nom, adreca, tel, usuari, contr, tRestr, new LlistaComanda());

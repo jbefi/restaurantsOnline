@@ -23,6 +23,7 @@ public class Comanda {
      */
 
     public Comanda(LlistaProducte producte, int hora, int minut){
+    	this.producte=producte; 
         identComanda=identComanda+1;
         this.hora=hora;
         this.minut=minut; 
@@ -39,7 +40,7 @@ public class Comanda {
         int aux;
         System.out.println("aqui");
         aux = producte.posicioProducte(nom); // busco la posicio del producte dins de la llista per a poder copiarlo
-        System.out.println("aqui");
+        System.out.println(aux);
         if  (aux>=0){
                 this.producte.afegirProducte(producte.getLlista()[aux]);  // afegeixo el producte de la posicio ''aux'' de dins de la LlistaProducte a la llista producte que he creat 
         }
@@ -84,7 +85,7 @@ public class Comanda {
 				+ "*************************************"
 				+ ""
 				+ producte.toString() +
-				 " \nLa hora de la comanda es =" + hora + "," + minut + "el teu identificador de comanda es el seguent" + identComanda + "";
+				 " \nLa hora de la comanda es :\t" + hora + ":" + minut + "\nEl teu identificador de comanda es el seguent:\n" + identComanda + "";
 	}
 
 
