@@ -174,19 +174,18 @@ public class Main {
 			buscantclient=false; 
 		}
 		if (existeix1 && existeix2){
-			
 		
 			while (!confirmar) { // bucle que confirma la comanda
-	
+				
 				int aux;
 				while (!plats) { // comencem amb els plats
-	
+					mostrarProducte(1); // Muestra todas las bebidas al usuario 
 					// demanem a l'usuari els plats i la seva quantitat
-					System.out.println("Introdueix els plat que vols");
+					System.out.println("Introdueix el nom del plat: ");
 					nom = teclat.nextLine(); //*******
-					nom = teclat.nextLine();
+					teclat.nextLine();
 					System.out.println("Introdueix la quantitat");
-	
+					
 					quantitat = teclat.nextInt();
 					teclat.nextLine();
 	
@@ -207,7 +206,7 @@ public class Main {
 					}
 				}
 				while (!begudes) {
-	
+					mostrarProducte(2); // Muestra todas las bebidas de la lista global 
 					System.out.println("Introdueix les begudes que vols");
 	
 					nom = teclat.nextLine();
@@ -350,6 +349,19 @@ public class Main {
 		System.out.print("\n\n\t La llista de comanda ordenat\t");
 		llistCo.ordenarComandes();
 	}
+	
+	// Mètode auxiliar per mostrar a la consola tots els plats o totes les begudes de la llista global de Productes.
+	// El paràmetre tipus és 1 si mostra els plats, 2 les begudes
+	public static void mostrarProducte(int tipus){
+		System.out.println("************ Informació del Producte *****************");
+		for (int i=0; i<llistaProducte.getnElem();i++){
+			if (tipus==1 && llistaProducte.getLlista()[i] instanceof Plat )
+				System.out.println(llistaProducte.getLlista()[i]);
+			else if (tipus==2 && llistaProducte.getLlista()[i] instanceof Beguda )
+				System.out.println(llistaProducte.getLlista()[i]);
+		}
+		System.out.println("******************************************************\n");
+	}
 
 	public static void main(String[] args) throws IOException {
 		
@@ -366,11 +378,11 @@ public class Main {
 		llista[2] = p1;
 		llista[3] = p2;
 
-		LlistaProducte llistP = new LlistaProducte(12);
-		llistP.afegirProducte(b1);
-		llistP.afegirProducte(b2);
-		llistP.afegirProducte(p1);
-		llistP.afegirProducte(p2);
+		llistaProducte = new LlistaProducte(12);
+		llistaProducte.afegirProducte(b1);
+		llistaProducte.afegirProducte(b2);
+		llistaProducte.afegirProducte(p1);
+		llistaProducte.afegirProducte(p2);
 
 		String[] tRestr = { "celiacs", "lactosa", "fruits secs" };
 
@@ -386,10 +398,11 @@ public class Main {
 		Clients Client3 = new Clients("Jordi", "avenida Ramon", "666888444", "jordi32", 543, tRestr,
 				new LlistaComanda());
 		llistaClients.creaClient(Client3);
-
-		Comanda comanda1 = new Comanda(llistP, hora, min);
-		Comanda comanda2 = new Comanda(llistP, hora, min);
-		Comanda comanda3 = new Comanda(llistP, hora, min);
+		
+	
+		Comanda comanda1 = new Comanda(llistaProducte, hora, min);
+		Comanda comanda2 = new Comanda(llistaProducte, hora, min);
+		Comanda comanda3 = new Comanda(llistaProducte, hora, min);
 
 		llistaClients.afegirComandaClient(Client1.getIdentificador(), comanda1);
 
@@ -403,14 +416,14 @@ public class Main {
 			System.out.println(opcio);
 			switch (opcio) {
 			case 1:
-				afegirProducte(llistP);
+				afegirProducte(llistaProducte);
 				;
 				break;
 			case 2:
-				eliminarProducte(llistP);
+				eliminarProducte(llistaProducte);
 				break;
 			case 3:
-				consultarInformacio(llistP);
+				consultarInformacio(llistaProducte);
 				break;
 			case 4:
 				crearClient();
