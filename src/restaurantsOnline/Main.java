@@ -365,6 +365,7 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		
+		
 		Producte[] llista = new Producte[4];
 		Beguda b1 = new Beguda("sprite", 2, 10, 20, false);
 		Beguda b2 = new Beguda("fanta", 2.5, 20, 30, false);
