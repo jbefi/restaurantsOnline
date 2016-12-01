@@ -43,8 +43,7 @@ class Finestra extends JFrame {
 		// Accions del desplegable
 		desplegable.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				JComboBox<String> combo = (JComboBox<String>) evt.getSource();
-				int opcio = combo.getSelectedIndex();
+				int opcio = desplegable.getSelectedIndex();
 				switch (opcio) {
 				case 0:
 					// Afegir nou producte
