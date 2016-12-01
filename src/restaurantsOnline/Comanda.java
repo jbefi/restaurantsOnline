@@ -14,7 +14,8 @@ public class Comanda {
     private int minut; 
     private float descuento;
     private boolean confirmarDescuento;
-    private int identComanda=0;
+    private static int idGeneral=0;
+    private int identComanda;
 
     /**
      * Constructor de la classe comanda que rep els seguents parametres 
@@ -24,7 +25,9 @@ public class Comanda {
 
     public Comanda(LlistaProducte producte, int hora, int minut){
     	this.producte=producte; 
-        identComanda=identComanda+1;
+    	identComanda=idGeneral;
+    	idGeneral++;
+        
         this.hora=hora;
         this.minut=minut; 
     }
@@ -38,6 +41,9 @@ public class Comanda {
     public int afegirElement(String nom, LlistaProducte producte) {  
 
         int aux;
+        identComanda=idGeneral;
+        idGeneral++;
+        
         System.out.println("aqui");
         aux = producte.posicioProducte(nom); // busco la posicio del producte dins de la llista per a poder copiarlo
         System.out.println(aux);

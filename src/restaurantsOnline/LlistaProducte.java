@@ -136,7 +136,6 @@ public class LlistaProducte {
 				}
 				i++;
 			}
-			System.out.println(posTrobat);
 			if (trobat)
 				return posTrobat;
 			else

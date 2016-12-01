@@ -19,7 +19,7 @@ public class LlistaComanda {
     
     public LlistaComanda(){
     	llista = new Comanda[maxElementos];
-    	nElem++; 
+    	nElem = 0; 
     }
     
     public LlistaComanda(Comanda[] comandes){
@@ -116,6 +116,15 @@ public class LlistaComanda {
     
     public int getIdentClient () { 
     	return identClient; 
+    }
+    
+    public String toString(){
+    	String aux = "";
+    	for(int i=0;i<nElem;i++){
+    		System.out.println(i);
+    		aux = aux + llista[i]+"\n";
+    	}
+    	return aux;
     }
     
     

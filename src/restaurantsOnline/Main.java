@@ -134,13 +134,12 @@ public class Main {
 		int opcio; // creo les variable enteres que utilitzo per a les opcions que dono al client
 		int quantitat = 0;
 		String nom = null; // variable utilitzada per al nom del producte
-		boolean confirmar, plats, begudes,existeix1, existeix2,buscantclient; // creo les variables booleanes que necessito per a fer el meu programa
+		boolean confirmar, plats, begudes,existeix1, existeix2; // creo les variables booleanes que necessito per a fer el meu programa
 		confirmar = false;
 		plats = false;
 		begudes = false;
 		existeix1= false; 
-		existeix2=false;
-		buscantclient=true; 
+		existeix2=false; 
 		int pas; 
 		int posiciousuari = 0; 
 		String usuari=null;
@@ -156,9 +155,9 @@ public class Main {
 		
 		System.out.println("Mot de pas:");
 		pas = teclat.nextInt(); 
+		teclat.nextLine();
 		
-		while (buscantclient){
-			for (i=0; i<llistaClients.getnClients(); i++){
+			for (i=0; ((i<llistaClients.getnClients())&&(!existeix1)&&(!existeix2)); i++){
 			
 				if(usuari.equals(llistaClients.getLlista()[i].getUsuari())){
 					existeix1=true; 
@@ -168,13 +167,11 @@ public class Main {
 				}
 			
 				if (existeix1 && existeix2){
-					buscantclient=false; 
 					posiciousuari=i; 
 					
 				}
 			}
-			buscantclient=false; 
-		}
+
 		if (existeix1 && existeix2){
 		
 			while (!confirmar) { // bucle que confirma la comanda
@@ -183,9 +180,8 @@ public class Main {
 				while (!plats) { // comencem amb els plats
 					mostrarProducte(1); // Muestra todas las bebidas al usuario 
 					// demanem a l'usuari els plats i la seva quantitat
-					System.out.println("Introdueix el nom del plat: ");
-					nom = teclat.nextLine(); 
-					teclat.nextLine();
+					System.out.println("Introdueix el nom del plat: "); 
+					nom=teclat.nextLine();
 					System.out.println("Introdueix la quantitat");
 					
 					quantitat = teclat.nextInt();
@@ -292,7 +288,7 @@ public class Main {
 		int contr;
 		String usuari;
 		String adreca;
-		String[] tRestr = null;
+		String[] res = new String[3];
 
 	
 		System.out.print("\n\n\tIndica el nom del client:\t");
@@ -307,16 +303,27 @@ public class Main {
 		contr = teclat.nextInt();
 
 		teclat.nextLine();
-		System.out.print("\n\n\tIndica si el client te alguna restriccions:\t"); // DEMANAR RESTRICCIONS
-	
-		System.out.print("1.Celiac  :\t");
-		tRestr[0] = teclat.next();
-		System.out.print("2.Lactosa  :\t");
-		tRestr[1] = teclat.next();
-		System.out.print("3.Fruit secs :\t");
-		tRestr[2] = teclat.next();
-
-		Clients client = new Clients(nom, adreca, tel, usuari, contr, tRestr, new LlistaComanda());
+		System.out.print("\n\n\tIndica si el client te alguna restriccions: (si/no)\t"); // DEMANAR RESTRICCIONS
+		if (teclat.nextLine().trim().equalsIgnoreCase("si")) {
+			System.out.print("\n\n\tIndica quina retriccions te aquet client  :\n");
+			System.out.print("\t1.Celiacs  (si/no):\n");
+			if (teclat.nextLine().trim().equalsIgnoreCase("si"))
+				res[0] = "Celiacs";
+			else {
+				res[0] = "";
+			}
+			System.out.print("\t2.lactosa  (si/no):\n");
+			if (teclat.nextLine().trim().equalsIgnoreCase("si"))
+				res[1] = "Lactosa";
+			else
+				res[1] = "";
+			System.out.print("\t3.fruit secs (si/no):\n");
+			if (teclat.nextLine().trim().equalsIgnoreCase("si"))
+				res[2] = "Fruits Secs";
+			else
+				res[2] = "";
+		}
+		Clients client = new Clients(nom, adreca, tel, usuari, contr, res, new LlistaComanda());
 
 		llistaClients.creaClient(client); // Afegir a la llista de Clients
 
@@ -336,23 +343,72 @@ public class Main {
 	private static void copiarComanda()
 
 	{
-		int iden, id;
-		System.out.print("\n\n\tIndica id del client:\t");
-		id = teclat.nextInt();
+		int iden, id = 0;
+		System.out.println("Usuari:");
+		String usuari = teclat.nextLine(); 
+		boolean exist1=false, exist2=false;
+		int posusuari = 0;
+		
+		System.out.println("Mot de pas:");
+		int pas = teclat.nextInt(); 
 		teclat.nextLine();
+		for (int i=0; i<llistaClients.getnClients(); i++){
+			
+			if(usuari.equals(llistaClients.getLlista()[i].getUsuari())){
+				exist1=true; 
+			}
+			if(pas==(llistaClients.getLlista()[i].getContrasenya())){
+				exist2=true; 
+			}
+		
+			if (exist1 && exist2){
+				posusuari=i; 
+				exist1 = false;
+				exist2 = false;
+			}
+		}
+		id = llistaClients.getLlista()[posusuari].getIdentificador();
+		
 		System.out.print("\n\n\tIndica el identificador  de la comanda que vols copiar :\t");
+		System.out.println(llistaClients.consultar_Comandes(id));
 		iden = teclat.nextInt();
 		teclat.nextLine();
 		System.out.print("\n\n\tLa comanda s'ha copiat amb exit \t");
-		llistaClients.copiar_Comanda(id, iden); // Agefir a la llista de comandes del client
+		llistaClients.copiar_Comanda(usuari, pas, iden); // Agefir a la llista de comandes del client
 
 	}
 
-	private static void ordenarComandes(LlistaComanda llistCo)
+	private static void ordenarComandes()
 
 	{
+		int iden, id = 0;
+		System.out.println("Usuari:");
+		String usuari = teclat.nextLine(); 
+		boolean exist1=false, exist2=false;
+		int posusuari = 0;
+		
+		System.out.println("Mot de pas:");
+		int pas = teclat.nextInt(); 
+		teclat.nextLine();
+		for (int i=0; i<llistaClients.getnClients(); i++){
+			
+			if(usuari.equals(llistaClients.getLlista()[i].getUsuari())){
+				exist1=true; 
+			}
+			if(pas==(llistaClients.getLlista()[i].getContrasenya())){
+				exist2=true; 
+			}
+		
+			if (exist1 && exist2){
+				posusuari=i; 
+				exist1 = false;
+				exist2 = false;
+			}
+		}
+		id = llistaClients.getLlista()[posusuari].getIdentificador();
+		llistaClients.consultar_Comandes(id).ordenarComandes();
 		System.out.print("\n\n\t La llista de comanda ordenat\t");
-		llistCo.ordenarComandes();
+		System.out.println(llistaClients.consultar_Comandes(id));
 	}
 	
 	// Mètode auxiliar per mostrar a la consola tots els plats o totes les begudes de la llista global de Productes.
@@ -411,8 +467,7 @@ public class Main {
 		Comanda comanda3 = new Comanda(llistaProducte, hora, min);
 
 		llistaClients.afegirComandaClient(Client1.getIdentificador(), comanda1);
-
-		LlistaComanda llistCo = new LlistaComanda();
+		llistaClients.afegirComandaClient(Client1.getIdentificador(), comanda2);
 
 		int opcio = 0;
 		while (opcio != 9) {
@@ -444,7 +499,7 @@ public class Main {
 				copiarComanda();
 				break;
 			case 8:
-				ordenarComandes(llistCo);
+				ordenarComandes();
 				break;
 
 			}

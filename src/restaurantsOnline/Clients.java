@@ -154,12 +154,19 @@ public class Clients {
 		this.nComandes = nComandes;
 	}
 
+	public void afegirComanda(Comanda nou){
+		comandes.afegirComanda(nou);
+	}
+	
+	
 	@Override
 	public String toString() {
-		return "Clients [Nom_client=" + Nom_client + ", Adreca=" + Adreca + ", Telefon=" + Telefon + ", Usuari="
-				+ Usuari + ", Contrasenya=" + Contrasenya + ", Restriccions=" +
-				//TODO: Acabar de fer el toString retornant la llista de restriccions
-				 ", Preferent=" + Preferent + ", Identificador=" + Identificador + ", nComandes=" + nComandes + "]";
+		String aux = "Clients [Nom_client=" + Nom_client + ", Adreca=" + Adreca + ", Telefon=" + Telefon + ", Usuari="
+				+ Usuari + ", Contrasenya=" + Contrasenya + ", Restriccions = ";
+		for (String i : Restriccions)
+			aux += i+" ";
+		aux+=", Preferent=" + Preferent + ", Identificador=" + Identificador + ", nComandes=" + nComandes + "]";
+		return aux;
 	}
 	
 	

@@ -53,7 +53,7 @@ public class LlistaClients {
 		boolean trobat = false;
 		while ((!trobat) && (i<nClients))
 		{
-			trobat = Objects.equals(llista[i].getIdentificador(), id);
+			trobat = llista[i].getIdentificador() == id;
 			if (!trobat)
 			{
 				i++;
@@ -151,42 +151,62 @@ public class LlistaClients {
 	}
 	
 	
-	public Comanda copiar_Comanda(int id, int identComanda)
+	public Comanda copiar_Comanda(String usuari, int pas, int identComanda)
 	{
 		
 		int i = 0;
 		int j;
-		j = consultar_Client(id);
+
 		boolean trobat = false;
+		boolean existeix1 = false, existeix2 = false;
+		int posiciousuari = 0;
 		
-		LlistaComanda llista_comandes = this.llista[j].getComandes();
+			for (i=0; ((i<llista.length)&&(!existeix1)&&(!existeix2)); i++){
+			
+				if(usuari.equals(llista[i].getUsuari())){
+					existeix1=true; 
+				}
+				if(pas==(llista[i].getContrasenya())){
+					existeix2=true; 
+				}
+			
+				if (existeix1 && existeix2){
+					posiciousuari=i; 
+				}
+			}
+		if (existeix1 && existeix2){
+			//j = consultar_Client(llista[posiciousuari].getIdentificador());
 		
-		while ((!trobat) && (i<llista_comandes.getnElem()))
-		{
-			if (llista_comandes.getLlista()[i].getIdentComanda() == identComanda)
+			LlistaComanda llista_comandes = this.llista[posiciousuari].getComandes();
+		
+			while ((!trobat) && (i<llista_comandes.getnElem()))
 			{
-				trobat = true;
+				if (llista_comandes.getLlista()[i].getIdentComanda() == identComanda)
+				{
+					trobat = true;
+				}
+				else
+				{
+					i++;
+				}
+			}
+			
+			if (trobat)
+			{
+				return (llista_comandes.getLlista()[i]);
 			}
 			else
 			{
-				i++;
+				return (null);
 			}
 		}
-		
-		if (trobat)
-		{
-			return (llista_comandes.getLlista()[i]);
-		}
-		else
-		{
-			return (null);
-		}
+		else return null;
 	}
 	
 	public void afegirComandaClient (int id, Comanda comandaguardada)
 	{
 		int i = consultar_Client(id);
-		llista[i].getComandes().afegirComanda(comandaguardada);
+		llista[i].afegirComanda(comandaguardada);
 	}
 }
 
