@@ -1,6 +1,5 @@
 package restaurantsOnline;
 
-
 /**
  * The Class Producte.
  * 
@@ -13,14 +12,18 @@ public abstract class Producte {
 	protected int codi;
 	protected double preu;
 	protected double descompte;
-	protected static int numProducte; // Atribut estàtica per implementar el codi de cada producte.
+	protected int quantitat;
+	private static int numProducte = 0; // Atribut estàtica per implementar el codi de cada producte.
 
 	/**
 	 * Constructor per la Fase. Sense 'codi' en el paràmetre.
 	 *
-	 * @param nom El nom del producte.
-	 * @param preu El preu del producte sense el descompte.
-	 * @param descompte La rebaixa que apliquem al producte.
+	 * @param nom
+	 *            El nom del producte.
+	 * @param preu
+	 *            El preu del producte sense el descompte.
+	 * @param descompte
+	 *            La rebaixa que apliquem al producte.
 	 */
 	public Producte(String nom, double preu, double descompte) {
 		this.nom = nom;
@@ -28,17 +31,22 @@ public abstract class Producte {
 		this.descompte = descompte;
 		numProducte++;
 		this.codi = numProducte;
+		this.quantitat = 1;
 	}
-	
+
 	/**
 	 * Constructor per 2a Fase. Amb el paràmetre 'codi's.
 	 *
-	 * @param codi L'identificador del producte.
-	 * @param nom El nom del producte.
-	 * @param preu El preu del producte sense el descompte.
-	 * @param descompte La rebaixa que apliquem al producte.
+	 * @param codi
+	 *            L'identificador del producte.
+	 * @param nom
+	 *            El nom del producte.
+	 * @param preu
+	 *            El preu del producte sense el descompte.
+	 * @param descompte
+	 *            La rebaixa que apliquem al producte.
 	 */
-	public Producte(int codi,String nom, double preu, double descompte) {
+	public Producte(int codi, String nom, double preu, double descompte) {
 		this.nom = nom;
 		this.preu = preu;
 		this.descompte = descompte;
@@ -57,7 +65,8 @@ public abstract class Producte {
 	/**
 	 * Setter de nom.
 	 *
-	 * @param nom El nou valor de  nom.
+	 * @param nom
+	 *            El nou valor de nom.
 	 */
 	public void setNom(String nom) {
 		this.nom = nom;
@@ -66,7 +75,7 @@ public abstract class Producte {
 	/**
 	 * Getter de codi.
 	 *
-	 * @return el valor de  codi.
+	 * @return el valor de codi.
 	 */
 	public int getCodi() {
 		return codi;
@@ -80,16 +89,16 @@ public abstract class Producte {
 	public double getPreu() {
 		return preu;
 	}
-	
+
 	/**
 	 * Setter de preu.
 	 *
-	 * @param preu El nou valor del preu.
+	 * @param preu
+	 *            El nou valor del preu.
 	 */
 	public void setPreu(double preu) {
 		this.preu = preu;
 	}
-	
 
 	/**
 	 * Setter de descompte.
@@ -103,7 +112,7 @@ public abstract class Producte {
 	/**
 	 * Getter de descompte.
 	 *
-	 * @return el valor de  descompte
+	 * @return el valor de descompte
 	 */
 	public double getDescompte() {
 		return descompte;
@@ -112,34 +121,55 @@ public abstract class Producte {
 	/**
 	 * Setter de descompte.
 	 *
-	 * @param descompte El nou valor del descompte.
+	 * @param descompte
+	 *            El nou valor del descompte.
 	 */
 	public void setDescompte(float descompte) {
 		this.descompte = descompte;
 	}
 
 	/**
-	 * Geter de numProducte.
+	 * Getter de numProducte.
 	 *
-	 * @return el valor de  numProducte.
+	 * @return el valor de numProducte.
 	 */
 	public static int getNumProducte() {
 		return numProducte;
 	}
-	
+
+	/**
+	 * Getter de Quantitat.
+	 *
+	 * @return el valor de quantitat.
+	 */
+	public int getQuantitat() {
+		return quantitat;
+	}
+
+	/**
+	 * Setter de Quantitat.
+	 *
+	 * @param quantitat
+	 *            El nou valor del quantitat.
+	 */
+	public void setQuantitat(int quantitat) {
+		this.quantitat = quantitat;
+	}
+
 	/**
 	 * Mètode per modificar el preu segons el percentage del descompte.
 	 * 
 	 */
-	public void aplicarDescompte(){
-		preu = preu * (1 - descompte / 100);
+	public void aplicarDescompte() {
+		preu = (preu * (1 - descompte / 100) * quantitat);
 	}
 
 	/**
 	 * Mètode toString() per retornar les informacions de l'objecte de la Classe instanciada.
 	 */
 	public String toString() {
-		return ("\n " + codi + ": " + nom + " ............................ " + preu + "€\n Descompte: " + descompte + "% \n");
+		return ("\n " + codi + ": " + nom + " ............................ " + preu + "€\n Descompte: " + descompte
+				+ "% \n" + "€\n Quantitat: " + quantitat + " \n");
 	}
 
 }
