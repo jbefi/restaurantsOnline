@@ -12,7 +12,6 @@ public class Comanda {
     private LlistaProducte producte;
     private int hora;
     private int minut; 
-    private boolean confirmarDescuento;
     private static int idGeneral=0;
     private int identComanda;
     private double preuTotal=0; 
@@ -52,25 +51,19 @@ public class Comanda {
        
         aux = producte.posicioProducte(nom); // busco la posicio del producte dins de la llista per a poder copiarlo
         
-        preuProducte = producte.getLlista()[aux].getPreu();  // busquem el preu del producte 
         descuento = producte.getLlista()[aux].getDescompte(); // busquem la seva 
-        if (preferent){
-        	
-
-        preuProducte = (preuProducte * (1 - descuento / 100) * quantitat);
-        preuTotal=preuProducte+preuTotal; 
-        }	
         
-        else{
-        	preuTotal=preuProducte+preuTotal; 
-        }
-  
       
         if  (aux>=0){
-        		this.producte.getLlista()[aux].setQuantitat(quantitat);
- 
+        		
                 this.producte.afegirProducte(producte.getLlista()[aux]);  // afegeixo el producte de la posicio ''aux'' de dins de la LlistaProducte a la llista producte que he creat 
+                this.producte.getLlista()[this.producte.getnElem()-1].setQuantitat(quantitat);
+                this.producte.getLlista()[this.producte.getnElem()-1].calcularPreuTotal();
+                if (preferent){
+                	this.producte.getLlista()[this.producte.getnElem()-1].aplicarDescompte();
+                }
         }
+        this.preuTotal +=this.producte.getLlista()[this.producte.getnElem()-1].getPreuTotal();
         return aux;
     }
 
@@ -82,9 +75,6 @@ public class Comanda {
         return minut;
     }
 
-    public boolean isConfirmarDescuento() {
-        return confirmarDescuento;
-    }
 
     public int getIdentComanda() {
         return identComanda;
@@ -111,7 +101,7 @@ public class Comanda {
 				+ "*************************************"
 				+ ""
 				+ producte.toString() +
-				 " \nLa hora de la comanda es :\t" + hora + ":" + minut + "\nEl teu identificador de comanda es el seguent:\n" + identComanda + "\n \n El preu total de la comanda es: "+ preuTotal;
+				 " \nLa hora de la comanda es :\t" + hora + ":" + minut + "\nL'identificador de comanda es el seguent:\n" + identComanda + "\n \n El preu total de la comanda es: "+ preuTotal+"€\n";
 	}
 
 

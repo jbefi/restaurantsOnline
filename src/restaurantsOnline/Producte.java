@@ -13,6 +13,7 @@ public abstract class Producte {
 	protected double preu;
 	protected double descompte;
 	protected int quantitat;
+	protected double preuTotal;
 	private static int numProducte = 0; // Atribut estàtica per implementar el codi de cada producte.
 
 	/**
@@ -32,6 +33,7 @@ public abstract class Producte {
 		numProducte++;
 		this.codi = numProducte;
 		this.quantitat = 1;
+		this.preuTotal = preu;
 	}
 
 	/**
@@ -51,15 +53,36 @@ public abstract class Producte {
 		this.preu = preu;
 		this.descompte = descompte;
 		this.codi = codi;
+		this.quantitat = 1;
+		this.preuTotal = preu;
 	}
 
 	/**
-	 * Getter thdee nom.
+	 * Getter de nom.
 	 *
 	 * @return el valor del nom.
 	 */
 	public String getNom() {
 		return nom;
+	}
+	
+	/**
+	 * Getter de preu Total.
+	 *
+	 * @return el valor de preu Total.
+	 */
+	public double getPreuTotal() {
+		return preuTotal;
+	}
+	
+	/**
+	 * Setter de preu total (preu*quantitat).
+	 *
+	 * @param nom
+	 *            El nou valor de preu total.
+	 */
+	public void setPreuTotal(double preuTotal) {
+		this.preuTotal = preuTotal;
 	}
 
 	/**
@@ -161,7 +184,15 @@ public abstract class Producte {
 	 * 
 	 */
 	public void aplicarDescompte() {
-		preu = (preu * (1 - descompte / 100) * quantitat);
+		preuTotal *= (1 - descompte / 100) ;
+	}
+	
+	/**
+	 * Mètode per calcular el preu total de cada producte.
+	 * 
+	 */
+	public void calcularPreuTotal() {
+		preuTotal = (preu * quantitat);
 	}
 
 	/**
@@ -169,7 +200,7 @@ public abstract class Producte {
 	 */
 	public String toString() {
 		return ("\n " + codi + ": " + nom + " ............................ " + preu + "€\n Descompte: " + descompte
-				+ "% \n" + "€\n Quantitat: " + quantitat + " \n");
+				+ "%\n Quantitat: " + quantitat + "\n Preu total:  " + preuTotal + "€\n");
 	}
 
 }
