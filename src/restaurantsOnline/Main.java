@@ -130,7 +130,7 @@ public class Main {
 	 */
 	public static void afegirComanda() {
 		
-		int i; 
+		int i = 0; 
 		int opcio; // creo les variable enteres que utilitzo per a les opcions que dono al client
 		int quantitat = 0;
 		String nom = null; // variable utilitzada per al nom del producte
@@ -143,21 +143,23 @@ public class Main {
 		int pas; 
 		int posiciousuari = 0; 
 		String usuari=null;
+		boolean preferent; 
+		preferent=false; 
 		
-		Comanda nova = new Comanda(new LlistaProducte(50), 0, 0);
+		Comanda nova = new Comanda(new LlistaProducte(50), 0, 0, 0);
 
 		System.out.println("** Crear comanda **");
 		
-		System.out.println("Per a crear una comanda introdueix l'usuari i el mot de pas ------>  ");
+		System.out.println("Per a crear una comanda introdueix l'usuari i la clau de pas------>  ");
 		
 		System.out.println("Usuari:");
 		usuari = teclat.nextLine(); 
 		
-		System.out.println("Mot de pas:");
+		System.out.println("Clau de pas:");
 		pas = teclat.nextInt(); 
 		teclat.nextLine();
 		
-			for (i=0; ((i<llistaClients.getnClients())&&(!existeix1)&&(!existeix2)); i++){
+			while  ((i<llistaClients.getnClients())&&(!existeix1)&&(!existeix2)){
 			
 				if(usuari.equals(llistaClients.getLlista()[i].getUsuari())){
 					existeix1=true; 
@@ -170,104 +172,108 @@ public class Main {
 					posiciousuari=i; 
 					
 				}
+				i++; 
 			}
-
-		if (existeix1 && existeix2){
+			preferent = llistaClients.passa_Preferent(llistaClients.getLlista()[posiciousuari]);
+			
+			if (existeix1 && existeix2){
 		
-			while (!confirmar) { // bucle que confirma la comanda
+				while (!confirmar) { // bucle que confirma la comanda
 				
-				int aux=0;
-				while (!plats) { // comencem amb els plats
-					mostrarProducte(1); // Muestra todas las bebidas al usuario 
-					// demanem a l'usuari els plats i la seva quantitat
-					System.out.println("Introdueix el nom del plat: "); 
-					nom=teclat.nextLine();
-					System.out.println("Introdueix la quantitat");
-					
-					quantitat = teclat.nextInt();
-					teclat.nextLine();
-	
-					for (i = 0; i < quantitat; i++) {
-						aux = nova.afegirElement(nom, llistaProducte); 
+					int aux=0;
+					while (!plats) { // comencem amb els plats
+						mostrarProducte(1); // Muestra todas las bebidas al usuario 
+						// demanem a l'usuari els plats i la seva quantitat
+						System.out.println("Introdueix el nom del plat: "); 
+						nom=teclat.nextLine();
+						System.out.println("Introdueix la quantitat");
 						
-						if (aux == -1) {
-							System.out.println("No hi ha l'element");
+						quantitat = teclat.nextInt();
+						teclat.nextLine();
+	
+					
+							aux = nova.afegirElement(nom, llistaProducte, quantitat, preferent); 
+							
+						
+							if (aux == -1) {
+								System.out.println("No hi ha l'element");
+							
+	
+			
+						System.out.println("Si vols mes plats, posa l'1, si no, el 2");
+						opcio = teclat.nextInt();
+						teclat.nextLine();
+						if (opcio == 2) {
+							plats = true;
 						}
-	
 					}
-	
-					System.out.println("Si vols mes plats, posa l'1, si no, el 2");
+					while (!begudes) {
+						mostrarProducte(2); // Muestra todas las bebidas de la lista global 
+						System.out.println("Introdueix les begudes que vols");
+		
+						nom = teclat.nextLine();
+		
+						System.out.println("Introdueix la quantitat");
+		
+						quantitat = teclat.nextInt();
+						teclat.nextLine();
+		
+						
+							nova.afegirElement(nom, llistaProducte, quantitat,preferent);
+						
+						System.out.println("Si vols mes begudes, posa l'1, si no, el 2");
+						opcio = teclat.nextInt();
+						teclat.nextLine();
+						if (opcio == 2) {
+							begudes = true;
+						}
+					}
+		
+					System.out.println("Per veure el resum de la comanda, posa l'1, per eliminar la comanda, el 2");
+		
 					opcio = teclat.nextInt();
 					teclat.nextLine();
-					if (opcio == 2) {
-						plats = true;
-					}
-				}
-				while (!begudes) {
-					mostrarProducte(2); // Muestra todas las bebidas de la lista global 
-					System.out.println("Introdueix les begudes que vols");
-	
-					nom = teclat.nextLine();
-	
-					System.out.println("Introdueix la quantitat");
-	
-					quantitat = teclat.nextInt();
-					teclat.nextLine();
-	
-					for (i = 0; i < quantitat; i++) {
-						nova.afegirElement(nom, llistaProducte);
-					}
-					System.out.println("Si vols mes begudes, posa l'1, si no, el 2");
-					opcio = teclat.nextInt();
-					teclat.nextLine();
-					if (opcio == 2) {
-						begudes = true;
-					}
-				}
-	
-				System.out.println("Per veure el resum de la comanda, posa l'1, per eliminar la comanda, el 2");
-	
-				opcio = teclat.nextInt();
-				teclat.nextLine();
-	
-				if (opcio == 1) {
-	
-					Calendar horaComanda = new GregorianCalendar();
-					int hora, minut;
-	
-					hora = horaComanda.get(Calendar.HOUR_OF_DAY);
-					minut = horaComanda.get(Calendar.MINUTE);
-					
-					nova.setHora(hora);
-					nova.setMinut(minut);
-					
-					nova.toString();
-					System.out.println(nova);
-					
-	
-					System.out.println("Si vols confirmar la comanda, posa l'1, si vols més productes el 2 ");
-	
-					opcio = teclat.nextInt();
-					teclat.nextLine();
+		
 					if (opcio == 1) {
+		
+						Calendar horaComanda = new GregorianCalendar();
+						int hora, minut;
+		
+						hora = horaComanda.get(Calendar.HOUR_OF_DAY);
+						minut = horaComanda.get(Calendar.MINUTE);
 						
-						//afegim comanda nova a la llista de clients 
+						nova.setHora(hora);
+						nova.setMinut(minut);
 						
-						int id = llistaClients.getLlista()[posiciousuari].getIdentificador(); 
-						llistaClients.afegirComandaClient(id, nova);
+						nova.toString();
+						System.out.println(nova);
 						
-						confirmar = true;
+		
+						System.out.println("Si vols confirmar la comanda, posa l'1, si no, el 2 ");
+		
+						opcio = teclat.nextInt();
+						teclat.nextLine();
+						if (opcio == 1) {
+							
+							int id = llistaClients.getLlista()[posiciousuari].getIdentificador(); 
+							llistaClients.afegirComandaClient(id, nova);
+							
+							confirmar = true;
+		
+						}
+					}
+					if (opcio==2){
+						confirmar=true; 
+					}
+				
+			
+			else 
+			{
+				System.out.println("L'usuari no existeix");
+			}
 	
 					}
-				}
-				if (opcio==2){
-					confirmar=true; 
-				}
 			}
-		}
-		else 
-		{
-			System.out.println("L'usuari no existeix");
 		}
 	}
 
@@ -352,7 +358,9 @@ public class Main {
 		System.out.println("Mot de pas:");
 		int pas = teclat.nextInt(); 
 		teclat.nextLine();
-		for (int i=0; i<llistaClients.getnClients(); i++){
+		int i=0; 
+		
+		while  ((i<llistaClients.getnClients())&&(!exist1)&&(!exist2)){
 			
 			if(usuari.equals(llistaClients.getLlista()[i].getUsuari())){
 				exist1=true; 
@@ -363,25 +371,34 @@ public class Main {
 		
 			if (exist1 && exist2){
 				posusuari=i; 
-				exist1 = false;
-				exist2 = false;
+				
 			}
+			i++; 
 		}
+		
 		id = llistaClients.getLlista()[posusuari].getIdentificador();
 		
-		System.out.print("\n\n\tIndica el identificador  de la comanda que vols copiar :\t");
 		System.out.println(llistaClients.consultar_Comandes(id));
+		System.out.print("\n\n\tIndica el identificador  de la comanda que vols copiar :\t");
 		iden = teclat.nextInt();
 		teclat.nextLine();
-		System.out.print("\n\n\tLa comanda s'ha copiat amb exit \t");
-		llistaClients.copiar_Comanda(usuari, pas, iden); // Agefir a la llista de comandes del client
+		
+		int j = llistaClients.copiar_Comanda (id, iden);
+		if (j==1){
+			System.out.print("\n\n\tLa comanda s'ha copiat amb exit \t");
+		}
+		else{
+			System.out.print("\n\n\tNo s'ha trobat la comanda \t");
+		}
+		
+		
 
 	}
 
 	private static void ordenarComandes()
 
 	{
-		int iden, id = 0;
+		int id = 0;
 		System.out.println("Usuari:");
 		String usuari = teclat.nextLine(); 
 		boolean exist1=false, exist2=false;
@@ -462,9 +479,10 @@ public class Main {
 		llistaClients.creaClient(Client3);
 		
 	
-		Comanda comanda1 = new Comanda(llistaProducte, hora, min);
-		Comanda comanda2 = new Comanda(llistaProducte, hora, min);
-		Comanda comanda3 = new Comanda(llistaProducte, hora, min);
+		Comanda comanda1 = new Comanda(llistaProducte, hora, min,0);
+		Comanda comanda2 = new Comanda(llistaProducte, hora, min,0);
+		@SuppressWarnings("unused")
+		Comanda comanda3 = new Comanda(llistaProducte, hora, min,0);
 
 		llistaClients.afegirComandaClient(Client1.getIdentificador(), comanda1);
 		llistaClients.afegirComandaClient(Client1.getIdentificador(), comanda2);

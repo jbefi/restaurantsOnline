@@ -111,14 +111,18 @@ public class LlistaClients {
 	}
 	
 	
-	public void passa_Preferent (Clients Client)
+
+	public boolean passa_Preferent (Clients Client)
 	{
 		
 		if (Client.getnComandes() > 5)
 		{
 			Client.setPreferent(true);
+			return true;
 		}
-		
+		else{
+			return false;
+		}
 	}
 	
 	
@@ -151,11 +155,14 @@ public class LlistaClients {
 	}
 	
 	
-	public int copiar_Comanda(int id, int identComanda)
+
+	public int copiar_Comanda(int id , int identComanda)
+
 	{
 		
 		int i = 0;
 		int j;
+
 		j = consultar_Client(id);
 		boolean trobat = false;
 		
@@ -184,6 +191,7 @@ public class LlistaClients {
 		}
 
 	}
+
 	
 	public void afegirComandaClient (int id, Comanda comandaguardada)
 	{

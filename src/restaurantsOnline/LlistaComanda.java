@@ -36,10 +36,10 @@ public class LlistaComanda {
      * @param minut, minut en que es fa la comanda
      */
 
-    public void afegirComanda(LlistaProducte producte, int hora, int minut) { 
+    public void afegirComanda(LlistaProducte producte, int hora, int minut, double preuTotal) { 
         if (nElem < maxElementos) {
 
-            llista[nElem] = new Comanda(producte, hora, minut); // en cada lloc de la llista poso una nova comanda amb els parametres que hi passo 
+            llista[nElem] = new Comanda(producte, hora, minut, preuTotal); // en cada lloc de la llista poso una nova comanda amb els parametres que hi passo 
             nElem++;
             
         }
@@ -103,6 +103,26 @@ public class LlistaComanda {
         }
     }
     
+    public int posicioComanda(int idGeneral){
+    	
+    	boolean trobat=false; 
+    	int i=0, pos=0; 
+    	
+    	while( (!trobat) && (i<nElem)){
+    		
+    		if (idGeneral== llista[i].getIdentComanda())
+    		{
+    			trobat=true; 
+    			pos=i; 
+    		}
+    		i++; 
+    	}
+    	if ( !trobat){ 
+    		pos=-1; 
+    	}
+    	return (pos); 
+    	
+    }
     //getters de la classe 
     
     public Comanda[] getLlista() {
