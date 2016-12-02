@@ -15,6 +15,7 @@ public class Comanda {
     private static int idGeneral=0;
     private int identComanda;
     private double preuTotal=0; 
+    
 
     /**
      * Constructor de la classe comanda que rep els seguents parametres 
