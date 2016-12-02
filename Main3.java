@@ -157,7 +157,7 @@ class Fines_consultarClient extends JFrame {
 		cont.add(panel1, BorderLayout.PAGE_START);
 		// Panel 2
 		JPanel panel2 = new JPanel(new GridBagLayout());
-		JLabel et2 = new JLabel("Indiqui eliddel client que vols consultar (1-" + llistClient.getnClients() + "):");
+		JLabel et2 = new JLabel("Indiqua el id del client que vols consultar (1-" + llistClient.getnClients() + "):");
 		JTextField campText = new JTextField(5);
 		JButton boto = new JButton("Cerca");
 		
@@ -235,7 +235,8 @@ class Fines_eliminarProducte extends JFrame {
 				String valor = campText.getText(); // 
 				int codi = Integer.parseInt(valor);
 				textArea.setText(""); 
-				//textArea.append(llistProds.eliminarProducte(codi)); // eliminar producte
+				textArea.append("s'ha eliminat el producte amb exit");
+				llistProds.eliminarProducte(codi); // eliminar producte
 			}
 		});
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
