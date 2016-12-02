@@ -75,6 +75,7 @@ public class Comanda {
     }
     public int getMinut() {
         return minut;
+        
     }
 
 
