@@ -24,7 +24,7 @@ class Finestra extends JFrame {
 		JPanel panel2 = new JPanel(new GridBagLayout());
 		JLabel etiqueta2 = new JLabel("Triï una opció del menú desplegable :");
 		// Desplegable ('ComboBox') per mostrar totes les opcions del menú
-		String[] opcionsMenu = { "Afegir nou producte", "Eliminar producte", "Informació d'un producte", "Crear client",
+		String[] opcionsMenu = { "Afegir nou producte", "Eliminar producte", "Informació d'un producte", "Crear client","consultar Client",
 				"Llistar comandes d'un client", "Nova comanda per client", "Copiar una comanda" };
 		JComboBox<String> desplegable = new JComboBox<String>(opcionsMenu);
 		desplegable.setForeground(Color.DARK_GRAY);
@@ -63,16 +63,20 @@ class Finestra extends JFrame {
 					System.out.println(3);
 					break;
 				case 4:
-					// Llistar comandes d'un client
+					new Fines_consultarClient("Informació d'un client", llistaClients);
 					System.out.println(4);
 					break;
 				case 5:
-					// Nova comanda per client
+					// Llistar comandes d'un client
 					System.out.println(5);
 					break;
 				case 6:
-					// Copiar una comanda
+					// Nova comanda per client
 					System.out.println(6);
+					break;
+				case 7:
+					// Copiar una comanda
+					System.out.println(7);
 					break;
 				}
 			}
@@ -137,6 +141,57 @@ class Fines_InfoProducte extends JFrame {
 		setVisible(true);
 	}
 }
+class Fines_consultarClient extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+
+	// Constructor
+	public Fines_consultarClient(String titol, LlistaClients llistClient) {
+	
+		
+		
+		Container cont = getContentPane();
+		cont.setLayout(new BorderLayout(10, 10));
+		// Panel 1
+		JPanel panel1 = new JPanel(new BorderLayout());
+		cont.add(panel1, BorderLayout.PAGE_START);
+		// Panel 2
+		JPanel panel2 = new JPanel(new GridBagLayout());
+		JLabel et2 = new JLabel("Indiqui eliddel client que vols consultar (1-" + llistClient.getnClients() + "):");
+		JTextField campText = new JTextField(5);
+		JButton boto = new JButton("Cerca");
+		
+		GridBagConstraints limit = new GridBagConstraints();
+		limit.anchor = GridBagConstraints.WEST;
+		limit.insets = new Insets(10, 10, 10, 10);
+		limit.gridx = 0;
+		limit.gridy = 0;
+		panel2.add(et2, limit);
+		limit.gridx = 1;
+		panel2.add(campText, limit);
+		limit.gridx = 2;
+		panel2.add(boto, limit);
+		limit.gridx = 0;
+		limit.gridy = 1;
+		JTextArea textArea = new JTextArea();
+		panel2.add(textArea, limit);
+
+		cont.add(panel2, BorderLayout.CENTER);
+
+		
+		boto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				String val = campText.getText(); // 
+				int id= Integer.parseInt(val);
+				textArea.setText(""); 
+				textArea.append(llistClient.imprimirClient(id)); // consultar client
+			}
+		});
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
+		setSize(1000, 500); 
+		setVisible(true);
+	}
+}
 class Fines_eliminarProducte extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -180,11 +235,11 @@ class Fines_eliminarProducte extends JFrame {
 				String valor = campText.getText(); // 
 				int codi = Integer.parseInt(valor);
 				textArea.setText(""); 
-				textArea.appen(llistProds.eliminarProducte(codi)); // eliminar producte
+				//textArea.append(llistProds.eliminarProducte(codi)); // eliminar producte
 			}
 		});
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
-		setSize(300, 200); 
+		setSize(600, 400); 
 		setVisible(true);
 	}
 }
@@ -214,6 +269,22 @@ public class Main3 {
 		llistaProducte.afegirProducte(b2);
 		llistaProducte.afegirProducte(p1);
 		llistaProducte.afegirProducte(p2);
+		llistaClients = new LlistaClients();
+		String[] tRestr = { "celiacs", "lactosa", "fruits secs" };
+
+		int hora = 0, min = 0;
+
+		Clients Client1 = new Clients("Jose", " avenida Barcelona", "666999444", "jose32", 234, tRestr,
+				new LlistaComanda());
+		llistaClients.creaClient(Client1);
+		Clients Client2 = new Clients("Alex", "avenida Jaume1", "666777444", "alex32", 123, tRestr,
+				new LlistaComanda());
+		llistaClients.creaClient(Client2);
+		Clients Client3 = new Clients("Jordi", "avenida Ramon", "666888444", "jordi32", 543, tRestr,
+				new LlistaComanda());
+		llistaClients.creaClient(Client3);
+		
+	
 		new Finestra("Restaurant Online", llistaProducte, llistaComandes, llistaClients);
 
 	}
