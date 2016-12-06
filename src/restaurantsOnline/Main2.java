@@ -216,7 +216,7 @@ public class Main2 {
 			llistaclients = comandes.consultar_Comandes(id);  
 			for ( j=0; j<llistaclients.getnElem();j++){
 				
-				f.write(llistaclients[j]+","); 
+				f.write(llistaclients[j].getComandes().getLlista()[i].getProducte().getNom()+","); 
 				 
 			}
 			

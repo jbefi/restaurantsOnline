@@ -37,8 +37,10 @@ public class LlistaComanda {
      */
 
     public void afegirComanda(LlistaProducte producte, int hora, int minut, double preuTotal) { 
-        if (nElem < maxElementos) {
-
+       
+    	if (nElem < maxElementos) {
+        	
+        
             llista[nElem] = new Comanda(producte, hora, minut, preuTotal); // en cada lloc de la llista poso una nova comanda amb els parametres que hi passo 
             nElem++;
             
@@ -52,8 +54,14 @@ public class LlistaComanda {
      */
     public void afegirComanda(Comanda nou) { 
         if (nElem < maxElementos) {
-
-            llista[nElem] = nou; // en cada lloc de la llista poso una nova comanda amb els parametres que hi passo 
+        	int i=0; 
+        	while (i<=nElem){
+        		
+        		llista[i]=llista[i+1]; 
+        		i++;
+        	}
+        	
+            llista[0] = nou; // en cada lloc de la llista poso una nova comanda amb els parametres que hi passo 
             nElem++;
             
         }
@@ -84,23 +92,6 @@ public class LlistaComanda {
             i++;
         }
         nElem--;
-    }
-	 /**
-     * metode que ordena les comandes 
-     */
-    public void ordenarComandes() {     // metode per ordenar comandes
-
-        int i=0;
-        int j;
-        while (i<nElem) { //bucle while que m'ajuda a recorrer tota la llista per a ordenar
-        	
-            for(j=i;j<-1;j++){
-
-                llista[j]=llista[j+1];
-
-            }
-            i++;
-        }
     }
     
     public int posicioComanda(int idGeneral){

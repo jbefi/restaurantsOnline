@@ -114,7 +114,8 @@ public class Main {
 
 	public static void eliminarProducte(LlistaProducte llistP) {
 		int codi;
-
+		mostrarProducte(1);
+		mostrarProducte(2);
 		System.out.print("\n\n\tIndiqui el codi del  producte a eliminar:\t");
 		codi = Integer.parseInt(teclat.nextLine());
 		llistP.eliminarProducte(codi);
@@ -130,21 +131,19 @@ public class Main {
 	 */
 	public static void afegirComanda() {
 		
-		int i = 0; 
-		int opcio; // creo les variable enteres que utilitzo per a les opcions que dono al client
-		int quantitat = 0;
-		String nom = null; // variable utilitzada per al nom del producte
-		boolean confirmar, plats, begudes,existeix1, existeix2; // creo les variables booleanes que necessito per a fer el meu programa
-		confirmar = false;
-		plats = false;
-		begudes = false;
-		existeix1= false; 
-		existeix2=false; 
-		int pas; 
-		int posiciousuari = 0; 
+		 // creo les variables booleanes que necessito per a fer el meu programa
+		String nom = null; 
 		String usuari=null;
-		boolean preferent; 
-		preferent=false; 
+		
+		int i=0, opcio, quantitat=0, pas, posiciousuari=0; 
+		
+		boolean confirmar, plats, begudes, existeix1, existeix2, preferent ;
+		confirmar=false;
+		plats = false;
+		begudes = false; 
+		existeix1 = false; 
+		existeix2 = false; 
+		preferent = false;
 		
 		Comanda nova = new Comanda(new LlistaProducte(50), 0, 0, 0);
 
@@ -197,7 +196,7 @@ public class Main {
 						
 							if (aux == -1) {
 								System.out.println("No hi ha l'element");
-							
+							}
 	
 			
 						System.out.println("Si vols mes plats, posa l'1, si no, el 2");
@@ -255,6 +254,7 @@ public class Main {
 						teclat.nextLine();
 						if (opcio == 1) {
 							
+							//llistaComandes.ordenarComandes(hora, minut, nova);
 							int id = llistaClients.getLlista()[posiciousuari].getIdentificador(); 
 							llistaClients.afegirComandaClient(id, nova);
 							
@@ -265,17 +265,14 @@ public class Main {
 					if (opcio==2){
 						confirmar=true; 
 					}
-				
-			
+		}
+	}
 			else 
 			{
 				System.out.println("L'usuari no existeix");
 			}
+}
 	
-					}
-			}
-		}
-	}
 
 	public static void consultarInformacio(LlistaProducte llistP) {
 
@@ -395,7 +392,7 @@ public class Main {
 
 	}
 
-	private static void ordenarComandes()
+	private static void Comandes()
 
 	{
 		int id = 0;
@@ -423,8 +420,8 @@ public class Main {
 			}
 		}
 		id = llistaClients.getLlista()[posusuari].getIdentificador();
-		llistaClients.consultar_Comandes(id).ordenarComandes();
-		System.out.print("\n\n\t La llista de comanda ordenat\t");
+
+		System.out.print("\n\n\t La llista de comandes ordenada : \t");
 		System.out.println(llistaClients.consultar_Comandes(id));
 	}
 	
@@ -517,7 +514,7 @@ public class Main {
 				copiarComanda();
 				break;
 			case 8:
-				ordenarComandes();
+				Comandes();
 				break;
 
 			}

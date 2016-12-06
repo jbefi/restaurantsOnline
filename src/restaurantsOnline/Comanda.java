@@ -78,8 +78,17 @@ public class Comanda {
         
     }
 
+    public LlistaProducte getProducte() {
+		return producte;
+	}
 
-    public int getIdentComanda() {
+
+	public void setProducte(LlistaProducte producte) {
+		this.producte = producte;
+	}
+
+
+	public int getIdentComanda() {
         return identComanda;
     }
     
@@ -104,7 +113,7 @@ public class Comanda {
 				+ "*************************************"
 				+ ""
 				+ producte.toString() +
-				 " \nLa hora de la comanda es :\t" + hora + ":" + minut + "\nL'identificador de comanda es el seguent:\n" + identComanda + "\n \n El preu total de la comanda es: "+ preuTotal+"€\n";
+				 " \nLa hora de la comanda es :\t" + hora + ":" + minut + "\nL'identificador de comanda es el seguent:\n" + identComanda + "\n \n El preu total de la comanda es: "+ preuTotal+"ï¿½\n";
 	}
 
 
