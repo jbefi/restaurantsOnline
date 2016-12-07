@@ -517,8 +517,8 @@ class Fines_Registrat extends JFrame {
 		
 		textArea.append("L'usuari: "+client.getUsuari()+ " s'ha registrat amb exit"); // Mostro la informació
 		
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Per a poder tancar la finestra atual sense afectar la
-									// finestra principal
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);	// Per a poder tancar la finestra atual sense afectar la
+															// finestra principal
 		setSize(250, 200); // Mida de la finestra
 		setVisible(true);
 	}
@@ -606,70 +606,69 @@ class Fines_LlistarComandes extends JFrame {
 //Classe que mostra les comandes del client
 class Fines_MostrarComandes extends JFrame {
 
-private static final long serialVersionUID = 1L;
-
-// Constructor
-public Fines_MostrarComandes(LlistaComanda llistacom) {
-// Contenidor de la fiestra principal, conté 2 panels horitzontals
-Container contenidor = getContentPane();
-contenidor.setLayout(new BorderLayout(10, 10));
-
-// Panel 1
-JPanel panel1 = new JPanel(new BorderLayout());
-contenidor.add(panel1, BorderLayout.PAGE_START);
-JLabel etiqueta = new JLabel("CONSULTAR COMANDES", SwingConstants.CENTER);
-panel1.add(etiqueta, SwingConstants.CENTER);
-
-// Panel 2
-JPanel panel2 = new JPanel(new GridBagLayout());
-JLabel etiqueta1 = new JLabel("Usuari:");
-JLabel etiqueta2 = new JLabel("Contrasenya:");
-JTextField campText1 = new JTextField(10);
-JTextField campText2 = new JTextField(10);
-JButton boto = new JButton("FINALITZAR");
-
-// Afegin un objecte de GridBagConstraints per definir les limitacions dels components en el panel
-GridBagConstraints limit = new GridBagConstraints();
-limit.anchor = GridBagConstraints.CENTER;
-limit.insets = new Insets(10, 10, 10, 10);
-limit.gridx = 0;
-limit.gridy = 0;
-panel2.add(etiqueta1, limit);
-limit.gridx = 1;
-panel2.add(campText1, limit);
-limit.gridx = 0;
-limit.gridy = 1;
-panel2.add(etiqueta2, limit);
-limit.gridx = 1;
-panel2.add(campText2, limit);
-limit.gridx = 3;
-panel2.add(boto, limit);
-limit.gridx = 3;
-limit.gridy = 2;
-JTextArea textArea = new JTextArea();
-panel2.add(textArea, limit);
-
-
-contenidor.add(panel2, BorderLayout.CENTER);
-
-//LLAMAR AL TO STRING DE LAS COMANDAS Y IMPRIMIRLO
-textArea.append(llistacom.toString()); // Mostro la informació
-
-// Accions del botó
-boto.addActionListener(new ActionListener() {
-
-public void actionPerformed(ActionEvent ae) {
-
-dispose();
-}
-});
-
-
-setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Per a poder tancar la finestra atual sense afectar la
-							// finestra principal
-setSize(500, 400); // Mida de la finestra
-setVisible(true);
-}
+	private static final long serialVersionUID = 1L;
+	
+	// Constructor
+	public Fines_MostrarComandes(LlistaComanda llistacom) {
+		// Contenidor de la fiestra principal, conté 2 panels horitzontals
+		Container contenidor = getContentPane();
+		contenidor.setLayout(new BorderLayout(10, 10));
+		
+		// Panel 1
+		JPanel panel1 = new JPanel(new BorderLayout());
+		contenidor.add(panel1, BorderLayout.PAGE_START);
+		JLabel etiqueta = new JLabel("CONSULTAR COMANDES", SwingConstants.CENTER);
+		panel1.add(etiqueta, SwingConstants.CENTER);
+		
+		// Panel 2
+		JPanel panel2 = new JPanel(new GridBagLayout());
+		JLabel etiqueta1 = new JLabel("Usuari:");
+		JLabel etiqueta2 = new JLabel("Contrasenya:");
+		JTextField campText1 = new JTextField(10);
+		JTextField campText2 = new JTextField(10);
+		JButton boto = new JButton("FINALITZAR");
+		
+		// Afegin un objecte de GridBagConstraints per definir les limitacions dels components en el panel
+		GridBagConstraints limit = new GridBagConstraints();
+		limit.anchor = GridBagConstraints.CENTER;
+		limit.insets = new Insets(10, 10, 10, 10);
+		limit.gridx = 0;
+		limit.gridy = 0;
+		panel2.add(etiqueta1, limit);
+		limit.gridx = 1;
+		panel2.add(campText1, limit);
+		limit.gridx = 0;
+		limit.gridy = 1;
+		panel2.add(etiqueta2, limit);
+		limit.gridx = 1;
+		panel2.add(campText2, limit);
+		limit.gridx = 3;
+		panel2.add(boto, limit);
+		limit.gridx = 3;
+		limit.gridy = 2;
+		JTextArea textArea = new JTextArea();
+		panel2.add(textArea, limit);
+		
+		
+		contenidor.add(panel2, BorderLayout.CENTER);
+		
+		//LLAMAR AL TO STRING DE LAS COMANDAS Y IMPRIMIRLO
+		textArea.append(llistacom.toString()); // Mostro la informació
+		
+		// Accions del botó
+		boto.addActionListener(new ActionListener() {
+		
+			public void actionPerformed(ActionEvent ae) {
+			
+				dispose();
+			}
+		});
+		
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);	// Per a poder tancar la finestra atual sense afectar la
+															// finestra principal
+		setSize(500, 400); // Mida de la finestra
+		setVisible(true);
+	}
 }
 
 // Classe Principal
