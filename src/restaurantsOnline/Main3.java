@@ -350,7 +350,7 @@ class Fines_CreaClient extends JFrame {
 				String aux = campText6.getText(); // Agafo la contrasenya
 				int contrasenya = Integer.parseInt(aux);
 				Clients client = new Clients(nom, adreca, telefon, usuari, contrasenya, restriccions);
-				//llistacl.creaClient(client); // Afegir a la llista de Clients
+				llistacl.creaClient(client); // Afegir a la llista de Clients
 				dispose();
 				new Fines_Registrat(client);
 	
