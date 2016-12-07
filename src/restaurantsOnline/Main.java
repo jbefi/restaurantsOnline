@@ -253,8 +253,7 @@ public class Main {
 						opcio = teclat.nextInt();
 						teclat.nextLine();
 						if (opcio == 1) {
-							
-							//llistaComandes.ordenarComandes(hora, minut, nova);
+						
 							int id = llistaClients.getLlista()[posiciousuari].getIdentificador(); 
 							llistaClients.afegirComandaClient(id, nova);
 							
