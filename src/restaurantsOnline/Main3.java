@@ -1176,8 +1176,8 @@ class Fines_LlistarComandes extends JFrame {
 				int i = 0;
 				i = llistacl.consultar_Client(usu);
 				if((i == -1)||(llistacl.getLlista()[i].getContrasenya()) != pass){
-					textArea.setText(""); // Esborro tot el contingut anterior de Text Area
-					textArea.append("L'usuari o contrasenya son incorrectes"); // Mostro la informacio
+					new Fines_Incorrecte();
+					
 				}
 				else{
 					dispose();
@@ -1197,7 +1197,7 @@ class Fines_LlistarComandes extends JFrame {
 class Fines_MostrarComandes extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	// Constructor
 	public Fines_MostrarComandes(LlistaComanda llistacom) {
 		// Contenidor de la fiestra principal, cont� 2 panels horitzontals
@@ -1211,37 +1211,25 @@ class Fines_MostrarComandes extends JFrame {
 		panel1.add(etiqueta, SwingConstants.CENTER);
 		
 		// Panel 2
-		JPanel panel2 = new JPanel(new GridBagLayout());
-//		JScrollPane panel2 = new JScrollPane(contenidor);
-		
-		JButton boto = new JButton("FINALITZAR");
+		JPanel panel2 = new JPanel(new GridBagLayout());		
 		
 		// Afegin un objecte de GridBagConstraints per definir les limitacions dels components en el panel
 		GridBagConstraints limit = new GridBagConstraints();
 		limit.anchor = GridBagConstraints.CENTER;
 		limit.insets = new Insets(10, 10, 10, 10);
 		limit.gridx = 0;
-		limit.gridy = 6;
-		panel2.add(boto, limit);
-		limit.gridx = 0;
 		limit.gridy = 1;
 		JTextArea textArea = new JTextArea();
 		panel2.add(textArea, limit);
+		JScrollPane scroll = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		
 		
 		contenidor.add(panel2, BorderLayout.CENTER);
 		
 		//LLAMAR AL TO STRING DE LAS COMANDAS Y IMPRIMIRLO
 		textArea.append(llistacom.toString()); // Mostro la informacio
+		contenidor.add(scroll);
 		
-		// Accions del boto
-		boto.addActionListener(new ActionListener() {
-		
-			public void actionPerformed(ActionEvent ae) {
-			
-				dispose();
-			}
-		});
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);	// Per a poder tancar la finestra atual sense afectar la
 															// finestra principal
@@ -1249,6 +1237,61 @@ class Fines_MostrarComandes extends JFrame {
 		setVisible(true);
 	}
 }
+
+
+
+//Classe client resgistrat
+class Fines_Incorrecte extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	
+	// Constructor
+	public Fines_Incorrecte() {
+		// Contenidor de la fiestra principal, cont� 2 panels horitzontals
+		Container contenidor = getContentPane();
+		contenidor.setLayout(new BorderLayout(10, 10));
+		
+		// Panel 1
+		JPanel panel1 = new JPanel(new BorderLayout());
+		contenidor.add(panel1, BorderLayout.PAGE_START);
+		JLabel etiqueta = new JLabel("INCORRECTE", SwingConstants.CENTER);
+		panel1.add(etiqueta, SwingConstants.CENTER);
+		
+		// Panel 2
+		JPanel panel2 = new JPanel(new GridBagLayout());
+		JButton boto = new JButton("Aceptar");
+		
+		// Afegin un objecte de GridBagConstraints per definir les limitacions dels components en el panel
+		GridBagConstraints limit = new GridBagConstraints();
+		limit.anchor = GridBagConstraints.CENTER;
+		limit.insets = new Insets(10, 10, 10, 10);
+		limit.gridx = 0;
+		limit.gridy = 0;
+		JTextArea textArea = new JTextArea();
+		panel2.add(textArea, limit);
+		limit.gridx = 0;
+		limit.gridy = 3;
+		panel2.add(boto, limit);
+		
+		contenidor.add(panel2, BorderLayout.CENTER);
+		
+		// Accions del bot�
+		boto.addActionListener(new ActionListener() {
+		
+			public void actionPerformed(ActionEvent ae) {
+				dispose();
+			}
+		});
+		
+		textArea.append("L'usuari o contrasenya son incorrectes"); // Mostro la informacio
+		
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);	// Per a poder tancar la finestra atual sense afectar la
+															// finestra principal
+		setSize(250, 200); // Mida de la finestra
+		setVisible(true);
+	}
+}
+
 
 // Classe Principal
 public class Main3 {
