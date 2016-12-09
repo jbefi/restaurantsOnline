@@ -4,6 +4,11 @@ package restaurantsOnline;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
+import RestuarantsOnline.Beguda;
+import RestuarantsOnline.LlistaProducte;
+import RestuarantsOnline.Plat;
+
 import java.util.Objects;
 
 
@@ -50,12 +55,11 @@ class Finestra extends JFrame {
 				switch (opcio) {
 				case 0:
 					// Afegir nou producte
-					// new Fines_CrearProducte("Crear Producte");
+					new Fines_AfegirProducte("Afegir un nou producte",llistaProducte);
 					break;
 				case 1:
 					// Eliminar producte
 					new Fines_eliminarProducte("Eliminar un producte", llistaProducte);
-					System.out.println(1);
 					break;
 				case 2:
 					// InformaciÃ³ d'un producte
@@ -67,25 +71,247 @@ class Finestra extends JFrame {
 					break;
 				case 4:
 					new Fines_consultarClient("InformaciÃ³ d'un client", llistaClients);
-					System.out.println(4);
 					break;
 				case 5:
 					// Llistar comandes d'un client
-					System.out.println(5);
 					break;
 				case 6:
 					new afegirComanda("Nova Comanda ", llistaProducte, llistaComandes, llistaClients);
-					System.out.println(6);
 					break;
 				case 7:
 					// Copiar una comanda
-					System.out.println(7);
 					break;
 				}
 			}
 		});
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE); // Per a poder tancar la finestra
+		setSize(500, 400); // Mida de la finestra
+		setVisible(true);
+	}
+}
+
+//Classe per crear la finestra que serveix per afegir un nou producte
+class Fines_AfegirProducte extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	private boolean esPlat, apteCeliacs, apteLactosa, apteFruitsSecs, teAlcohol;
+
+	// Constructor
+	public Fines_AfegirProducte(String titol, LlistaProducte llistProds) {
+		super(titol);
+
+		// Contenidor de la finestra principal, conté 2 panels horitzontals
+		Container contenidor = getContentPane();
+		contenidor.setLayout(new BorderLayout(10, 10));
+
+		// Panel 1
+		JPanel panel1 = new JPanel(new BorderLayout());
+		contenidor.add(panel1, BorderLayout.PAGE_START);
+		// Panel 2
+		JPanel panel2 = new JPanel(new GridBagLayout());
+		JLabel etiqueta2 = new JLabel("Nom:");
+		JLabel etiqueta3 = new JLabel("Preu:");
+		JLabel etiqueta4 = new JLabel("Descompte(%):");
+		// RadioButtons per triar si és un plat o una beguda
+		JRadioButton opcioPlat = new JRadioButton("Plat");
+		JRadioButton opcioBeguda = new JRadioButton("Beguda");
+		ButtonGroup seleccio = new ButtonGroup(); // Selecció de grup: per a què només pugui triar un dels dos
+		seleccio.add(opcioPlat);
+		seleccio.add(opcioBeguda);
+		JLabel etiqueta5 = new JLabel("Al·lèrigies:");
+		// ChckBox per elegir els 3 tipus de restriccions alimentàries
+		JCheckBox celiacs = new JCheckBox("Celiacs");
+		JCheckBox lactosa = new JCheckBox("Lactosa");
+		JCheckBox fruitsSecs = new JCheckBox("Fruïts secs");
+		JLabel etiqueta6 = new JLabel("Volum:");
+		JTextField campText2 = new JTextField(10);
+		JTextField campText3 = new JTextField(10);
+		JTextField campText4 = new JTextField(10);
+		JTextField campText6 = new JTextField(10);
+		JRadioButton opcioTeAlcohol = new JRadioButton("Te Alcohol");
+		JButton boto = new JButton("Afegir");
+
+		// Afegin un objecte de GridBagConstraints per definir les limitacions dels components en el panel
+		GridBagConstraints limit = new GridBagConstraints();
+		limit.anchor = GridBagConstraints.WEST;
+		limit.insets = new Insets(10, 10, 10, 10);
+		limit.gridx = 0;
+		limit.gridy = 0;
+		panel2.add(etiqueta2, limit);
+		limit.gridx = 1;
+		panel2.add(campText2, limit);
+		limit.gridx = 0;
+		limit.gridy = 1;
+		panel2.add(etiqueta3, limit);
+		limit.gridx = 1;
+		panel2.add(campText3, limit);
+		limit.gridx = 0;
+		limit.gridy = 2;
+		panel2.add(etiqueta4, limit);
+		limit.gridx = 1;
+		panel2.add(campText4, limit);
+		limit.gridx = 0;
+		limit.gridy = 3;
+		panel2.add(opcioPlat, limit);
+		limit.gridx = 1;
+		panel2.add(opcioBeguda, limit);
+		limit.gridx = 0;
+		limit.gridy = 4;
+		panel2.add(etiqueta5, limit);
+		etiqueta5.setVisible(false);
+		limit.gridx = 0;
+		limit.gridy = 5;
+		panel2.add(celiacs, limit);
+		limit.gridx = 1;
+		panel2.add(lactosa, limit);
+		limit.gridx = 2;
+		panel2.add(fruitsSecs, limit);
+		celiacs.setVisible(false);
+		lactosa.setVisible(false);
+		fruitsSecs.setVisible(false);
+		limit.gridx = 0;
+		limit.gridy = 6;
+		panel2.add(etiqueta6, limit);
+		limit.gridx = 1;
+		panel2.add(campText6, limit);
+		limit.gridx = 0;
+		limit.gridy = 7;
+		panel2.add(opcioTeAlcohol, limit);
+		campText6.setVisible(false);
+		etiqueta6.setVisible(false);
+		opcioTeAlcohol.setVisible(false);
+		limit.gridx = 0;
+		limit.gridy = 8;
+		panel2.add(boto, limit);
+		boto.setVisible(false);
+		contenidor.add(panel2, BorderLayout.WEST);
+
+		// Acció del radioButton de la tria entre plat i beguda
+		opcioPlat.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent event) {
+				int state = event.getStateChange();
+				if (state == ItemEvent.SELECTED) {
+					// Si l'usuari vol afegir un plat,
+					esPlat = true;
+					boto.setVisible(true);
+					// mostro els components per triar les propietats del plat,
+					etiqueta5.setVisible(true);
+					celiacs.setVisible(true);
+					lactosa.setVisible(true);
+					fruitsSecs.setVisible(true);
+					// i amago els componets per triar les propietats de les begudes.
+					campText6.setVisible(false);
+					etiqueta6.setVisible(false);
+					opcioTeAlcohol.setVisible(false);
+				} else if (state == ItemEvent.DESELECTED) {
+					esPlat = false;
+					boto.setVisible(true);
+					etiqueta5.setVisible(false);
+					celiacs.setVisible(false);
+					lactosa.setVisible(false);
+					fruitsSecs.setVisible(false);
+					campText6.setVisible(true);
+					etiqueta6.setVisible(true);
+					opcioTeAlcohol.setVisible(true);
+				}
+			}
+		});
+		opcioBeguda.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent event) {
+				int state = event.getStateChange();
+				if (state == ItemEvent.DESELECTED) {
+					esPlat = true;
+					boto.setVisible(true);
+					etiqueta5.setVisible(true);
+					celiacs.setVisible(true);
+					lactosa.setVisible(true);
+					fruitsSecs.setVisible(true);
+					campText6.setVisible(false);
+					etiqueta6.setVisible(false);
+					opcioTeAlcohol.setVisible(false);
+				} else if (state == ItemEvent.SELECTED) {
+					esPlat = false;
+					boto.setVisible(true);
+					etiqueta5.setVisible(false);
+					celiacs.setVisible(false);
+					lactosa.setVisible(false);
+					fruitsSecs.setVisible(false);
+					campText6.setVisible(true);
+					etiqueta6.setVisible(true);
+					opcioTeAlcohol.setVisible(true);
+				}
+			}
+		});
+
+		// Acció del radioButton de TeAlcohol
+		opcioTeAlcohol.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent event) {
+				int state = event.getStateChange();
+				if (state == ItemEvent.SELECTED) {
+					teAlcohol = true;
+				} else if (state == ItemEvent.DESELECTED) {
+					teAlcohol = false;
+				}
+			}
+		});
+
+		// Accions del botó
+		boto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				// Accions del checkbox de les al·lèrgies
+				if (celiacs.isSelected()) {
+					apteCeliacs = true;
+				} else {
+					apteCeliacs = false;
+				}
+				if (lactosa.isSelected()) {
+					apteLactosa = true;
+				} else {
+					apteLactosa = false;
+				}
+				if (fruitsSecs.isSelected()) {
+					apteFruitsSecs = true;
+				} else {
+					apteFruitsSecs = false;
+				}
+				String nom = campText2.getText();
+				double preu = Double.parseDouble(campText3.getText());
+				double descompte = Double.parseDouble(campText4.getText());
+				if (esPlat) {
+					// El producte nou és un plat
+					Plat platNou;
+					if (apteCeliacs || apteLactosa || apteFruitsSecs) {
+						// En el cas que hagi seleccionat un o més al·lèrgia,
+						String[] alergies = new String[3];
+						int i = 0;
+						if (apteCeliacs)
+							alergies[i++] = "Celiacs";
+						if (apteLactosa)
+							alergies[i++] = "Lactosa";
+						if (apteFruitsSecs)
+							alergies[i++] = "Fruits secs";
+						for (int j = i; j < 3; j++)
+							alergies[j] = "";
+						platNou = new Plat(nom, preu, descompte, alergies);
+
+					} else {
+						// aquí el plat nou no conté cap al·lèrgia
+						platNou = new Plat(nom, preu, descompte);
+					}
+					llistProds.afegirProducte(platNou);
+				} else {
+					// El producte nou és una beguda
+					int volum = Integer.parseInt(campText6.getText());
+					Beguda begudaNou = new Beguda(nom, preu, descompte, volum, teAlcohol);
+					llistProds.afegirProducte(begudaNou);
+				}
+				dispose(); // Per tancar la finestra actual al pulsar el botó d'afegir
+			}
+		});
+
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Per a poder tancar la finestra atual sense afectar la
+		// finestra principal
 		setSize(500, 400); // Mida de la finestra
 		setVisible(true);
 	}
