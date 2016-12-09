@@ -792,12 +792,9 @@ class Contrasenya extends JFrame{
 					if( existeix1 && existeix2){
 						new afegirComanda("Afegir Comanda", llistaProducte, llistaComanda, llistaClients); 
 					}
-					if ( existeix1==false ){
-						
-						new noCorrecte(); 
 						
 						
-					}
+					
 				}
 			
 			});
@@ -809,7 +806,7 @@ class Contrasenya extends JFrame{
 			
 		}
 }
-class noCorrecte extends JFrame {
+/*class noCorrecte extends JFrame {
 	private static final long serialVersionUID = 1L; 
 	
 	public noCorrecte(){
@@ -838,7 +835,7 @@ class noCorrecte extends JFrame {
 		
 	}
 }
-
+*/
 //////////////////////////////////CREAR CLIENT//////////////////////////////////////////////////////
 
 //Classe per crear la finestra que serveix per crear un nou client
