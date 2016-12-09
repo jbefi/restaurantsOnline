@@ -76,7 +76,7 @@ class Finestra extends JFrame {
 					new Fines_LlistarComandes("Llistar comandes d'un client", llistaClients);
 					break;
 				case 6:
-					new afegirComanda("Nova Comanda ", llistaProducte, llistaComandes, llistaClients);
+					new Contrasenya("Autentifica't al sistema", llistaClients, llistaProducte, llistaComandes);
 					break;
 				case 7:
 					// Copiar una comanda
@@ -101,7 +101,7 @@ class Fines_AfegirProducte extends JFrame {
 	public Fines_AfegirProducte(String titol, LlistaProducte llistProds) {
 		super(titol);
 
-		// Contenidor de la finestra principal, conté 2 panels horitzontals
+		// Contenidor de la finestra principal, contï¿½ 2 panels horitzontals
 		Container contenidor = getContentPane();
 		contenidor.setLayout(new BorderLayout(10, 10));
 
@@ -113,17 +113,17 @@ class Fines_AfegirProducte extends JFrame {
 		JLabel etiqueta2 = new JLabel("Nom:");
 		JLabel etiqueta3 = new JLabel("Preu:");
 		JLabel etiqueta4 = new JLabel("Descompte(%):");
-		// RadioButtons per triar si és un plat o una beguda
+		// RadioButtons per triar si ï¿½s un plat o una beguda
 		JRadioButton opcioPlat = new JRadioButton("Plat");
 		JRadioButton opcioBeguda = new JRadioButton("Beguda");
-		ButtonGroup seleccio = new ButtonGroup(); // Selecció de grup: per a què només pugui triar un dels dos
+		ButtonGroup seleccio = new ButtonGroup(); // Selecciï¿½ de grup: per a quï¿½ nomï¿½s pugui triar un dels dos
 		seleccio.add(opcioPlat);
 		seleccio.add(opcioBeguda);
-		JLabel etiqueta5 = new JLabel("Al·lèrigies:");
-		// ChckBox per elegir els 3 tipus de restriccions alimentàries
+		JLabel etiqueta5 = new JLabel("Alï¿½lï¿½rigies:");
+		// ChckBox per elegir els 3 tipus de restriccions alimentï¿½ries
 		JCheckBox celiacs = new JCheckBox("Celiacs");
 		JCheckBox lactosa = new JCheckBox("Lactosa");
-		JCheckBox fruitsSecs = new JCheckBox("Fruïts secs");
+		JCheckBox fruitsSecs = new JCheckBox("Fruï¿½ts secs");
 		JLabel etiqueta6 = new JLabel("Volum:");
 		JTextField campText2 = new JTextField(10);
 		JTextField campText3 = new JTextField(10);
@@ -187,7 +187,7 @@ class Fines_AfegirProducte extends JFrame {
 		boto.setVisible(false);
 		contenidor.add(panel2, BorderLayout.WEST);
 
-		// Acció del radioButton de la tria entre plat i beguda
+		// Acciï¿½ del radioButton de la tria entre plat i beguda
 		opcioPlat.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent event) {
 				int state = event.getStateChange();
@@ -244,7 +244,7 @@ class Fines_AfegirProducte extends JFrame {
 			}
 		});
 
-		// Acció del radioButton de TeAlcohol
+		// Acciï¿½ del radioButton de TeAlcohol
 		opcioTeAlcohol.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent event) {
 				int state = event.getStateChange();
@@ -256,10 +256,10 @@ class Fines_AfegirProducte extends JFrame {
 			}
 		});
 
-		// Accions del botó
+		// Accions del botï¿½
 		boto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				// Accions del checkbox de les al·lèrgies
+				// Accions del checkbox de les alï¿½lï¿½rgies
 				if (celiacs.isSelected()) {
 					apteCeliacs = true;
 				} else {
@@ -279,10 +279,10 @@ class Fines_AfegirProducte extends JFrame {
 				double preu = Double.parseDouble(campText3.getText());
 				double descompte = Double.parseDouble(campText4.getText());
 				if (esPlat) {
-					// El producte nou és un plat
+					// El producte nou ï¿½s un plat
 					Plat platNou;
 					if (apteCeliacs || apteLactosa || apteFruitsSecs) {
-						// En el cas que hagi seleccionat un o més al·lèrgia,
+						// En el cas que hagi seleccionat un o mï¿½s alï¿½lï¿½rgia,
 						String[] alergies = new String[3];
 						int i = 0;
 						if (apteCeliacs)
@@ -296,17 +296,17 @@ class Fines_AfegirProducte extends JFrame {
 						platNou = new Plat(nom, preu, descompte, alergies);
 
 					} else {
-						// aquí el plat nou no conté cap al·lèrgia
+						// aquï¿½ el plat nou no contï¿½ cap alï¿½lï¿½rgia
 						platNou = new Plat(nom, preu, descompte);
 					}
 					llistProds.afegirProducte(platNou);
 				} else {
-					// El producte nou és una beguda
+					// El producte nou ï¿½s una beguda
 					int volum = Integer.parseInt(campText6.getText());
 					Beguda begudaNou = new Beguda(nom, preu, descompte, volum, teAlcohol);
 					llistProds.afegirProducte(begudaNou);
 				}
-				dispose(); // Per tancar la finestra actual al pulsar el botó d'afegir
+				dispose(); // Per tancar la finestra actual al pulsar el botï¿½ d'afegir
 			}
 		});
 
@@ -719,7 +719,125 @@ class Fines_eliminarProducte extends JFrame {
 		
 	}
 
+class Contrasenya extends JFrame{
+		
+		private static final long serialVersionUID = 1L;
+		
+		Contrasenya (String titol, LlistaClients llistaClients, LlistaProducte llistaProducte, LlistaComanda llistaComanda) {
+			
+			
+			Container contenidor = getContentPane();
+			contenidor.setLayout(new BorderLayout(10, 10));
+			
+			//panel 1
+			JPanel panel1 = new JPanel(new BorderLayout());
+			contenidor.add(panel1, BorderLayout.PAGE_START);
+			JLabel etiqueta = new JLabel("Autentifica't", SwingConstants.CENTER);
+			panel1.add(etiqueta, SwingConstants.CENTER);
+			
+			//panel 2 
+			JPanel panel2 = new JPanel(new GridBagLayout()); 
+			
+			JLabel etiqueta1 = new JLabel("Usuari:");
+			JLabel etiqueta2 = new JLabel("Contrasenya (numeros):");
+			
+			JTextField campText = new JTextField(10);
+			JTextField campText2 = new JTextField(10);
+			
+			JButton entrar = new JButton ( "Entrar:"); 
+			entrar.setForeground(Color.blue);
+			// Afegin un objecte de GridBagConstraints per definir les limitacions dels components en el panel
+			GridBagConstraints limit = new GridBagConstraints();
+			limit.anchor = GridBagConstraints.WEST;
+			limit.insets = new Insets(10, 10, 10, 10);
+			limit.gridx = 0;
+			limit.gridy = 0;
+			panel2.add(etiqueta1, limit);
+			limit.gridx = 1;
+			panel2.add(campText, limit);
+			limit.gridx = 0;
+			limit.gridy = 1;
+			panel2.add(etiqueta2, limit);
+			limit.gridx = 1;
+			panel2.add(campText2, limit);
+			limit.gridx = 0;
+			limit.gridy = 2;
+			panel2.add(entrar, limit); 
+			limit.gridy = 3; 
+			
+			contenidor.add(panel2, BorderLayout.CENTER);
+			//accio del boto ENTRAR
+			entrar.addActionListener(new ActionListener() { // ENTRAR
+				
+				public void actionPerformed(ActionEvent ae) {
+					boolean existeix1, existeix2; 
+					existeix1=false; 
+					existeix2=false;
+					int i = 0; 
+					String usuari = campText.getText(); 
+					String aux = campText2.getText(); 
+					int contrasenya = Integer.parseInt(aux);
+					
+					while ((i < llistaClients.getnClients()) && (!existeix1) && (!existeix2)) {
+
+						if (usuari.equals(llistaClients.getLlista()[i].getUsuari())) {
+							existeix1 = true;
+						}
+						if (contrasenya == (llistaClients.getLlista()[i].getContrasenya())) {
+							existeix2 = true;
+						}
+
+						i++;
+					}
+					if( existeix1 && existeix2){
+						new afegirComanda("Afegir Comanda", llistaProducte, llistaComanda, llistaClients); 
+					}
+					if ( existeix1==false ){
+						
+						new noCorrecte(); 
+						
+						
+					}
+				}
+			
+			});
+			
+			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Per a poder tancar la finestra actual sense afectar la
+			// finestra principal
+			setSize(400, 400); // Mida de la finestra
+			setVisible(true);		
+			
+		}
+}
+class noCorrecte extends JFrame {
+	private static final long serialVersionUID = 1L; 
 	
+	public noCorrecte(){
+		Container contenidor = getContentPane();
+		contenidor.setLayout(new BorderLayout(10, 10));
+		
+		// Panel 1
+		JPanel panel1 = new JPanel(new BorderLayout());
+		contenidor.add(panel1, BorderLayout.PAGE_START);
+		JLabel etiqueta = new JLabel("Autentifica't", SwingConstants.CENTER);
+		panel1.add(etiqueta, SwingConstants.CENTER);
+		// Panel 2
+		JPanel panel2 = new JPanel(new GridBagLayout());
+		JLabel etiqueta2 = new JLabel("L'USUARI NO ES CORRECTE!");
+		
+		GridBagConstraints limit = new GridBagConstraints();
+		limit.anchor = GridBagConstraints.WEST;
+		limit.insets = new Insets(10, 10, 10, 10);
+		limit.gridx = 0;
+		limit.gridy = 0;
+		panel2.add(etiqueta2, limit);
+		limit.gridx = 1;
+		contenidor.add(panel2, BorderLayout.WEST);
+		
+		
+		
+	}
+}
 
 //////////////////////////////////CREAR CLIENT//////////////////////////////////////////////////////
 
@@ -731,7 +849,7 @@ class Fines_CreaClient extends JFrame {
 	// Constructor
 	public Fines_CreaClient(String titol, LlistaClients llistacl) {
 		super(titol);
-		// Contenidor de la finestra principal, conté 2 panels horitzontals
+		// Contenidor de la finestra principal, contï¿½ 2 panels horitzontals
 		Container contenidor = getContentPane();
 		contenidor.setLayout(new BorderLayout(10, 10));
 		
@@ -813,7 +931,7 @@ class Fines_CreaClient extends JFrame {
 				}
 		});
 
-		// Accions del botó
+		// Accions del botï¿½
 		boto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 	
@@ -845,7 +963,7 @@ class Fines_Restriccions extends JFrame {
 	
 	// Constructor
 	public Fines_Restriccions(String[] restriccions, LlistaClients llistacl) {
-		// Contenidor de la finestra principal, conté 2 panels horitzontals
+		// Contenidor de la finestra principal, contï¿½ 2 panels horitzontals
 		Container contenidor = getContentPane();
 		contenidor.setLayout(new BorderLayout(10, 10));
 		
@@ -907,7 +1025,7 @@ class Fines_Restriccions extends JFrame {
 		
 		contenidor.add(panel2, BorderLayout.CENTER);
 		
-		// Accions del botó
+		// Accions del botï¿½
 		boto.addActionListener(new ActionListener() {
 			
 			int i = 0;
@@ -953,7 +1071,7 @@ class Fines_Registrat extends JFrame {
 	
 	// Constructor
 	public Fines_Registrat(Clients client) {
-		// Contenidor de la fiestra principal, conté 2 panels horitzontals
+		// Contenidor de la fiestra principal, contï¿½ 2 panels horitzontals
 		Container contenidor = getContentPane();
 		contenidor.setLayout(new BorderLayout(10, 10));
 		
@@ -981,7 +1099,7 @@ class Fines_Registrat extends JFrame {
 		
 		contenidor.add(panel2, BorderLayout.CENTER);
 		
-		// Accions del botó
+		// Accions del botï¿½
 		boto.addActionListener(new ActionListener() {
 		
 			public void actionPerformed(ActionEvent ae) {
@@ -989,7 +1107,7 @@ class Fines_Registrat extends JFrame {
 			}
 		});
 		
-		textArea.append("L'usuari: "+client.getUsuari()+ " s'ha registrat amb exit"); // Mostro la informació
+		textArea.append("L'usuari: "+client.getUsuari()+ " s'ha registrat amb exit"); // Mostro la informaciï¿½
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);	// Per a poder tancar la finestra atual sense afectar la
 															// finestra principal
@@ -1006,7 +1124,7 @@ class Fines_LlistarComandes extends JFrame {
 	
 	// Constructor
 	public Fines_LlistarComandes(String titol, LlistaClients llistacl) {
-		// Contenidor de la fiestra principal, conté 2 panels horitzontals
+		// Contenidor de la fiestra principal, contï¿½ 2 panels horitzontals
 		Container contenidor = getContentPane();
 		contenidor.setLayout(new BorderLayout(10, 10));
 		
@@ -1047,7 +1165,7 @@ class Fines_LlistarComandes extends JFrame {
 		
 		contenidor.add(panel2, BorderLayout.CENTER);
 		
-		// Accions del botó
+		// Accions del botï¿½
 		boto.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent ae) {
@@ -1065,7 +1183,7 @@ class Fines_LlistarComandes extends JFrame {
 				new Fines_MostrarComandes(llistacl.getLlista()[i].getComandes());	
 				}
 				else{
-				textArea.append("L'usuari o contrasenya son incorrectes"); // Mostro la informació
+				textArea.append("L'usuari o contrasenya son incorrectes"); // Mostro la informaciï¿½
 				}
 			}
 		});
@@ -1084,7 +1202,7 @@ class Fines_MostrarComandes extends JFrame {
 	
 	// Constructor
 	public Fines_MostrarComandes(LlistaComanda llistacom) {
-		// Contenidor de la fiestra principal, conté 2 panels horitzontals
+		// Contenidor de la fiestra principal, contï¿½ 2 panels horitzontals
 		Container contenidor = getContentPane();
 		contenidor.setLayout(new BorderLayout(10, 10));
 		
@@ -1127,9 +1245,9 @@ class Fines_MostrarComandes extends JFrame {
 		contenidor.add(panel2, BorderLayout.CENTER);
 		
 		//LLAMAR AL TO STRING DE LAS COMANDAS Y IMPRIMIRLO
-		textArea.append(llistacom.toString()); // Mostro la informació
+		textArea.append(llistacom.toString()); // Mostro la informaciï¿½
 		
-		// Accions del botó
+		// Accions del botï¿½
 		boto.addActionListener(new ActionListener() {
 		
 			public void actionPerformed(ActionEvent ae) {
