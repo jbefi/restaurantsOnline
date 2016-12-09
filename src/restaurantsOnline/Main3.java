@@ -1168,19 +1168,21 @@ class Fines_LlistarComandes extends JFrame {
 			public void actionPerformed(ActionEvent ae) {
 			
 				String usu = campText1.getText(); // Agafo el nom
-				String pass = campText2.getText(); // Agafo la adreca
+				String contrasenya = campText2.getText(); // Agafo la contrasenya del camp de text
+				int pass = Integer.parseInt(contrasenya); //Agafo la contrasenya
 				//LLAMAR A UNA FUNCION QUE NOS DIGA LA POSICION DE LA LISTA DEL CLIENTE
 				
 				
 				int i = 0;
 				i = llistacl.consultar_Client(usu);
-				if (Objects.equals(llistacl.getLlista()[i].getContrasenya(), pass))
+				if ((llistacl.getLlista()[i].getContrasenya()) == pass)
 				{
 				dispose();
 				new Fines_MostrarComandes(llistacl.getLlista()[i].getComandes());	
 				}
 				else{
-				textArea.append("L'usuari o contrasenya son incorrectes"); // Mostro la informaci�
+					textArea.setText(""); // Esborro tot el contingut anterior de Text Area
+					textArea.append("L'usuari o contrasenya son incorrectes"); // Mostro la informacio
 				}
 			}
 		});
@@ -1242,9 +1244,9 @@ class Fines_MostrarComandes extends JFrame {
 		contenidor.add(panel2, BorderLayout.CENTER);
 		
 		//LLAMAR AL TO STRING DE LAS COMANDAS Y IMPRIMIRLO
-		textArea.append(llistacom.toString()); // Mostro la informaci�
+		textArea.append(llistacom.toString()); // Mostro la informacio
 		
-		// Accions del bot�
+		// Accions del boto
 		boto.addActionListener(new ActionListener() {
 		
 			public void actionPerformed(ActionEvent ae) {
