@@ -73,7 +73,7 @@ class Finestra extends JFrame {
 					new Fines_consultarClient("Informació d'un client", llistaClients);
 					break;
 				case 5:
-					// Llistar comandes d'un client
+					new Fines_LlistarComandes("Llistar comandes d'un client", llistaClients);
 					break;
 				case 6:
 					new afegirComanda("Nova Comanda ", llistaProducte, llistaComandes, llistaClients);
