@@ -10,7 +10,7 @@ public class Main2 {
 	//TODO: variables globales e las listas
 	
 	
-	public static LlistaProducte llegirFitxerProductes() throws IOException , FileNotFoundException {
+	public static LlistaProducte llegirFitxerProductes(String nomFitxer) throws IOException , FileNotFoundException {
 		final String PLAT = "PLAT";
 		final String BEGUDA = "BEGUDA";
 		final String NO_ALERGIA = "NoRestriccions";
@@ -21,7 +21,7 @@ public class Main2 {
 		int codi,i,volum;
 		boolean teAlcohol;
 		double preu, descompte;
-		BufferedReader f = new BufferedReader(new FileReader("productes.txt"));
+		BufferedReader f = new BufferedReader(new FileReader(nomFitxer));
 		String frase = "", nom;
 		String paraula;
 		frase = f.readLine();
@@ -71,8 +71,8 @@ public class Main2 {
 		
 	}
 	
-	public static void escriureFitxerProductes(LlistaProducte productes)throws IOException{
-		BufferedWriter f = new BufferedWriter(new FileWriter("productes_output.txt"));
+	public static void escriureFitxerProductes(String nomFitxer, LlistaProducte productes)throws IOException{
+		BufferedWriter f = new BufferedWriter(new FileWriter(nomFitxer));
 		for (int i=0; i<productes.getnElem();i++){
 			f.write(productes.getLlista()[i].getCodi()+",");
 			if (productes.getLlista()[i] instanceof Plat){
@@ -229,10 +229,9 @@ public class Main2 {
 	
 	public static void main(String[] args) {
 		try {
-			
-			LlistaProducte llista = llegirFitxerProductes();
-			System.out.println(llista);
-			escriureFitxerProductes(llista);
+			LlistaProducte llistaProductes = llegirFitxerProductes("productes.txt");
+			System.out.println(llistaProductes);
+			escriureFitxerProductes("productes_output.txt",llistaProductes);
 			
 		} catch(FileNotFoundException e) {
 			System.out.println("L'arxiu d'entrada no existeix");
