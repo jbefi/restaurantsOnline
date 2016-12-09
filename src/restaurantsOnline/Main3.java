@@ -1019,7 +1019,7 @@ class Fines_LlistarComandes extends JFrame {
 		// Panel 2
 		JPanel panel2 = new JPanel(new GridBagLayout());
 		JLabel etiqueta1 = new JLabel("Usuari:");
-		JLabel etiqueta2 = new JLabel("Contrasenya:");
+		JLabel etiqueta2 = new JLabel("Contrasenya: (numeros)");
 		JTextField campText1 = new JTextField(10);
 		JTextField campText2 = new JTextField(10);
 		JButton boto = new JButton("CONSULTAR");
@@ -1053,19 +1053,20 @@ class Fines_LlistarComandes extends JFrame {
 			public void actionPerformed(ActionEvent ae) {
 			
 				String usu = campText1.getText(); // Agafo el nom
-				String pass = campText2.getText(); // Agafo la adreca
+				String aux = campText2.getText(); // Agafo la contrasenya
+				int pass = Integer.parseInt(aux);
 				//LLAMAR A UNA FUNCION QUE NOS DIGA LA POSICION DE LA LISTA DEL CLIENTE
-				
 				
 				int i = 0;
 				i = llistacl.consultar_Client(usu);
-				if (Objects.equals(llistacl.getLlista()[i].getContrasenya(), pass))
+				if ((llistacl.getLlista()[i].getContrasenya()) == pass)
 				{
-				dispose();
-				new Fines_MostrarComandes(llistacl.getLlista()[i].getComandes());	
+					dispose();
+					new Fines_MostrarComandes(llistacl.getLlista()[i].getComandes());	
 				}
 				else{
-				textArea.append("L'usuari o contrasenya son incorrectes"); // Mostro la informació
+					textArea.append("");
+					textArea.append("L'usuari o contrasenya son incorrectes"); // Mostro la informació
 				}
 			}
 		});
@@ -1091,15 +1092,11 @@ class Fines_MostrarComandes extends JFrame {
 		// Panel 1
 		JPanel panel1 = new JPanel(new BorderLayout());
 		contenidor.add(panel1, BorderLayout.PAGE_START);
-		JLabel etiqueta = new JLabel("CONSULTAR COMANDES", SwingConstants.CENTER);
+		JLabel etiqueta = new JLabel("LES COMANDES SON LES SEGUENTS", SwingConstants.CENTER);
 		panel1.add(etiqueta, SwingConstants.CENTER);
 		
 		// Panel 2
 		JPanel panel2 = new JPanel(new GridBagLayout());
-		JLabel etiqueta1 = new JLabel("Usuari:");
-		JLabel etiqueta2 = new JLabel("Contrasenya:");
-		JTextField campText1 = new JTextField(10);
-		JTextField campText2 = new JTextField(10);
 		JButton boto = new JButton("FINALITZAR");
 		
 		// Afegin un objecte de GridBagConstraints per definir les limitacions dels components en el panel
@@ -1107,19 +1104,10 @@ class Fines_MostrarComandes extends JFrame {
 		limit.anchor = GridBagConstraints.CENTER;
 		limit.insets = new Insets(10, 10, 10, 10);
 		limit.gridx = 0;
-		limit.gridy = 0;
-		panel2.add(etiqueta1, limit);
-		limit.gridx = 1;
-		panel2.add(campText1, limit);
-		limit.gridx = 0;
-		limit.gridy = 1;
-		panel2.add(etiqueta2, limit);
-		limit.gridx = 1;
-		panel2.add(campText2, limit);
-		limit.gridx = 3;
+		limit.gridy = 6;
 		panel2.add(boto, limit);
-		limit.gridx = 3;
-		limit.gridy = 2;
+		limit.gridx = 0;
+		limit.gridy = 0;
 		JTextArea textArea = new JTextArea();
 		panel2.add(textArea, limit);
 		
@@ -1127,6 +1115,7 @@ class Fines_MostrarComandes extends JFrame {
 		contenidor.add(panel2, BorderLayout.CENTER);
 		
 		//LLAMAR AL TO STRING DE LAS COMANDAS Y IMPRIMIRLO
+		
 		textArea.append(llistacom.toString()); // Mostro la informació
 		
 		// Accions del botó
