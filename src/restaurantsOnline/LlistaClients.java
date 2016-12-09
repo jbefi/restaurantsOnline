@@ -71,6 +71,30 @@ public class LlistaClients {
 		}
 	}
 	
+	public int consultar_Client(String usu)
+	{
+		int i = 0;
+		boolean trobat = false;
+		while ((!trobat) && (i<nClients))
+		{
+			trobat = Objects.equals(llista[i].getUsuari(), usu);
+			if (!trobat)
+			{
+				i++;
+			}
+		}
+		
+		if (trobat)
+		{
+			return (i);
+		}
+		else
+		{
+			i = -1;
+			return (i);
+		}
+	}
+	
 	public String imprimirClient(int id)
 	{
 		int i = 0;
@@ -182,7 +206,8 @@ public class LlistaClients {
 		
 		if (trobat)
 		{
-			this.llista[j].afegirComanda(this.llista[j].getComandes().getLlista()[llista_comandes.posicioComanda(identComanda)]);
+			
+			this.llista[j].getComandes().afegirComanda(this.llista[j].getComandes().getLlista()[llista_comandes.posicioComanda(identComanda)]);
 			return (1);
 		}
 		else
@@ -199,4 +224,3 @@ public class LlistaClients {
 		llista[i].afegirComanda(comandaguardada);
 	}
 }
-

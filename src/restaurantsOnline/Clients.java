@@ -44,6 +44,22 @@ public class Clients {
 		this.Contrasenya = Contrasenya;
 		this.Identificador = Identificador;
 	}
+	
+	public Clients(String Nom_client, String Adreca, String Telefon, String Usuari, int Contrasenya, String[] Restriccions) {
+		this.Nom_client = Nom_client;
+		this.Adreca = Adreca;
+		this.Telefon = Telefon;
+		this.Usuari = Usuari;
+		this.Contrasenya = Contrasenya;
+		this.Restriccions = new String[Restriccions.length];
+		for (int i=0; i<this.Restriccions.length; i++)
+		{
+			this.Restriccions[i] = Restriccions[i];
+		}
+		this.comandes = new LlistaComanda();
+		this.Preferent = false;
+		this.Identificador = ID_Clients++;
+	}
 
 	public String getNom_client() {
 		return Nom_client;
