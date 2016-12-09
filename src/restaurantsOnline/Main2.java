@@ -160,7 +160,7 @@ public class Main2 {
 	public static LlistaComanda llegirFitxerComandes() throws IOException , FileNotFoundException {
 	
 		LlistaComanda llistaguardada = new LlistaComanda(); 
-		Comanda comandaguardada = new Comanda(null,0,0); // creo les variables que necessito per a poder llegir tot el que tinc al fitxer
+		Comanda comandaguardada = new Comanda(null,0,0,0); // creo les variables que necessito per a poder llegir tot el que tinc al fitxer
 		int identClient, identComanda, hora, minut;
 		String beguda, plat; 
 		BufferedReader f = new BufferedReader(new FileReader("Comandes.txt")); // el fitxer que miro es el comandes.txt

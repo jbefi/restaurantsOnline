@@ -40,7 +40,6 @@ public class LlistaComanda {
        
     	if (nElem < maxElementos) {
         	
-        
             llista[nElem] = new Comanda(producte, hora, minut, preuTotal); // en cada lloc de la llista poso una nova comanda amb els parametres que hi passo 
             nElem++;
             
@@ -54,14 +53,13 @@ public class LlistaComanda {
      */
     public void afegirComanda(Comanda nou) { 
         if (nElem < maxElementos) {
-        	int i=0; 
-        	while (i<=nElem){
-        		
-        		llista[i]=llista[i+1]; 
-        		i++;
-        	}
-        	
-            llista[0] = nou; // en cada lloc de la llista poso una nova comanda amb els parametres que hi passo 
+//        	int i=0; 
+//        	while (i<=nElem){
+//        		
+//        		llista[i]=llista[i+1]; 
+//        		i++;
+//        	}
+            llista[nElem] = nou; // en cada lloc de la llista poso una nova comanda amb els parametres que hi passo 
             nElem++;
             
         }
@@ -131,10 +129,8 @@ public class LlistaComanda {
     
     public String toString(){
     	String aux = "";
-    	for(int i=0;i<nElem;i++){
-    		System.out.println(i);
+    	for(int i=0;i<nElem;i++)
     		aux = aux + llista[i]+"\n";
-    	}
     	return aux;
     }
     

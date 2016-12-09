@@ -5,9 +5,9 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import RestuarantsOnline.Beguda;
-import RestuarantsOnline.LlistaProducte;
-import RestuarantsOnline.Plat;
+import restaurantsOnline.Beguda;
+import restaurantsOnline.LlistaProducte;
+import restaurantsOnline.Plat;
 
 import java.util.Objects;
 
@@ -1175,14 +1175,13 @@ class Fines_LlistarComandes extends JFrame {
 				
 				int i = 0;
 				i = llistacl.consultar_Client(usu);
-				if ((llistacl.getLlista()[i].getContrasenya()) == pass)
-				{
-				dispose();
-				new Fines_MostrarComandes(llistacl.getLlista()[i].getComandes());	
-				}
-				else{
+				if((i == -1)||(llistacl.getLlista()[i].getContrasenya()) != pass){
 					textArea.setText(""); // Esborro tot el contingut anterior de Text Area
 					textArea.append("L'usuari o contrasenya son incorrectes"); // Mostro la informacio
+				}
+				else{
+					dispose();
+					new Fines_MostrarComandes(llistacl.getLlista()[i].getComandes());	
 				}
 			}
 		});
@@ -1213,6 +1212,8 @@ class Fines_MostrarComandes extends JFrame {
 		
 		// Panel 2
 		JPanel panel2 = new JPanel(new GridBagLayout());
+//		JScrollPane panel2 = new JScrollPane(contenidor);
+		
 		JButton boto = new JButton("FINALITZAR");
 		
 		// Afegin un objecte de GridBagConstraints per definir les limitacions dels components en el panel
@@ -1290,7 +1291,14 @@ public class Main3 {
 
 		Clients Client1 = new Clients("Jose", " avenida Barcelona", "666999444", "jose32", 234, tRestr,
 				new LlistaComanda());
+		LlistaProducte productesClient1 = new LlistaProducte(50);
+		productesClient1.afegirProducte(p1);
+		productesClient1.afegirProducte(b1);
+		// aquesta llista l'afegirem a la comanda del client 1
+		Comanda comanda1 = new Comanda(productesClient1, hora, min, 0);
 		llistaClients.creaClient(Client1);
+		llistaClients.afegirComandaClient(Client1.getIdentificador(), comanda1);
+		llistaClients.afegirComandaClient(Client1.getIdentificador(), comanda1);
 		Clients Client2 = new Clients("Alex", "avenida Jaume1", "666777444", "alex32", 123, tRestr,
 				new LlistaComanda());
 		llistaClients.creaClient(Client2);

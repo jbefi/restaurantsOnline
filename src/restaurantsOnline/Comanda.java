@@ -31,7 +31,11 @@ public class Comanda {
         
         this.hora=hora;
         this.minut=minut; 
-        this.preuTotal=preuTotal; 
+        this.preuTotal=preuTotal;
+        Producte[] auxLlista = producte.getLlista();
+        for( int i = 0; i<producte.getnElem(); i++){
+        	this.preuTotal+=auxLlista[i].getPreu();
+        }
     }
 
 
@@ -65,7 +69,7 @@ public class Comanda {
                 	this.producte.getLlista()[this.producte.getnElem()-1].aplicarDescompte();
                 }
         }
-        this.preuTotal +=this.producte.getLlista()[this.producte.getnElem()-1].getPreuTotal();
+        this.preuTotal+= this.producte.getLlista()[this.producte.getnElem()-1].getPreuTotal();
         return aux;
     }
 
@@ -113,7 +117,7 @@ public class Comanda {
 				+ "*************************************"
 				+ ""
 				+ producte.toString() +
-				 " \nLa hora de la comanda es :\t" + hora + ":" + minut + "\nL'identificador de comanda es el seguent:\n" + identComanda + "\n \n El preu total de la comanda es: "+ preuTotal+"�\n";
+				 " \nLa hora de la comanda es :\t" + hora + ":" + minut + "\nL'identificador de comanda es el seguent:\n" + identComanda + "\n \n El preu total de la comanda es: "+ preuTotal+" euros\n";
 	}
 
 
