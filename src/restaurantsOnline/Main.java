@@ -318,12 +318,36 @@ public class Main {
 	public static void consultarClient()
 
 	{
-	        int id;
-		System.out.print("\n\n\tIndica id del client que vols consultar (1-" + llistaClients.getnClients() + "): \t");
-		id = teclat.nextInt();
+		int id;
+		String usuari;
+		int i=0;
+		int pUsuari=0;
+		boolean exist1=false, exist2=false;
+		System.out.println("Indica el Usuari del Client:");
+		usuari = teclat.nextLine(); 
 		teclat.nextLine();
-		System.out.println(llistaClients.imprimirClient(id));
+		System.out.println("Indica la contrasenya:");
+		int contra = teclat.nextInt(); 
+		teclat.nextLine();
+		
+			while  ((i<llistaClients.getnClients())&&(!exist1)&&(!exist2)){
+			
+				if(usuari.equals(llistaClients.getLlista()[i].getUsuari())){
+					exist1=true; 
+				}
+				if(contra==(llistaClients.getLlista()[i].getContrasenya())){
+					exist2=true; 
+				}
+			
+				if (exist1 && exist2){
+					pUsuari=i; 
+					i++; 
+				}	
+			}
+			id = llistaClients.getLlista()[pUsuari].getIdentificador();
+		    System.out.println(llistaClients.imprimirClient(id));
 	}
+	
 
 	private static void copiarComanda()
 
