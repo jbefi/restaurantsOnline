@@ -674,7 +674,7 @@ public class Main2 {
 					System.out.println("Error en : " + e);
 					carregarComandes = false;
 				}
-				
+				  
 				break;
 			case 3:
 				try {
