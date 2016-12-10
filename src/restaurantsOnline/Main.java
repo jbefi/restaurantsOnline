@@ -12,7 +12,7 @@ public class Main {
 	static Scanner teclat = new Scanner(System.in);
 
 	public static void mostraMenu() {
-		System.out.println("******RESTAURANTE ON LINE*******");
+		System.out.println("\n ******RESTAURANTE ON LINE*******");
 
 		System.out.println("\n\nOpcions del menu:");
 		System.out.println("\n\t1. Afegir nou producte");
@@ -264,7 +264,7 @@ public class Main {
 	public static void consultarInformacio(LlistaProducte llistP) {
 
 		int codi;
-		System.out.print("\n\n\tIndiqui el codi del producte (1-"+llistP.getnElem() +"): \t");
+		System.out.print("\n\n\tIndiqui el codi del producte (1-" + llistP.getnElem() + "): \t");
 		codi = teclat.nextInt();
 		teclat.nextLine();
 		System.out.println("\n   ---------- INFORMACIÓ ---------");
@@ -322,7 +322,7 @@ public class Main {
 
 	{
 		int id;
-		System.out.print("\n\n\tIndica id del client que vols consultar:\t");
+		System.out.print("\n\n\tIndica id del client que vols consultar (1-"+ llistaClients.getnClients()+"): \t");
 		id = teclat.nextInt();
 		teclat.nextLine();
 		System.out.println(llistaClients.imprimirClient(id));
@@ -358,18 +358,22 @@ public class Main {
 			i++;
 		}
 
-		id = llistaClients.getLlista()[posusuari].getIdentificador();
+		if (exist1 && exist2) {
+			id = llistaClients.getLlista()[posusuari].getIdentificador();
 
-		System.out.println(llistaClients.consultar_Comandes(id));
-		System.out.print("\n\n\tIndica el identificador  de la comanda que vols copiar :\t");
-		iden = teclat.nextInt();
-		teclat.nextLine();
+			System.out.println(llistaClients.consultar_Comandes(id));
+			System.out.print("\n\n\tIndica el identificador  de la comanda que vols copiar :\t");
+			iden = teclat.nextInt();
+			teclat.nextLine();
 
-		int j = llistaClients.copiar_Comanda(id, iden);
-		if (j == 1) {
-			System.out.print("\n\n\tLa comanda s'ha copiat amb exit \t");
+			int j = llistaClients.copiar_Comanda(id, iden);
+			if (j == 1) {
+				System.out.print("\n\n\tLa comanda s'ha copiat amb exit \t");
+			} else {
+				System.out.print("\n\n\tNo s'ha trobat la comanda \t");
+			}
 		} else {
-			System.out.print("\n\n\tNo s'ha trobat la comanda \t");
+			System.out.println("No existeix aquest usuari amb aquesta contrasenya!\n ");
 		}
 
 	}
@@ -401,10 +405,13 @@ public class Main {
 				exist2 = false;
 			}
 		}
-		id = llistaClients.getLlista()[posusuari].getIdentificador();
-
-		System.out.print("\n\n\t La llista de comandes ordenada : \t");
-		System.out.println(llistaClients.consultar_Comandes(id));
+		if (exist1 && exist2) {
+			id = llistaClients.getLlista()[posusuari].getIdentificador();
+			System.out.print("\n\n\t La llista de comandes ordenada : \t");
+			System.out.println(llistaClients.consultar_Comandes(id));
+		} else {
+			System.out.println("No existeix aquest usuari amb aquesta contrasenya!\n ");
+		}
 	}
 
 	// Mètode auxiliar per mostrar a la consola tots els plats o totes les begudes de la llista global de Productes.
