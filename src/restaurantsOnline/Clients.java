@@ -40,6 +40,7 @@ public class Clients {
 		this.Adreca = Adreca;
 		this.Telefon = Telefon;
 		this.Usuari = Usuari;
+		this.Restriccions = new String[3];
 		this.comandes = new LlistaComanda();
 		this.Contrasenya = Contrasenya;
 		this.Identificador = Identificador;

@@ -763,7 +763,7 @@ public class Main2 {
 				}
 				break;
 			case 14:
-				if (carregarProductes) {
+				if (carregarClients) {
 					try {
 						escriureFitxerClients(llistaClients);
 					} catch (IOException e) {
