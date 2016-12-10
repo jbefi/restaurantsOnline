@@ -2,3 +2,6 @@
 2,PLAT,Bistec,20,10,NoRestriccions
 3,BEGUDA,Cocacola,2.5,5,250,NO
 4,BEGUDA,Vi,4,5,1000,SI
+5,PLAT,Sopa,5.5,3.5,Fruïts Secs
+6,BEGUDA,Aigua,1.5,2.5,500,NO
+7,BEGUDA,Cervesa,1.9,3,330,SI

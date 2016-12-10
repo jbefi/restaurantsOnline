@@ -9,7 +9,7 @@ public class Main {
 	public static LlistaComanda llistaComandes;
 	public static LlistaClients llistaClients;
 
-	static Scanner teclat = new Scanner(System.in);
+	public static Scanner teclat = new Scanner(System.in);
 
 	public static void mostraMenu() {
 		System.out.println("\n ******RESTAURANTE ON LINE*******");
@@ -108,6 +108,7 @@ public class Main {
 
 	}
 
+	// Mètode per eliminar un producte de la llista passat per paràmetre a partir del codi introduït per l'usuari.
 	public static void eliminarProducte(LlistaProducte llistP) {
 		int codi;
 		mostrarProducte(1);
@@ -116,10 +117,6 @@ public class Main {
 		codi = Integer.parseInt(teclat.nextLine());
 		llistP.eliminarProducte(codi);
 		System.out.print("\n\n\tEl producte s'ha eliminat amb exit!\t");
-	}
-
-	public static void carregarProducte(LlistaProducte llistP) {
-		// encara falta el fitxer
 	}
 
 	/**
@@ -322,7 +319,7 @@ public class Main {
 
 	{
 		int id;
-		System.out.print("\n\n\tIndica id del client que vols consultar (1-"+ llistaClients.getnClients()+"): \t");
+		System.out.print("\n\n\tIndica id del client que vols consultar (1-" + llistaClients.getnClients() + "): \t");
 		id = teclat.nextInt();
 		teclat.nextLine();
 		System.out.println(llistaClients.imprimirClient(id));
@@ -530,6 +527,10 @@ public class Main {
 				break;
 			case 8:
 				comandes();
+				break;
+			default:
+				if (opcio != 9)
+					System.out.println("Opció trïada incorrecte!");
 				break;
 
 			}
