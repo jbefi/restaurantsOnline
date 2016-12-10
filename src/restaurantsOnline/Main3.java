@@ -1321,6 +1321,8 @@ class Fines_MostrarComandes extends JFrame {
 		contenidor.add(panel1, BorderLayout.PAGE_START);
 		JLabel etiqueta = new JLabel("LES COMANDES SON LES SEGUENTS", SwingConstants.CENTER);
 		panel1.add(etiqueta, SwingConstants.CENTER);
+		JButton boto = new JButton("FINALITZAR");
+		contenidor.add(boto, BorderLayout.PAGE_END);
 		
 		// Panel 2
 		JPanel panel2 = new JPanel(new GridBagLayout());		
@@ -1342,6 +1344,12 @@ class Fines_MostrarComandes extends JFrame {
 		textArea.append(llistacom.toString()); // Mostro la informacio
 		contenidor.add(scroll);
 		
+		// Accions del bot�
+		boto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				dispose();
+			}
+		});
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);	// Per a poder tancar la finestra atual sense afectar la
 															// finestra principal
