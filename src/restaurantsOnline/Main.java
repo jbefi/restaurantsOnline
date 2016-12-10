@@ -264,7 +264,7 @@ public class Main {
 	public static void consultarInformacio(LlistaProducte llistP) {
 
 		int codi;
-		System.out.print("\n\n\tIndiqui el codi del producte:\t");
+		System.out.print("\n\n\tIndiqui el codi del producte (1-"+llistP.getnElem() +"): \t");
 		codi = teclat.nextInt();
 		teclat.nextLine();
 		System.out.println("\n   ---------- INFORMACIÓ ---------");
