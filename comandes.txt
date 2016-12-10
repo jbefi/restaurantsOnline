@@ -1,4 +1,4 @@
-1,1.carn,bistec.cola,fanta.12,33
-*
-2,2.carn,ensalada,sandwich.cola,cola,cola.5,12
-*
+1,1.carn,2,bistec,2.cola,2,fanta.2.12,33
+
+2,2.carn,3,ensalada,1,sandwich,3.cola,3.5,12
+

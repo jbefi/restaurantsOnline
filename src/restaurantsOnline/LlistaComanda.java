@@ -11,6 +11,7 @@ public class LlistaComanda {
     private Comanda[] llista;
 	private int identClient;
     private static final int maxElementos = 100;
+    private int ayudaIG; //variable de ayuda en la IG para pasar valores de un action listener a otro
     
     /**
      * Constructor de la LlistaComanda
@@ -126,6 +127,16 @@ public class LlistaComanda {
     public int getIdentClient () { 
     	return identClient; 
     }
+    
+    public int getAyudaIG() {
+ 		return ayudaIG;
+ 	}
+
+
+ 	public void setAyudaIG(int ayudaIG) {
+ 		this.ayudaIG = ayudaIG;
+ 	}
+
     
     public String toString(){
     	String aux = "";

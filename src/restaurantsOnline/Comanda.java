@@ -15,10 +15,13 @@ public class Comanda {
     private static int idGeneral=0;
     private int identComanda;
     private double preuTotal=0; 
+
     
     
 
-    /**
+
+
+	/**
      * Constructor de la classe comanda que rep els seguents parametres 
      * @param producte -> una llista de llista producte que conte tots els productes de la comanda 
      * @param hora -> l'hora en que es fa la comanda 
@@ -110,6 +113,8 @@ public class Comanda {
 	public void setIdentComanda(int identComanda) {
 		this.identComanda = identComanda;
 	}
+	
+ 
 
 	public String toString() {
 		return "El resum de la teva comanda es el següent:\n  "

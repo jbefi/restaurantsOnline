@@ -161,7 +161,7 @@ public class Main2 {
 	
 		LlistaComanda llistaguardada = new LlistaComanda(); 
 		Comanda comandaguardada = new Comanda(null,0,0,0); // creo les variables que necessito per a poder llegir tot el que tinc al fitxer
-		int identClient, identComanda, hora, minut;
+		int identClient, identComanda, hora, minut, quantitat = 0;
 		String beguda, plat; 
 		BufferedReader f = new BufferedReader(new FileReader("Comandes.txt")); // el fitxer que miro es el comandes.txt
 		String paraula = "";
@@ -169,23 +169,22 @@ public class Main2 {
 		
 		while (paraula != null) {   // mentres la paraula seguent existeixi 
 			
-			while ( paraula !="*"); 
 			StringTokenizer next = new StringTokenizer(paraula, ",");  // primer agafo 
 			identClient = Integer.parseInt(next.nextToken());  
-			//que fer amb el ident? 
 			identComanda = Integer.parseInt(next.nextToken()); 
 			comandaguardada.setIdentComanda(identComanda); 
 			
+			while ( )
 			if ((paraula = next.nextToken()) == "."){
 				while ((paraula = next.nextToken())!= ","){
-					
 					plat = next.nextToken(); 
-					comandaguardada.afegirElement(plat,llistacomanda); 
+					quantitat =Integer.parseInt(next.nextToken());
+					comandaguardada.afegirElement(plat,llistacomanda, quantitat, false); 
 				}
 				while ((paraula = next.nextToken())!= ","){
 					
 					beguda = next.nextToken(); 
-					comandaguardada.afegirElement(beguda, llistacomanda);
+					comandaguardada.afegirElement(beguda, llistacomanda, quantitat, false);
 						
 				}
 			}
@@ -202,31 +201,7 @@ public class Main2 {
 		
 	}
 	
-	public static void escriureFitxerComandes(LlistaClients comandes)throws IOException{
-		
-		BufferedWriter f = new BufferedWriter(new FileWriter("comandes_output.txt"));
-		
-		int i,j;
-		int id; 
-		
-		for (i=0; i<comandes.getnClients();i++){
-		
-			f.write(comandes.getLlista()[i].getIdentificador()+",");
-			id= comandes.getLlista()[i].getIdentificador();
-			llistaclients = comandes.consultar_Comandes(id);  
-			for ( j=0; j<llistaclients.getnElem();j++){
-				
-				f.write(llistaclients[j].getComandes().getLlista()[i].getProducte().getNom()+","); 
-				 
-			}
-			
-			
-		}
-		f.close();
-	}
-	
-	
-	
+
 	public static void main(String[] args) {
 		try {
 			LlistaProducte llistaProductes = llegirFitxerProductes("productes.txt");

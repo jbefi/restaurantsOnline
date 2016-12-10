@@ -475,17 +475,16 @@ class Fines_eliminarProducte extends JFrame {
 }
 
 
-// ********************** AFEGIR COMANDA *************************
+//********************** AFEGIR COMANDA *************************
 
 //CLASSE PRINCIPAL 
 	class afegirComanda extends JFrame {
 		
 		private static final long serialVersionUID = 1L;
-		
-		Comanda nova = new Comanda(new LlistaProducte(50), 0, 0, 0);
+	
 		
 		 afegirComanda(String titol, LlistaProducte llistaProducte, LlistaComanda llistaComandes,
-			LlistaClients llistaClients){
+			LlistaClients llistaClients, boolean preferent){
 			 super(titol); 
 
 			 	Container contenidor = getContentPane();
@@ -540,12 +539,12 @@ class Fines_eliminarProducte extends JFrame {
 				//FUNCIONS DELS DIFERENTS BOTONS 
 				plats.addActionListener(new ActionListener() { //obro la finestra dels plats despres d'apretar el boto 
 					public void actionPerformed(ActionEvent ae) {
-						new Plats ("Menú dels plats", llistaProducte); 
+						new Plats ("Menú dels plats", llistaProducte, llistaComandes); 
 					}
 				});
 				begudes.addActionListener(new ActionListener() { // obro la finestra de les begudes despres d'apretar el boto
 					public void actionPerformed(ActionEvent ae) {
-						new Begudes ("Menú de les begudes", llistaProducte); 
+						new Begudes ("Menú de les begudes", llistaProducte, llistaComandes); 
 					}
 				});
 				confirmar.addActionListener(new ActionListener(){ 
@@ -564,7 +563,7 @@ class Fines_eliminarProducte extends JFrame {
 				
 				setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Per a poder tancar la finestra atual sense afectar la
 																   // finestra principal
-				setSize(1200, 600); // Mida de la finestra
+				setSize(1000, 350); // Mida de la finestra
 				setVisible(true);					
 					
 		 }
@@ -574,7 +573,7 @@ class Fines_eliminarProducte extends JFrame {
 		
 		private static final long serialVersionUID = 1L;
 		
-		Plats (String titol, LlistaProducte llistaProducte) {
+		Plats (String titol, LlistaProducte llistaProducte, LlistaComanda llistaComanda) {
 			
 			Container contenidor = getContentPane();
 			contenidor.setLayout(new BorderLayout(10, 10));
@@ -613,28 +612,48 @@ class Fines_eliminarProducte extends JFrame {
 			//accio del boto SEGUENT
 			seguent.addActionListener(new ActionListener() {
 				int i=0; 
+				int num=0; 
 				public void actionPerformed(ActionEvent ae) {
-		
+					System.out.println(i);
 				textArea.setText(""); 
-				textArea.append(llistaProducte.getLlista()[i].toString());
-				if( i<= llistaProducte.getnElem()){
-					i++;
+				LlistaProducte llistaplats= new LlistaProducte(llistaProducte.getnElem()); 
+				int k=0; 
+				for ( int j=0; j<llistaProducte.getnElem();j++){
+					if (llistaProducte.getLlista()[j] instanceof Plat){
+						llistaplats.getLlista()[k]= llistaProducte.getLlista()[j];
+						k++; 
+					}
+					
 				}
+					textArea.append(llistaplats.getLlista()[i].toString());
+						if( i<= llistaplats.getnElem()){
+							num=i;
+							llistaComanda.setAyudaIG(num); 
+							i++;
+						}
+						else{
+							i=0; 
+						}
+			
 				}
 			});
 			
-			//accio del boto CARRO
-			carro.addActionListener(new ActionListener() {
+			carro.addActionListener(new ActionListener() { // CARRO 
 				
 				public void actionPerformed (ActionEvent ae) {
 					
+					textArea.setText("");
+					textArea.append("Has d'introduir la quantitat");
+					int num = llistaComanda.getAyudaIG(); 
+					new Quantitat( num, llistaProducte);
+				}
+			}); 
+
 					
 				
-			}
-			}); 
 			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Per a poder tancar la finestra actual sense afectar la
 			// finestra principal
-			setSize(800, 800); // Mida de la finestra
+			setSize(600, 600); // Mida de la finestra
 			setVisible(true);		
 		} 
 		
@@ -644,7 +663,7 @@ class Fines_eliminarProducte extends JFrame {
 		
 		private static final long serialVersionUID = 1L;
 		
-		Begudes (String titol, LlistaProducte llistaProducte) {
+		Begudes (String titol, LlistaProducte llistaProducte, LlistaComanda llistaComanda) {
 	
 			
 			Container contenidor = getContentPane();
@@ -683,37 +702,50 @@ class Fines_eliminarProducte extends JFrame {
 			contenidor.add(panel2, BorderLayout.CENTER);
 			
 			//accio del boto SEGUENT
-			seguent.addActionListener(new ActionListener() { // SEGUENT
+			seguent.addActionListener(new ActionListener() {
 				int i=0; 
-				int num= 0; 
+				int num= 0;
 				public void actionPerformed(ActionEvent ae) {
-					
-					textArea.setText(""); 
-					textArea.append(llistaProducte.getLlista()[i].toString()); // MOSTRA PRODUCTES 
-					if( i< llistaProducte.getnElem()){
-						num=i; 
-						i++;
+					System.out.println(i);
+				textArea.setText(""); 
+				LlistaProducte llistaplats= new LlistaProducte(llistaProducte.getnElem()); 
+				int k=0; 
+				for ( int j=0; j<llistaProducte.getnElem();j++){
+					if (llistaProducte.getLlista()[j] instanceof Beguda){
+						llistaplats.getLlista()[k]= llistaProducte.getLlista()[j];
+						k++; 
 					}
-					else {i=0;} 	
 					
-					
-					carro.addActionListener(new ActionListener() { // CARRO 
-						
-						public void actionPerformed (ActionEvent ae) {
-							
-							textArea.setText("");
-							textArea.append("Has d'introduir la quantitat");
-							// nova finestra de posar quantitat
+				}
+					textArea.append(llistaplats.getLlista()[i].toString());
+						if( i<= llistaplats.getnElem()){
+							num=i; 
+							llistaComanda.setAyudaIG(num); 
+							i++;
 						}
-					}); 
+						else{
+							i=0; 
+						}
+					
 				}
 			
 			});
+			
+			carro.addActionListener(new ActionListener() { // CARRO 
+				
+				public void actionPerformed (ActionEvent ae) {
+					
+					textArea.setText("");
+					textArea.append("Has d'introduir la quantitat");
+					int num = llistaComanda.getAyudaIG(); 
+					new Quantitat( num, llistaProducte);
+				}
+			}); 
 			//accio del boto CARRO
 		
 			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Per a poder tancar la finestra actual sense afectar la
 			// finestra principal
-			setSize(800, 800); // Mida de la finestra
+			setSize(600, 600); // Mida de la finestra
 			setVisible(true);		
 		} 
 		
@@ -725,7 +757,8 @@ class Contrasenya extends JFrame{
 		
 		Contrasenya (String titol, LlistaClients llistaClients, LlistaProducte llistaProducte, LlistaComanda llistaComanda) {
 			
-			
+			LlistaProducte llista = new LlistaProducte (50); 
+			Comanda nova = new Comanda(llista, 0, 0, 0);
 			Container contenidor = getContentPane();
 			contenidor.setLayout(new BorderLayout(10, 10));
 			
@@ -737,7 +770,8 @@ class Contrasenya extends JFrame{
 			
 			//panel 2 
 			JPanel panel2 = new JPanel(new GridBagLayout()); 
-			
+			JLabel etiqueta3 = new JLabel("MADE BY  ** KIDU 15 ** ");
+			etiqueta3.setForeground(Color.red);
 			JLabel etiqueta1 = new JLabel("Usuari:");
 			JLabel etiqueta2 = new JLabel("Contrasenya (numeros):");
 			
@@ -763,22 +797,26 @@ class Contrasenya extends JFrame{
 			limit.gridx = 0;
 			limit.gridy = 2;
 			panel2.add(entrar, limit); 
-			limit.gridy = 3; 
+			limit.gridy = 4; 
+			limit.gridx = 1; 
+			panel2.add(etiqueta3,limit);
 			
 			contenidor.add(panel2, BorderLayout.CENTER);
 			//accio del boto ENTRAR
 			entrar.addActionListener(new ActionListener() { // ENTRAR
 				
 				public void actionPerformed(ActionEvent ae) {
-					boolean existeix1, existeix2; 
+					boolean existeix1, existeix2,preferent; 
 					existeix1=false; 
 					existeix2=false;
+					preferent=false; 
 					int i = 0; 
+					int j = 0; 
 					String usuari = campText.getText(); 
 					String aux = campText2.getText(); 
 					int contrasenya = Integer.parseInt(aux);
 					
-					while ((i < llistaClients.getnClients()) && (!existeix1) && (!existeix2)) {
+					while ((i < llistaClients.getnClients()) && ((!existeix1) && (!existeix2))) {
 
 						if (usuari.equals(llistaClients.getLlista()[i].getUsuari())) {
 							existeix1 = true;
@@ -786,14 +824,20 @@ class Contrasenya extends JFrame{
 						if (contrasenya == (llistaClients.getLlista()[i].getContrasenya())) {
 							existeix2 = true;
 						}
-
+						j=i; 
 						i++;
 					}
+					
 					if( existeix1 && existeix2){
-						new afegirComanda("Afegir Comanda", llistaProducte, llistaComanda, llistaClients); 
+						preferent = llistaClients.getLlista()[j].getPreferent(); 
+						new afegirComanda("Afegir Comanda", llistaProducte, llistaComanda, llistaClients, preferent ); 
 					}
+					
+					else {
 						
+						new noCorrecte (); 
 						
+					}
 					
 				}
 			
@@ -806,7 +850,7 @@ class Contrasenya extends JFrame{
 			
 		}
 }
-/*class noCorrecte extends JFrame {
+class noCorrecte extends JFrame {
 	private static final long serialVersionUID = 1L; 
 	
 	public noCorrecte(){
@@ -822,20 +866,88 @@ class Contrasenya extends JFrame{
 		JPanel panel2 = new JPanel(new GridBagLayout());
 		JLabel etiqueta2 = new JLabel("L'USUARI NO ES CORRECTE!");
 		
+		JButton eliminar = new JButton ( "Tancar"); 
+		eliminar.setForeground(Color.RED);
+		
 		GridBagConstraints limit = new GridBagConstraints();
 		limit.anchor = GridBagConstraints.WEST;
 		limit.insets = new Insets(10, 10, 10, 10);
 		limit.gridx = 0;
 		limit.gridy = 0;
 		panel2.add(etiqueta2, limit);
-		limit.gridx = 1;
+		limit.gridy = 1;
+		panel2.add(eliminar, limit); 
 		contenidor.add(panel2, BorderLayout.WEST);
 		
 		
 		
+		eliminar.addActionListener(new ActionListener(){ 
+			public void actionPerformed(ActionEvent ae){
+				dispose(); 
+			}
+		
+		});
+		
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Per a poder tancar la finestra actual sense afectar la
+		// finestra principal
+		setSize(200, 200); // Mida de la finestra
+		setVisible(true);		
+		
+		
 	}
 }
-*/
+
+class Quantitat extends JFrame {
+
+private static final long serialVersionUID = 1L; 
+	
+	public Quantitat(int num, LlistaProducte llistaProducte){
+		Container contenidor = getContentPane();
+		contenidor.setLayout(new BorderLayout(10, 10));
+		
+		// Panel 1
+		JPanel panel1 = new JPanel(new BorderLayout());
+		contenidor.add(panel1, BorderLayout.PAGE_START);
+		JLabel etiqueta = new JLabel("Quantitat", SwingConstants.CENTER);
+		panel1.add(etiqueta, SwingConstants.CENTER);
+		// Panel 2
+		JPanel panel2 = new JPanel(new GridBagLayout());
+		JLabel etiqueta2 = new JLabel("Introdueix la quantitat: ");
+		JTextField campText = new JTextField(10);
+		JButton eliminar = new JButton ( "Tancar"); 
+		JButton seleccionar = new JButton ( "Seleccionar ");
+		eliminar.setForeground(Color.RED);
+		
+		GridBagConstraints limit = new GridBagConstraints();
+		limit.anchor = GridBagConstraints.WEST;
+		limit.insets = new Insets(10, 10, 10, 10);
+		limit.gridx = 0;
+		limit.gridy = 0;
+		panel2.add(etiqueta2, limit);
+		limit.gridy = 1;
+		panel2.add(campText,limit); 
+		limit.gridx = 1;
+		limit.gridy = 2; 
+		panel2.add(eliminar, limit); 
+		limit.gridx = 0; 
+		panel2.add(seleccionar,limit);
+		contenidor.add(panel2, BorderLayout.WEST);
+		
+		eliminar.addActionListener(new ActionListener(){ 
+			public void actionPerformed(ActionEvent ae){
+				dispose(); 
+			}
+		
+		});
+		
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Per a poder tancar la finestra actual sense afectar la
+		// finestra principal
+		setSize(400, 200); // Mida de la finestra
+		setVisible(true);		
+		
+		
+	}
+}
 //////////////////////////////////CREAR CLIENT//////////////////////////////////////////////////////
 
 //Classe per crear la finestra que serveix per crear un nou client
