@@ -318,9 +318,13 @@ public class Main {
 	public static void consultarClient()
 
 	{
-		int id;
-		System.out.print("\n\n\tIndica id del client que vols consultar (1-" + llistaClients.getnClients() + "): \t");
-		id = teclat.nextInt();
+	        int contra;
+		String nom;
+		System.out.print("\n\n\tIndica nom del client que vols consultar (1-" + llistaClients.getnClients() + "): \t");
+		nom = teclat.nextLine();
+		teclat.nextLine();
+		System.out.print("\n\n\tIndica usuari del client que vols consultar:\t");
+		contra= teclat.nextInt();
 		teclat.nextLine();
 		System.out.println(llistaClients.imprimirClient(id));
 	}
