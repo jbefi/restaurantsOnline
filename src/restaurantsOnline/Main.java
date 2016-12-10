@@ -288,7 +288,7 @@ public class Main {
 		tel = teclat.nextLine();
 		System.out.print("\n\n\tIndica el nom d'usuari del client:\t");
 		usuari = teclat.nextLine();
-		System.out.print("\n\n\tIndica el mot de pas del client:\t");
+		System.out.print("\n\n\tIndica el Contrasenya:  del client:\t");
 		contr = teclat.nextInt();
 
 		teclat.nextLine();
@@ -337,7 +337,7 @@ public class Main {
 		boolean exist1 = false, exist2 = false;
 		int posusuari = 0;
 
-		System.out.println("Mot de pas:");
+		System.out.println("Contrasenya:");
 		int pas = teclat.nextInt();
 		teclat.nextLine();
 		int i = 0;
@@ -374,7 +374,7 @@ public class Main {
 
 	}
 
-	private static void Comandes()
+	private static void comandes()
 
 	{
 		int id = 0;
@@ -383,7 +383,7 @@ public class Main {
 		boolean exist1 = false, exist2 = false;
 		int posusuari = 0;
 
-		System.out.println("Mot de pas:");
+		System.out.println("Contrasenya:");
 		int pas = teclat.nextInt();
 		teclat.nextLine();
 		for (int i = 0; i < llistaClients.getnClients(); i++) {
@@ -522,7 +522,7 @@ public class Main {
 				copiarComanda();
 				break;
 			case 8:
-				Comandes();
+				comandes();
 				break;
 
 			}
