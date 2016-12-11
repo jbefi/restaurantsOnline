@@ -13,14 +13,14 @@ public class Main2 {
 	public static LlistaComanda llistaComandes;
 	public static LlistaClients llistaClients;
 
-	// Mètode estàtica per llegir els productes a partir del fitxer, on el seu nom es passa pel paràmetre.
+	// Mï¿½tode estï¿½tica per llegir els productes a partir del fitxer, on el seu nom es passa pel parï¿½metre.
 	public static LlistaProducte llegirFitxerProductes(String nomFitxer) throws IOException, FileNotFoundException {
 		// Constants per comparar amb les informacions del fitxer
 		final String PLAT = "PLAT";
 		final String BEGUDA = "BEGUDA";
 		final String NO_ALERGIA = "NoRestriccions";
 		final String SI_ALCOHOL = "SI";
-		LlistaProducte llista = new LlistaProducte(100); // variable LlistaProducte per retornada en la funció
+		LlistaProducte llista = new LlistaProducte(100); // variable LlistaProducte per retornada en la funciï¿½
 		Plat plat;
 		Beguda beguda;
 		int codi, i, volum;
@@ -32,23 +32,23 @@ public class Main2 {
 		frase = f.readLine();
 		while (frase != null) {
 			// Mentre no arribi al final del fitxer
-			StringTokenizer st = new StringTokenizer(frase, ","); // Llegirem cada línia del fitxer (cada línia = un
+			StringTokenizer st = new StringTokenizer(frase, ","); // Llegirem cada lï¿½nia del fitxer (cada lï¿½nia = un
 																	// producte)
 			while (st.hasMoreTokens()) {
 				// Separem cada producte per les propietats corresponents
 				codi = Integer.parseInt(st.nextToken());
 				paraula = st.nextToken();
 				if (paraula.equals(PLAT)) {
-					// Si el producte és de subtipus Plat
+					// Si el producte ï¿½s de subtipus Plat
 					nom = st.nextToken();
 					preu = Double.parseDouble(st.nextToken());
 					descompte = Double.parseDouble(st.nextToken());
 					paraula = st.nextToken();
 					if (paraula.equals(NO_ALERGIA)) {
-						// El plat no té restriccions al·lèrgics
+						// El plat no tï¿½ restriccions alï¿½lï¿½rgics
 						plat = new Plat(codi, nom, preu, descompte);
 					} else {
-						// El plat sí conté alguna al·lèrgia alimentària
+						// El plat sï¿½ contï¿½ alguna alï¿½lï¿½rgia alimentï¿½ria
 						String[] alergies = new String[3];
 						alergies[0] = paraula;
 						i = 1;
@@ -60,7 +60,7 @@ public class Main2 {
 					}
 					llista.afegirProducte(plat);
 				} else if (paraula.equals(BEGUDA)) {
-					// El producte és de subtipus Plat
+					// El producte ï¿½s de subtipus Plat
 					nom = st.nextToken();
 					preu = Double.parseDouble(st.nextToken());
 					descompte = Double.parseDouble(st.nextToken());
@@ -80,8 +80,8 @@ public class Main2 {
 		return llista;
 	}
 
-	// Mètode per escriure la llista de productes (passat per paràmetre) al fitxer resultant, on el seu nom també és
-	// passat perl paràmetre.
+	// Mï¿½tode per escriure la llista de productes (passat per parï¿½metre) al fitxer resultant, on el seu nom tambï¿½ ï¿½s
+	// passat perl parï¿½metre.
 	public static void escriureFitxerProductes(String nomFitxer, LlistaProducte productes) throws IOException {
 		BufferedWriter f = new BufferedWriter(new FileWriter(nomFitxer));
 		for (int i = 0; i < productes.getnElem(); i++) {
@@ -166,50 +166,46 @@ public class Main2 {
 	}
 
 	public static LlistaComanda llegirFitxerComandes() throws IOException , FileNotFoundException {
-	
+
+		
 		LlistaComanda llistaguardada = new LlistaComanda(); 
-		Comanda comandaguardada = new Comanda(null,0,0,0); // creo les variables que necessito per a poder llegir tot el que tinc al fitxer
+		Comanda comandaguardada = new Comanda(new LlistaProducte(50), 0, 0, 0); // creo una nova comanda buida 
 		int identClient, identComanda, hora, minut, quantitat = 0;
 		String beguda, plat; 
 		BufferedReader f = new BufferedReader(new FileReader("Comandes.txt")); // el fitxer que miro es el comandes.txt
 		String paraula = "";
 		paraula = f.readLine(); //paraula : cada nova cosa que llegeixo 
 		
-		while (paraula != null) {   // mentres la paraula seguent existeixi 
-			
-			StringTokenizer next = new StringTokenizer(paraula, ",");  // primer agafo 
-			identClient = Integer.parseInt(next.nextToken());  
-			identComanda = Integer.parseInt(next.nextToken()); 
-			comandaguardada.setIdentComanda(identComanda); 
-			
-			// while ( )
-			if ((paraula = next.nextToken()) == "."){
-				while ((paraula = next.nextToken())!= ","){
-					plat = next.nextToken(); 
-					quantitat =Integer.parseInt(next.nextToken());
-					comandaguardada.afegirElement(plat,llistacomanda, quantitat, false); 
-				}
-				while ((paraula = next.nextToken())!= ","){
-					
-					beguda = next.nextToken(); 
-					comandaguardada.afegirElement(beguda, llistacomanda, quantitat, false);
-						
-				}
-			}
-			hora = Integer.parseInt(next.nextToken()); 
-			comandaguardada.setHora(hora);
-			minut = Integer.parseInt(next.nextToken()); 
-			comandaguardada.setMinut(minut);
-			int id = llista.consultar_Client(identClient);
-			llista.afegirComandaClient(id, comandaguardada);
 		
+		while (paraula != null) {
+			StringTokenizer st = new StringTokenizer(paraula, ","); // com a separador poso la coma
+			while (st.hasMoreTokens()) {
+				
+				identClient = Integer.parseInt(st.nextToken());  // agafo primer la id del client 
+				identComanda = Integer.parseInt(st.nextToken()); // despres la id de la comanda 
+				comandaguardada.setIdentComanda(identComanda); 
+			
+					while ((paraula = st.nextToken())!= "ya"){ 
+						plat = paraula; 
+						quantitat =Integer.parseInt(st.nextToken());
+						comandaguardada.afegirElement(plat, llistaProducte, quantitat, false); 
+					}
+					
+				hora = Integer.parseInt(st.nextToken()); 
+				comandaguardada.setHora(hora);
+				minut = Integer.parseInt(st.nextToken()); 
+				comandaguardada.setMinut(minut);
+				int id = llista.consultar_Client(identClient);
+				llista.afegirComandaClient(id, comandaguardada);
+			}
 		}
 		f.close();
 		return llistaguardada;
 		
+		
 	}
 	
-	// Mètode per mostrar totes les opcions del menú
+	// Mï¿½tode per mostrar totes les opcions del menï¿½
 	public static void mostraMenu() {
 		System.out.println("\n ******RESTAURANTE ON LINE*******");
 		System.out.println("\nOpcions del menu:");
@@ -218,7 +214,7 @@ public class Main2 {
 		System.out.println("\t3. Carregar els clients del fitxer");
 		System.out.println("\t4. Afegir un nou producte");
 		System.out.println("\t5. Eliminar producte");
-		System.out.println("\t6. Consultar la informació d'un producte ");
+		System.out.println("\t6. Consultar la informaciï¿½ d'un producte ");
 		System.out.println("\t7. Crear un nou client ");
 		System.out.println("\t8. Consultar un client ");
 		System.out.println("\t9. Afegir una comanda ");
@@ -228,7 +224,7 @@ public class Main2 {
 		System.out.println("\t13. Escriure les comandes al fitxer");
 		System.out.println("\t14. Escriure els clients al fitxer");
 		System.out.println("\t15. Sortir");
-		System.out.print("\n\t\t\tIndica opció:\n");
+		System.out.print("\n\t\t\tIndica opciï¿½:\n");
 	}
 	
 	//////////////////////////////////// MATEIXA PART QUE 'Main.java' /////////////////////////////////
@@ -286,7 +282,7 @@ public class Main2 {
 			System.out.print("\n\n\tIndiqui % del descompte :\t");
 			descompte = teclat.nextDouble();
 			teclat.nextLine();
-			System.out.print("\n\n\tIndiqui si té restriccions alimentàries (si/no):\t");
+			System.out.print("\n\n\tIndiqui si tï¿½ restriccions alimentï¿½ries (si/no):\t");
 			if (teclat.nextLine().trim().equalsIgnoreCase("si")) {
 				System.out.print("\n\n\tIndica quina retriccions te aquet plat  :\n");// DEmanar REstriccions
 				System.out.print("\t1.Celiacs  (si/no):\n");
@@ -316,7 +312,7 @@ public class Main2 {
 
 	}
 	
-	// Mètode per eliminar un producte de la llista passat per paràmetre a partir del codi introduït per l'usuari.
+	// Mï¿½tode per eliminar un producte de la llista passat per parï¿½metre a partir del codi introduï¿½t per l'usuari.
 	public static void eliminarProducte(LlistaProducte llistP) {
 		int codi;
 		mostrarProducte(1);
@@ -472,7 +468,7 @@ public class Main2 {
 		System.out.print("\n\n\tIndiqui el codi del producte (1-" + llistP.getnElem() + "): \t");
 		codi = teclat.nextInt();
 		teclat.nextLine();
-		System.out.println("\n   ---------- INFORMACIÓ ---------");
+		System.out.println("\n   ---------- INFORMACIï¿½ ---------");
 		System.out.println(llistP.informacio(codi));
 
 	}
@@ -619,10 +615,10 @@ public class Main2 {
 		}
 	}
 
-	// Mètode auxiliar per mostrar a la consola tots els plats o totes les begudes de la llista global de Productes.
-	// El paràmetre tipus és 1 si mostra els plats, 2 les begudes
+	// Mï¿½tode auxiliar per mostrar a la consola tots els plats o totes les begudes de la llista global de Productes.
+	// El parï¿½metre tipus ï¿½s 1 si mostra els plats, 2 les begudes
 	public static void mostrarProducte(int tipus) {
-		System.out.println("************ Informació del Producte *****************");
+		System.out.println("************ Informaciï¿½ del Producte *****************");
 		for (int i = 0; i < llistaProducte.getnElem(); i++) {
 			if (tipus == 1 && llistaProducte.getLlista()[i] instanceof Plat)
 				System.out.println(llistaProducte.getLlista()[i]);
@@ -636,7 +632,7 @@ public class Main2 {
 	
 	
 	
-	// Mètode principal
+	// Mï¿½tode principal
 	public static void main(String[] args) {
 		boolean carregarProductes,carregarComandes,carregarClients;
 		int opcio = 0;
@@ -692,50 +688,50 @@ public class Main2 {
 				if (carregarProductes)
 					afegirProducte(llistaProducte);
 				else 
-					System.out.println("No està carregada els productes del fitxer!");
+					System.out.println("No estï¿½ carregada els productes del fitxer!");
 				break;
 			case 5:
 				if (carregarProductes)
 					eliminarProducte(llistaProducte);
 				else 
-					System.out.println("No està carregada els productes del fitxer!");
+					System.out.println("No estï¿½ carregada els productes del fitxer!");
 				break;
 			case 6:
 				if (carregarProductes)
 					consultarInformacio(llistaProducte);
 				else 
-					System.out.println("No està carregada els productes del fitxer!");
+					System.out.println("No estï¿½ carregada els productes del fitxer!");
 				break;
 			case 7:
 				if (carregarClients)
 					crearClient();
 				else 
-					System.out.println("No està carregada els clients del fitxer!");
+					System.out.println("No estï¿½ carregada els clients del fitxer!");
 				break;
 			case 8:
 				if (carregarClients)
 					consultarClient();
 				else 
-					System.out.println("No està carregada els clients del fitxer!");
+					System.out.println("No estï¿½ carregada els clients del fitxer!");
 				break;
 			case 9:
 				if (carregarClients && carregarComandes)
 					afegirComanda();
 				else {
-					System.out.println("No està carregada les dades!");
+					System.out.println("No estï¿½ carregada les dades!");
 				}
 				break;
 			case 10:
 				if (carregarClients && carregarComandes)
 					copiarComanda();
 				else 
-					System.out.println("No està carregada les dades!");
+					System.out.println("No estï¿½ carregada les dades!");
 				break;
 			case 11:
 				if (carregarClients && carregarComandes)
 					comandes();
 				else 
-					System.out.println("No està carregada les dades!");
+					System.out.println("No estï¿½ carregada les dades!");
 				break;
 			case 12:
 				if (carregarProductes) {
@@ -775,7 +771,7 @@ public class Main2 {
 				break;
 			default:
 				if (opcio != 15)
-					System.out.println("Opció trïada incorrecte!");
+					System.out.println("Opciï¿½ trï¿½ada incorrecte!");
 				break;
 
 			}

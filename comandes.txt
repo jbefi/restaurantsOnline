@@ -1,4 +1,4 @@
-1,1.carn,2,bistec,2.cola,2,fanta.2.12,33
+1,1,amanida,2,sopa,2,vi,2,ya,12,33
 
-2,2.carn,3,ensalada,1,sandwich,3.cola,3.5,12
+2,2,sopa,3,amanida,1,macarrons,3.fanta,3.5,12
 

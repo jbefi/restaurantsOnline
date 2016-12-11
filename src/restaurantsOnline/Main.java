@@ -138,7 +138,7 @@ public class Main {
 		existeix2 = false;
 		preferent = false;
 
-		Comanda nova = new Comanda(new LlistaProducte(50), 0, 0, 0);
+		Comanda nova = new Comanda(new LlistaProducte(50), 0, 0, 0); // creo una nova comanda buida 
 
 		System.out.println("** Crear comanda **");
 
@@ -151,7 +151,7 @@ public class Main {
 		pas = teclat.nextInt();
 		teclat.nextLine();
 
-		while ((i < llistaClients.getnClients()) && (!existeix1) && (!existeix2)) {
+		while ((i < llistaClients.getnClients()) && (!existeix1) && (!existeix2)) { // part que comprova l'usuari i la contrasenya 
 
 			if (usuari.equals(llistaClients.getLlista()[i].getUsuari())) {
 				existeix1 = true;
@@ -166,15 +166,16 @@ public class Main {
 			}
 			i++;
 		}
-		preferent = llistaClients.passa_Preferent(llistaClients.getLlista()[posiciousuari]);
+		preferent = llistaClients.passa_Preferent(llistaClients.getLlista()[posiciousuari]); // ara que se quina es la pos de la llista del client 
+																							// miro si es prferent per a poder usar-ho despres 
 
-		if (existeix1 && existeix2) {
+		if (existeix1 && existeix2) { // si l'usuari existeix 	
 
 			while (!confirmar) { // bucle que confirma la comanda
 
 				int aux = 0;
 				while (!plats) { // comencem amb els plats
-					mostrarProducte(1); // Muestra todas las bebidas al usuario
+					mostrarProducte(1); //Mostra tots els plats 
 					// demanem a l'usuari els plats i la seva quantitat
 					System.out.println("Introdueix el nom del plat: ");
 					nom = teclat.nextLine();
@@ -183,21 +184,21 @@ public class Main {
 					quantitat = teclat.nextInt();
 					teclat.nextLine();
 
-					aux = nova.afegirElement(nom, llistaProducte, quantitat, preferent);
+					aux = nova.afegirElement(nom, llistaProducte, quantitat, preferent); //afegim un nou element a la comanda 
 
 					if (aux == -1) {
-						System.out.println("No hi ha l'element");
+						System.out.println("No hi ha l'element"); // si l'element no existeix, informo al client 
 					}
 
-					System.out.println("Si vols mes plats, posa l'1, si no, el 2");
+					System.out.println("Si vols mes plats, posa l'1, si no, el 2"); // confirmo el que vol el client 
 					opcio = teclat.nextInt();
 					teclat.nextLine();
 					if (opcio == 2) {
 						plats = true;
 					}
 				}
-				while (!begudes) {
-					mostrarProducte(2); // Muestra todas las bebidas de la lista global
+				while (!begudes) { // te la mateixa estructura que els plats 
+					mostrarProducte(2); // mostra totes les begudes 
 					System.out.println("Introdueix les begudes que vols");
 
 					nom = teclat.nextLine();
@@ -217,14 +218,14 @@ public class Main {
 					}
 				}
 
-				System.out.println("Per veure el resum de la comanda, posa l'1, per eliminar la comanda, el 2");
+				System.out.println("Per veure el resum de la comanda, posa l'1, per eliminar la comanda, el 2"); // poso el resum de la comanda 
 
 				opcio = teclat.nextInt();
 				teclat.nextLine();
 
 				if (opcio == 1) {
 
-					Calendar horaComanda = new GregorianCalendar();
+					Calendar horaComanda = new GregorianCalendar();  // crido aixo per tenir l'hora actual i poder afergir-la a la comanda 
 					int hora, minut;
 
 					hora = horaComanda.get(Calendar.HOUR_OF_DAY);
@@ -236,13 +237,13 @@ public class Main {
 					nova.toString();
 					System.out.println(nova);
 
-					System.out.println("Si vols confirmar la comanda, posa l'1, si no, el 2 ");
+					System.out.println("Si vols confirmar la comanda, posa l'1, si no, el 2 "); // pregunto al client si vol confirmar la comanda
 
 					opcio = teclat.nextInt();
 					teclat.nextLine();
 					if (opcio == 1) {
 
-						int id = llistaClients.getLlista()[posiciousuari].getIdentificador();
+						int id = llistaClients.getLlista()[posiciousuari].getIdentificador(); //busco l'identificador de l'usuari actual i li poso la comanda a la seva llista de comandes 
 						llistaClients.afegirComandaClient(id, nova);
 
 						confirmar = true;
@@ -253,7 +254,7 @@ public class Main {
 					confirmar = true;
 				}
 			}
-		} else {
+		} else { // si l'usuari no existeix informo al client 
 			System.out.println("L'usuari no existeix");
 		}
 	}

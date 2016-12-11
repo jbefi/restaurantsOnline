@@ -474,7 +474,10 @@ class Fines_eliminarProducte extends JFrame {
 	}
 }
 
-
+/**
+ * Afegir Comanda 
+ * Created by Kidu15 on 11/11/16.
+ */
 //********************** AFEGIR COMANDA *************************
 
 //CLASSE PRINCIPAL 
@@ -770,15 +773,15 @@ class Contrasenya extends JFrame{
 			
 			//panel 2 
 			JPanel panel2 = new JPanel(new GridBagLayout()); 
-			JLabel etiqueta3 = new JLabel("MADE BY  ** KIDU 15 ** ");
-			etiqueta3.setForeground(Color.red);
+			
+			
 			JLabel etiqueta1 = new JLabel("Usuari:");
 			JLabel etiqueta2 = new JLabel("Contrasenya (numeros):");
 			
 			JTextField campText = new JTextField(10);
 			JTextField campText2 = new JTextField(10);
 			
-			JButton entrar = new JButton ( "Entrar:"); 
+			JButton entrar = new JButton ( "Entrar"); 
 			entrar.setForeground(Color.blue);
 			// Afegin un objecte de GridBagConstraints per definir les limitacions dels components en el panel
 			GridBagConstraints limit = new GridBagConstraints();
@@ -797,9 +800,7 @@ class Contrasenya extends JFrame{
 			limit.gridx = 0;
 			limit.gridy = 2;
 			panel2.add(entrar, limit); 
-			limit.gridy = 4; 
-			limit.gridx = 1; 
-			panel2.add(etiqueta3,limit);
+			
 			
 			contenidor.add(panel2, BorderLayout.CENTER);
 			//accio del boto ENTRAR

@@ -58,18 +58,18 @@ public class Comanda {
         identComanda=idGeneral;
         idGeneral++;
        
-        aux = producte.posicioProducte(nom); // busco la posicio del producte dins de la llista per a poder copiarlo
+        aux = producte.posicioProducte(nom); // busco la posicio del producte dins de la llista sencera de productes per a poder copiarlo
         
-        descuento = producte.getLlista()[aux].getDescompte(); // busquem la seva 
+        descuento = producte.getLlista()[aux].getDescompte(); // busquem el descompte del producte 
         
       
         if  (aux>=0){
         		
                 this.producte.afegirProducte(producte.getLlista()[aux]);  // afegeixo el producte de la posicio ''aux'' de dins de la LlistaProducte a la llista producte que he creat 
-                this.producte.getLlista()[this.producte.getnElem()-1].setQuantitat(quantitat);
-                this.producte.getLlista()[this.producte.getnElem()-1].calcularPreuTotal();
+                this.producte.getLlista()[this.producte.getnElem()-1].setQuantitat(quantitat); // faig un set de l'atribut quantitat de producte del producte que acabo d'afegir a la nova llista
+                this.producte.getLlista()[this.producte.getnElem()-1].calcularPreuTotal(); // calculo el preu total del producte i més tard, augmento el preu total de la comanda 
                 if (preferent){
-                	this.producte.getLlista()[this.producte.getnElem()-1].aplicarDescompte();
+                	this.producte.getLlista()[this.producte.getnElem()-1].aplicarDescompte(); // si el client es preferent, aplico el descompte (per aixo passo per paràmetre si el client es preferent) 
                 }
         }
         this.preuTotal+= this.producte.getLlista()[this.producte.getnElem()-1].getPreuTotal();
