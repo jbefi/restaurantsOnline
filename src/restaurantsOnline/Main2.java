@@ -594,7 +594,7 @@ public class Main2 {
 		int id = 0;
 		System.out.println("Usuari:");
 		String usuari = teclat.nextLine();
-		boolean exist1 = false, exist2 = false;
+		boolean exist1 = false, exist2 = false, trobat = false;
 		int posusuari = 0;
 
 		System.out.println("Contrasenya:");
@@ -611,11 +611,12 @@ public class Main2 {
 
 			if (exist1 && exist2) {
 				posusuari = i;
+				trobat = true;
 				exist1 = false;
 				exist2 = false;
 			}
 		}
-		if (exist1 && exist2) {
+		if (trobat) {
 			id = llistaClients.getLlista()[posusuari].getIdentificador();
 			System.out.print("\n\n\t La llista de comandes ordenada : \t");
 			System.out.println(llistaClients.consultar_Comandes(id));
