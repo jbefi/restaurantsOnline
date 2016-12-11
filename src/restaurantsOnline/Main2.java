@@ -164,14 +164,19 @@ public class Main2 {
 		}
 		f.close();
 	}
-
+	
+	/**
+	 * Afegir Comanda 
+	 * Created by Kidu15 on 11/11/16.
+	 */
+	
 	public static LlistaComanda llegirFitxerComandes() throws IOException , FileNotFoundException {
 
 		
 		LlistaComanda llistaguardada = new LlistaComanda(); 
 		Comanda comandaguardada = new Comanda(new LlistaProducte(50), 0, 0, 0); // creo una nova comanda buida 
 		int identClient, identComanda, hora, minut, quantitat = 0;
-		String beguda, plat; 
+		String plat; 
 		BufferedReader f = new BufferedReader(new FileReader("Comandes.txt")); // el fitxer que miro es el comandes.txt
 		String paraula = "";
 		paraula = f.readLine(); //paraula : cada nova cosa que llegeixo 
@@ -184,11 +189,13 @@ public class Main2 {
 				identClient = Integer.parseInt(st.nextToken());  // agafo primer la id del client 
 				identComanda = Integer.parseInt(st.nextToken()); // despres la id de la comanda 
 				comandaguardada.setIdentComanda(identComanda); 
-			
-					while ((paraula = st.nextToken())!= "ya"){ 
+				paraula = st.nextToken();
+				
+					while ( !paraula.equals("ya")){ 
 						plat = paraula; 
 						quantitat =Integer.parseInt(st.nextToken());
 						comandaguardada.afegirElement(plat, llistaProducte, quantitat, false); 
+						paraula = st.nextToken();
 					}
 					
 				hora = Integer.parseInt(st.nextToken()); 
@@ -196,8 +203,10 @@ public class Main2 {
 				minut = Integer.parseInt(st.nextToken()); 
 				comandaguardada.setMinut(minut);
 				int id = llista.consultar_Client(identClient);
+				id = llista.getLlista()[id].getIdentificador(); 
 				llista.afegirComandaClient(id, comandaguardada);
 			}
+			paraula = f.readLine();
 		}
 		f.close();
 		return llistaguardada;
