@@ -326,7 +326,6 @@ public class Main {
 		boolean exist1=false, exist2=false;
 		System.out.println("Indica el Usuari del Client:");
 		usuari = teclat.nextLine(); 
-		teclat.nextLine();
 		System.out.println("Indica la contrasenya:");
 		int contra = teclat.nextInt(); 
 		teclat.nextLine();
