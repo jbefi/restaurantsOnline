@@ -1242,15 +1242,6 @@ class Fines_consultarClient extends JFrame {
 				} else {
 					dispose();
 					new Fines_MuestraCliente(llistacl.getLlista()[i]);
-					
-//					boto.addActionListener(new ActionListener() {
-//						public void actionPerformed(ActionEvent ae) {
-//							String val = campText.getText(); //
-//							int id = Integer.parseInt(val);
-//							textArea.setText("");
-//							textArea.append(llistClient.imprimirClient(id)); // consultar client
-//						}
-//					});
 				}
 			}
 		});
@@ -1304,7 +1295,7 @@ class Fines_MuestraCliente extends JFrame {
 		String contra = Integer.toString(client.getContrasenya());
 		JLabel contrasenya = new JLabel(contra);
 		String[] restr = client.getRestriccions();
-		JTextArea textArea = new JTextArea();
+		JLabel restriccions = new JLabel(restr[0]+ "," +restr[1]+ "," +restr[1]);
 		
 		
 		JButton boto = new JButton("Finalitzar");
@@ -1342,16 +1333,12 @@ class Fines_MuestraCliente extends JFrame {
 		limit.gridy = 5;
 		panel2.add(etiqueta7, limit);
 		limit.gridx = 1;
-		panel2.add(textArea, limit);
-		limit.gridx = 1;
+		panel2.add(restriccions, limit);
+		limit.gridx = 0;
 		limit.gridy = 6;
 		panel2.add(boto, limit);
-		
-		textArea.append(restr[0]+ "," +restr[1]+ "," +restr[1]);
 
 		contenidor.add(panel2, BorderLayout.WEST);
-
-
 
 		// Accions del bot�
 		boto.addActionListener(new ActionListener() {
