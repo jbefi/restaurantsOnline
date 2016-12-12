@@ -322,30 +322,21 @@ public class Main {
 		int id;
 		String usuari;
 		int i=0;
-		int pUsuari=0;
-		boolean exist1=false, exist2=false;
 		System.out.println("Indica el Usuari del Client:");
 		usuari = teclat.nextLine(); 
 		System.out.println("Indica la contrasenya:");
 		int contra = teclat.nextInt(); 
 		teclat.nextLine();
 		
-			while  ((i<llistaClients.getnClients())&&(!exist1)&&(!exist2)){
+		i = llistaClients.consultar_Client(usuari);
+		if((i == -1)||(llistaClients.getLlista()[i].getContrasenya()) != contra){
+			System.out.println("L'usuari o la contrasenya son incorrectes");
 			
-				if(usuari.equals(llistaClients.getLlista()[i].getUsuari())){
-					exist1=true; 
-				}
-				if(contra==(llistaClients.getLlista()[i].getContrasenya())){
-					exist2=true; 
-				}
-			
-				if (exist1 && exist2){
-					pUsuari=i; 
-					i++; 
-				}	
-			}
-			id = llistaClients.getLlista()[pUsuari].getIdentificador();
+		}
+		else{
+			id = llistaClients.getLlista()[i].getIdentificador();
 		    System.out.println(llistaClients.imprimirClient(id));
+		}
 	}
 	
 
@@ -402,37 +393,24 @@ public class Main {
 	private static void comandes()
 
 	{
-		int id = 0;
-		System.out.println("Usuari:");
-		String usuari = teclat.nextLine();
-		boolean exist1 = false, exist2 = false, trobat = false;
-		int posusuari = 0;
-
-		System.out.println("Contrasenya:");
-		int pas = teclat.nextInt();
+		int id;
+		String usuari;
+		int i=0;
+		System.out.println("Indica el Usuari del Client:");
+		usuari = teclat.nextLine(); 
+		System.out.println("Indica la contrasenya:");
+		int contra = teclat.nextInt(); 
 		teclat.nextLine();
-		for (int i = 0; i < llistaClients.getnClients(); i++) {
-
-			if (usuari.equals(llistaClients.getLlista()[i].getUsuari())) {
-				exist1 = true;
-			}
-			if (pas == (llistaClients.getLlista()[i].getContrasenya())) {
-				exist2 = true;
-			}
-
-			if (exist1 && exist2) {
-				posusuari = i;
-				trobat = true;
-				exist1 = false;
-				exist2 = false;
-			}
+		
+		i = llistaClients.consultar_Client(usuari);
+		if((i == -1)||(llistaClients.getLlista()[i].getContrasenya()) != contra){
+			System.out.println("L'usuari o la contrasenya son incorrectes");
+			
 		}
-		if (trobat) {
-			id = llistaClients.getLlista()[posusuari].getIdentificador();
+		else{
+			id = llistaClients.getLlista()[i].getIdentificador();
 			System.out.print("\n\n\t La llista de comandes ordenada : \t");
 			System.out.println(llistaClients.consultar_Comandes(id));
-		} else {
-			System.out.println("No existeix aquest usuari amb aquesta contrasenya!\n ");
 		}
 	}
 
