@@ -14,7 +14,7 @@ import restaurantsOnline.Plat;
  * Classe principal per validar tot el funcionament del programa.
  */
 public class Main {
-	// Variables golbals
+	// Variables globals
 	public static LlistaProducte llistaProducte; // llista global de tots els productes.
 	public static LlistaComanda llistaComandes; // llista de totes les comandes.
 	public static LlistaClients llistaClients; // llista de tots els clients.
