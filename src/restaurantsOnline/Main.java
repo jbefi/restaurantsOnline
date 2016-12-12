@@ -172,12 +172,9 @@ public class Main {
 		pas = teclat.nextInt();
 		teclat.nextLine();
 
-<<<<<<< HEAD
+
 		while ((i < llistaClients.getnClients()) && ((!existeix1) && (!existeix2))) { // part que comprova l'usuari i la contrasenya 
-=======
-		while ((i < llistaClients.getnClients()) && (!existeix1) && (!existeix2)) { // part que comprova l'usuari i la
-																					// contrasenya
->>>>>>> origin/master
+
 
 			if (usuari.equals(llistaClients.getLlista()[i].getUsuari())) {
 				existeix1 = true;
@@ -192,18 +189,8 @@ public class Main {
 			}
 			i++;
 		}
-<<<<<<< HEAD
 		
 		preferent = llistaClients.passa_Preferent(llistaClients.getLlista()[posiciousuari]); // ara que se quina es la pos de la llista del client 
-																							// miro si es prferent per a poder usar-ho despres 
-=======
-		preferent = llistaClients.passa_Preferent(llistaClients.getLlista()[posiciousuari]); // ara que se quina es la
-																								// pos de la llista del
-																								// client
-																								// miro si es prferent
-																								// per a poder usar-ho
-																								// despres
->>>>>>> origin/master
 
 		if (existeix1 && existeix2) { // si l'usuari existeix
 
