@@ -151,7 +151,7 @@ public class Main {
 		pas = teclat.nextInt();
 		teclat.nextLine();
 
-		while ((i < llistaClients.getnClients()) && (!existeix1) && (!existeix2)) { // part que comprova l'usuari i la contrasenya 
+		while ((i < llistaClients.getnClients()) && ((!existeix1) && (!existeix2))) { // part que comprova l'usuari i la contrasenya 
 
 			if (usuari.equals(llistaClients.getLlista()[i].getUsuari())) {
 				existeix1 = true;
@@ -166,6 +166,7 @@ public class Main {
 			}
 			i++;
 		}
+		
 		preferent = llistaClients.passa_Preferent(llistaClients.getLlista()[posiciousuari]); // ara que se quina es la pos de la llista del client 
 																							// miro si es prferent per a poder usar-ho despres 
 
@@ -495,7 +496,7 @@ public class Main {
 		// aquesta llista l'afegirem a la comanda del client 3
 		Comanda comanda3 = new Comanda(productesClient3, hora, min, 0);
 		// Afegim les comandes anteriors corresponents de vada client a la llista global dels clients
-		llistaClients.afegirComandaClient(Client1.getIdentificador(), comanda1);
+		llistaClients.afegirComandaClient(Client1.getIdentificador(), comanda1);		
 		llistaClients.afegirComandaClient(Client2.getIdentificador(), comanda2);
 		llistaClients.afegirComandaClient(Client3.getIdentificador(), comanda3);
 
@@ -532,7 +533,7 @@ public class Main {
 				break;
 			default:
 				if (opcio != 9)
-					System.out.println("Opció trïada incorrecte!");
+					System.out.println("Opció trïada incorrectament!");
 				break;
 
 			}

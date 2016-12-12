@@ -564,10 +564,10 @@ class Fines_eliminarProducte extends JFrame {
 				limit.gridx = 1; 
 				limit.gridy = 8; 
 				panel2.add(fer,limit); 
-				fer.setVisible(false); //TODO AQUI
+				fer.setVisible(false); 
 				limit.gridx = 0; 
 				limit.gridy = 1; 
-				panel2.add(confComanda); 
+				panel2.add(confComanda,limit); 
 				limit.gridx = 0; 
 				limit.gridy = 4; 
 				panel2.add(textArea1,limit); 
@@ -603,11 +603,11 @@ class Fines_eliminarProducte extends JFrame {
 				posar.addActionListener(new ActionListener() {
 									
 						public void actionPerformed(ActionEvent ae){
-										
+															
 								auxt = campText2.getText();
 								aux = Integer.parseInt(auxt); 
 								aux = nova.afegirElement(producte, llistaProducte, aux, preferent); //afegim un nou element a la comanda 
-
+								
 								if (aux == -1) {
 									System.out.println("No hi ha l'element"); // si l'element no existeix, informo al client 
 								}
@@ -845,7 +845,8 @@ class Contrasenya extends JFrame{
 					}
 					
 					if( existeix1 && existeix2){
-						preferent = llistaClients.getLlista()[j].getPreferent();
+						preferent = llistaClients.passa_Preferent(llistaClients.getLlista()[j]);
+						
 						id = llistaClients.getLlista()[j].getIdentificador();
 						new afegirComanda("Afegir Comanda", llistaProducte, llistaComanda, llistaClients, preferent, id ); 
 					}
@@ -1613,6 +1614,10 @@ public class Main3 {
 		// aquesta llista l'afegirem a la comanda del client 1
 		Comanda comanda1 = new Comanda(productesClient1, hora, min, 0);
 		llistaClients.creaClient(Client1);
+		llistaClients.afegirComandaClient(Client1.getIdentificador(), comanda1);
+		llistaClients.afegirComandaClient(Client1.getIdentificador(), comanda1);
+		llistaClients.afegirComandaClient(Client1.getIdentificador(), comanda1);
+		llistaClients.afegirComandaClient(Client1.getIdentificador(), comanda1);
 		llistaClients.afegirComandaClient(Client1.getIdentificador(), comanda1);
 		llistaClients.afegirComandaClient(Client1.getIdentificador(), comanda1);
 		Clients Client2 = new Clients("Alex", "avenida Jaume1", "666777444", "alex32", 123, tRestr,
