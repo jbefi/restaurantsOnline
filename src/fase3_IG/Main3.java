@@ -1197,7 +1197,7 @@ class Fines_consultarClient extends JFrame {
 		// Panel 1
 		JPanel panel1 = new JPanel(new BorderLayout());
 		contenidor.add(panel1, BorderLayout.PAGE_START);
-		JLabel etiqueta = new JLabel("CONSULTAR COMANDES", SwingConstants.CENTER);
+		JLabel etiqueta = new JLabel("CONSULTAR CLIENT", SwingConstants.CENTER);
 		panel1.add(etiqueta, SwingConstants.CENTER);
 
 		// Panel 2
