@@ -1,16 +1,20 @@
 ﻿package restaurantsOnline;
 
-import java.io.*;
 import java.util.*;
 
+/**
+ * Classe principal per validar tot el funcionament del programa.
+ */
 public class Main {
-
-	public static LlistaProducte llistaProducte;
-	public static LlistaComanda llistaComandes;
-	public static LlistaClients llistaClients;
-
+	// Variables golbals
+	public static LlistaProducte llistaProducte; // llista global de tots els productes.
+	public static LlistaComanda llistaComandes; // llista de totes les comandes.
+	public static LlistaClients llistaClients; // llista de tots els clients.
 	public static Scanner teclat = new Scanner(System.in);
 
+	/**
+	 * Mètode estàtica per mostra les opcions del menú per la consola.
+	 */
 	public static void mostraMenu() {
 		System.out.println("\n ******RESTAURANTE ON LINE*******");
 
@@ -27,6 +31,13 @@ public class Main {
 		System.out.print("\n\t\t\tIndica opció:\n");
 	}
 
+	/**
+	 * Mètode estàtica per afegir un nou producte. Es demana a l'usuari per introduir totes les informacions
+	 * relacionades amb les propietats que té el plat o la beguda.
+	 *
+	 * @param llistP
+	 *            la llista de producte in ha d'afegir un nou proucte.
+	 */
 	public static void afegirProducte(LlistaProducte llistP)
 
 	{
@@ -108,7 +119,14 @@ public class Main {
 
 	}
 
-	// Mètode per eliminar un producte de la llista passat per paràmetre a partir del codi introduït per l'usuari.
+	/**
+	 * Mètode estàtica per eliminar un producte de la llista passat per paràmetre a partir del codi introduït per
+	 * l'usuari.
+	 *
+	 * @param llistP
+	 *            la llista de producte on conté el producte a eliminar.
+	 * 
+	 */
 	public static void eliminarProducte(LlistaProducte llistP) {
 		int codi;
 		mostrarProducte(1);
@@ -120,7 +138,9 @@ public class Main {
 	}
 
 	/**
-	 * Metode al main que crea una comanda Created by Kidu15 on 11/11/16.
+	 * Mètode estàtica per obrir una nova comanda que s'afegirà a la llista de comanda d'un client en concret. Primer
+	 * cal l'autentificació del client, després s'ha de triar entre els producte i la seva quantitat. Després mostrem el
+	 * resum de la comanda nova i l'usuari tria si accepta aquesta comanda o no.
 	 */
 	public static void afegirComanda() {
 
@@ -138,7 +158,7 @@ public class Main {
 		existeix2 = false;
 		preferent = false;
 
-		Comanda nova = new Comanda(new LlistaProducte(50), 0, 0, 0); // creo una nova comanda buida 
+		Comanda nova = new Comanda(new LlistaProducte(50), 0, 0, 0); // creo una nova comanda buida
 
 		System.out.println("** Crear comanda **");
 
@@ -151,7 +171,8 @@ public class Main {
 		pas = teclat.nextInt();
 		teclat.nextLine();
 
-		while ((i < llistaClients.getnClients()) && (!existeix1) && (!existeix2)) { // part que comprova l'usuari i la contrasenya 
+		while ((i < llistaClients.getnClients()) && (!existeix1) && (!existeix2)) { // part que comprova l'usuari i la
+																					// contrasenya
 
 			if (usuari.equals(llistaClients.getLlista()[i].getUsuari())) {
 				existeix1 = true;
@@ -166,16 +187,20 @@ public class Main {
 			}
 			i++;
 		}
-		preferent = llistaClients.passa_Preferent(llistaClients.getLlista()[posiciousuari]); // ara que se quina es la pos de la llista del client 
-																							// miro si es prferent per a poder usar-ho despres 
+		preferent = llistaClients.passa_Preferent(llistaClients.getLlista()[posiciousuari]); // ara que se quina es la
+																								// pos de la llista del
+																								// client
+																								// miro si es prferent
+																								// per a poder usar-ho
+																								// despres
 
-		if (existeix1 && existeix2) { // si l'usuari existeix 	
+		if (existeix1 && existeix2) { // si l'usuari existeix
 
 			while (!confirmar) { // bucle que confirma la comanda
 
 				int aux = 0;
 				while (!plats) { // comencem amb els plats
-					mostrarProducte(1); //Mostra tots els plats 
+					mostrarProducte(1); // Mostra tots els plats
 					// demanem a l'usuari els plats i la seva quantitat
 					System.out.println("Introdueix el nom del plat: ");
 					nom = teclat.nextLine();
@@ -184,21 +209,22 @@ public class Main {
 					quantitat = teclat.nextInt();
 					teclat.nextLine();
 
-					aux = nova.afegirElement(nom, llistaProducte, quantitat, preferent); //afegim un nou element a la comanda 
+					aux = nova.afegirElement(nom, llistaProducte, quantitat, preferent); // afegim un nou element a la
+																							// comanda
 
 					if (aux == -1) {
-						System.out.println("No hi ha l'element"); // si l'element no existeix, informo al client 
+						System.out.println("No hi ha l'element"); // si l'element no existeix, informo al client
 					}
 
-					System.out.println("Si vols mes plats, posa l'1, si no, el 2"); // confirmo el que vol el client 
+					System.out.println("Si vols mes plats, posa l'1, si no, el 2"); // confirmo el que vol el client
 					opcio = teclat.nextInt();
 					teclat.nextLine();
 					if (opcio == 2) {
 						plats = true;
 					}
 				}
-				while (!begudes) { // te la mateixa estructura que els plats 
-					mostrarProducte(2); // mostra totes les begudes 
+				while (!begudes) { // te la mateixa estructura que els plats
+					mostrarProducte(2); // mostra totes les begudes
 					System.out.println("Introdueix les begudes que vols");
 
 					nom = teclat.nextLine();
@@ -218,14 +244,20 @@ public class Main {
 					}
 				}
 
-				System.out.println("Per veure el resum de la comanda, posa l'1, per eliminar la comanda, el 2"); // poso el resum de la comanda 
+				System.out.println("Per veure el resum de la comanda, posa l'1, per eliminar la comanda, el 2"); // poso
+																													// el
+																													// resum
+																													// de
+																													// la
+																													// comanda
 
 				opcio = teclat.nextInt();
 				teclat.nextLine();
 
 				if (opcio == 1) {
 
-					Calendar horaComanda = new GregorianCalendar();  // crido aixo per tenir l'hora actual i poder afergir-la a la comanda 
+					Calendar horaComanda = new GregorianCalendar(); // crido aixo per tenir l'hora actual i poder
+																	// afergir-la a la comanda
 					int hora, minut;
 
 					hora = horaComanda.get(Calendar.HOUR_OF_DAY);
@@ -237,13 +269,19 @@ public class Main {
 					nova.toString();
 					System.out.println(nova);
 
-					System.out.println("Si vols confirmar la comanda, posa l'1, si no, el 2 "); // pregunto al client si vol confirmar la comanda
+					System.out.println("Si vols confirmar la comanda, posa l'1, si no, el 2 "); // pregunto al client si
+																								// vol confirmar la
+																								// comanda
 
 					opcio = teclat.nextInt();
 					teclat.nextLine();
 					if (opcio == 1) {
 
-						int id = llistaClients.getLlista()[posiciousuari].getIdentificador(); //busco l'identificador de l'usuari actual i li poso la comanda a la seva llista de comandes 
+						int id = llistaClients.getLlista()[posiciousuari].getIdentificador(); // busco l'identificador
+																								// de l'usuari actual i
+																								// li poso la comanda a
+																								// la seva llista de
+																								// comandes
 						llistaClients.afegirComandaClient(id, nova);
 
 						confirmar = true;
@@ -254,11 +292,17 @@ public class Main {
 					confirmar = true;
 				}
 			}
-		} else { // si l'usuari no existeix informo al client 
+		} else { // si l'usuari no existeix informo al client
 			System.out.println("L'usuari no existeix");
 		}
 	}
 
+	/**
+	 * Mètode estàtica per consultar tota la informació d'un producte de la llista global de producte.
+	 *
+	 * @param llistP
+	 *            the llist P
+	 */
 	public static void consultarInformacio(LlistaProducte llistP) {
 
 		int codi;
@@ -270,6 +314,10 @@ public class Main {
 
 	}
 
+	/**
+	 * Mètode estàtica per crear un nou client. Es demana a l'usuari introduir tots els camps relacionats amb els
+	 * atributs del client.
+	 */
 	public static void crearClient() {
 		String nom;
 		String tel;
@@ -316,30 +364,37 @@ public class Main {
 
 	}
 
+	/**
+	 * Mètode estàtica per consultar el client en la llista global dels clients. Es demana l'autentificació del client a
+	 * consultar. Si és correcte, es mostra totes les informacions relacionades amb ell. Si no, es mostra un missatge de
+	 * què el client no es troba en la llista.
+	 */
 	public static void consultarClient()
 
 	{
 		int id;
 		String usuari;
-		int i=0;
+		int i = 0;
 		System.out.println("Indica el Usuari del Client:");
-		usuari = teclat.nextLine(); 
+		usuari = teclat.nextLine();
 		System.out.println("Indica la contrasenya:");
-		int contra = teclat.nextInt(); 
+		int contra = teclat.nextInt();
 		teclat.nextLine();
-		
+
 		i = llistaClients.consultar_Client(usuari);
-		if((i == -1)||(llistaClients.getLlista()[i].getContrasenya()) != contra){
+		if ((i == -1) || (llistaClients.getLlista()[i].getContrasenya()) != contra) {
 			System.out.println("L'usuari o la contrasenya son incorrectes");
-			
-		}
-		else{
+
+		} else {
 			id = llistaClients.getLlista()[i].getIdentificador();
-		    System.out.println(llistaClients.imprimirClient(id));
+			System.out.println(llistaClients.imprimirClient(id));
 		}
 	}
-	
 
+	/**
+	 * Mètode estàtica per copiar una comanda existent i ferr-ne de nova amb els matexios productes. Es demana
+	 * l'autentificació del client.
+	 */
 	private static void copiarComanda()
 
 	{
@@ -390,32 +445,40 @@ public class Main {
 
 	}
 
+	/**
+	 * Mètode per mostrar totes comandes d'un client. Es demana
+	 * l'autentificació del client.
+	 */
 	private static void comandes()
 
 	{
 		int id;
 		String usuari;
-		int i=0;
+		int i = 0;
 		System.out.println("Indica el Usuari del Client:");
-		usuari = teclat.nextLine(); 
+		usuari = teclat.nextLine();
 		System.out.println("Indica la contrasenya:");
-		int contra = teclat.nextInt(); 
+		int contra = teclat.nextInt();
 		teclat.nextLine();
-		
+
 		i = llistaClients.consultar_Client(usuari);
-		if((i == -1)||(llistaClients.getLlista()[i].getContrasenya()) != contra){
+		if ((i == -1) || (llistaClients.getLlista()[i].getContrasenya()) != contra) {
 			System.out.println("L'usuari o la contrasenya son incorrectes");
-			
-		}
-		else{
+
+		} else {
 			id = llistaClients.getLlista()[i].getIdentificador();
 			System.out.print("\n\n\t La llista de comandes ordenada : \t");
 			System.out.println(llistaClients.consultar_Comandes(id));
 		}
 	}
 
-	// Mètode auxiliar per mostrar a la consola tots els plats o totes les begudes de la llista global de Productes.
-	// El paràmetre tipus és 1 si mostra els plats, 2 les begudes
+	
+	/**
+	 * Mètode estàtica auxiliar per mostrar a la consola tots els plats o totes les begudes de la llista global de Productes.
+	 *
+	 * @param tipus si és 1 és el plat i 2 , beguda.
+	 *          
+	 */
 	public static void mostrarProducte(int tipus) {
 		System.out.println("************ Informació del Producte *****************");
 		for (int i = 0; i < llistaProducte.getnElem(); i++) {
@@ -427,7 +490,13 @@ public class Main {
 		System.out.println("******************************************************\n");
 	}
 
-	public static void main(String[] args) throws IOException {
+	/**
+	 * Mètode principal.
+	 *
+	 * @param args
+	 *            
+	 */
+	public static void main(String[] args) {
 		// Primer de tot, inicialitzem una quants productes directament
 		Beguda sprite = new Beguda("Sprite", 1.5, 10, 330, false);
 		Beguda cola = new Beguda("Coca-Cola", 1.6, 5, 330, false);

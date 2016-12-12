@@ -6,12 +6,10 @@ import java.util.*;
 public class Main2 {
 
 	static LlistaClients llista;
-	
 	static LlistaProducte llistacomanda;
-
-	public static LlistaProducte llistaProducte;
-	public static LlistaComanda llistaComandes;
-	public static LlistaClients llistaClients;
+	public static LlistaProducte llistaProducte; // llista global de tots els productes.
+	public static LlistaComanda llistaComandes; // llista de totes les comandes.
+	public static LlistaClients llistaClients; // llista de tots els clients.
 
 	// M�tode est�tica per llegir els productes a partir del fitxer, on el seu nom es passa pel par�metre.
 	public static LlistaProducte llegirFitxerProductes(String nomFitxer) throws IOException, FileNotFoundException {

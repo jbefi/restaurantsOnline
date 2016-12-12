@@ -11,7 +11,6 @@ import restaurantsOnline.Plat;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Objects;
 
 
 class Finestra extends JFrame {
