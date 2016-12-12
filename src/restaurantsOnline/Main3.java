@@ -11,7 +11,6 @@ import restaurantsOnline.Plat;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Objects;
 
 
 class Finestra extends JFrame {
@@ -29,6 +28,7 @@ class Finestra extends JFrame {
 		JPanel panel1 = new JPanel(new BorderLayout());
 		JLabel etiqueta = new JLabel("BENVIGUT AL NOSTRE RESTAURANT!", SwingConstants.CENTER);
 		panel1.add(etiqueta);
+		
 		contenidor.add(panel1, BorderLayout.PAGE_START);
 		// Panel 2
 		JPanel panel2 = new JPanel(new GridBagLayout());
@@ -1127,7 +1127,7 @@ class Fines_CreaClient extends JFrame {
 		JLabel etiqueta3 = new JLabel("Adreca:");
 		JLabel etiqueta4 = new JLabel("Telefon:");
 		JLabel etiqueta5 = new JLabel("Usuari:");
-		JLabel etiqueta6 = new JLabel("Contrasenya:");
+		JLabel etiqueta6 = new JLabel("Contrasenya: (numeros)");
 		JLabel etiqueta7 = new JLabel("Restriccions");
 		JTextField campText2 = new JTextField(10);
 		JTextField campText3 = new JTextField(10);

@@ -53,16 +53,9 @@ public class Comanda {
     public int afegirElement(String nom, LlistaProducte producte, int quantitat, boolean preferent) {  
 
         int aux;
-        double preuProducte = 0;
-        double descuento; 
         identComanda=idGeneral;
         idGeneral++;
-       
         aux = producte.posicioProducte(nom); // busco la posicio del producte dins de la llista sencera de productes per a poder copiarlo
-        
-        descuento = producte.getLlista()[aux].getDescompte(); // busquem el descompte del producte 
-        
-      
         if  (aux>=0){
         		
                 this.producte.afegirProducte(producte.getLlista()[aux]);  // afegeixo el producte de la posicio ''aux'' de dins de la LlistaProducte a la llista producte que he creat 
