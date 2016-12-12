@@ -81,7 +81,7 @@ class Finestra extends JFrame {
 					new Contrasenya("Autentifica't al sistema", llistaClients, llistaProducte, llistaComandes);
 					break;
 				case 7:
-					// Copiar una comanda
+					new ContrasenyaComanda (titol, llistaClients, llistaProducte, llistaComandes );
 					break;
 				}
 			}
@@ -509,10 +509,9 @@ class Fines_eliminarProducte extends JFrame {
 				// PART VEURE PRODUCTES 
 				JButton veure = new JButton("Veure"); 
 				JTextArea textArea = new JTextArea();
-//				JScrollPane jScrollPane=new JScrollPane();
-//				jScrollPane.setViewportView(textArea);
-				// PART CREAR COMANDA
-				
+			
+//				 PART CREAR COMANDA
+//				
 				JLabel etiqueta3 = new JLabel ("Esculli un producte de la llista (nom)");
 				JTextField campText1 = new JTextField(10);
 				JButton continuar = new JButton ("Continuar"); 
@@ -543,7 +542,7 @@ class Fines_eliminarProducte extends JFrame {
 				panel2.add(textArea,limit);
 				etiqueta2.setVisible(true); 
 				veure.setVisible(true);
-				textArea.setVisible(true);
+				textArea.setVisible(false);
 				limit.gridx = 0;
 				panel2.add(etiqueta3,limit); 
 				limit.gridy = 2; 
@@ -565,12 +564,12 @@ class Fines_eliminarProducte extends JFrame {
 				limit.gridx = 1; 
 				limit.gridy = 8; 
 				panel2.add(fer,limit); 
-				fer.setVisible(false); 
+				fer.setVisible(false); //TODO AQUI
 				limit.gridx = 0; 
 				limit.gridy = 1; 
 				panel2.add(confComanda); 
-				limit.gridx = 1; 
-				limit.gridy = 1; 
+				limit.gridx = 0; 
+				limit.gridy = 4; 
 				panel2.add(textArea1,limit); 
 				confComanda.setVisible(false);
 				textArea1.setVisible(false); 
@@ -579,85 +578,195 @@ class Fines_eliminarProducte extends JFrame {
 				//FUNCIONS DELS DIFERENTS BOTONS 
 				
 				veure.addActionListener(new ActionListener() {
-					int i=0; 
+				
 					public void actionPerformed(ActionEvent ae){
 
-						textArea.append(llistaProducte.getLlista()[i].toString());	
+						new Fines_MostrarProductes ( llistaProducte );
 						etiqueta3.setVisible(true);
 						campText1.setVisible(true);
 						continuar.setVisible(true);
 						fer.setVisible(true);
-						
-						continuar.addActionListener(new ActionListener() {
-							
-							public void actionPerformed(ActionEvent ae){
-								producte = campText1.getText(); 
-								quantitat = true;
-								if (quantitat){
-									etiqueta4.setVisible(true);
-									campText2.setVisible(true);
-									posar.setVisible(true); 
-								}
-								posar.addActionListener(new ActionListener() {
-									
-									public void actionPerformed(ActionEvent ae){
-										
-										auxt = campText2.getText();
-										aux = Integer.parseInt(auxt); 
-										aux = nova.afegirElement(producte, llistaProducte, aux, preferent); //afegim un nou element a la comanda 
-
-										if (aux == -1) {
-											System.out.println("No hi ha l'element"); // si l'element no existeix, informo al client 
-										}
-										etiqueta4.setVisible(false);
-										campText2.setVisible(false);
-										posar.setVisible(false);
-										
-										fer.addActionListener(new ActionListener() {
-											
-											public void actionPerformed(ActionEvent ae){
-												textArea.setVisible(false);
-												etiqueta3.setVisible(false);
-												campText1.setVisible(false);
-												continuar.setVisible(false);
-												confComanda.setVisible(true);
-												textArea1.setVisible(true);
-												textArea1.append(nova.toString()); //TODO hacer scroll
-												
-
-												confComanda.addActionListener(new ActionListener() {
-													
-													public void actionPerformed(ActionEvent ae){
-														
-														Calendar horaComanda = new GregorianCalendar();  // crido aixo per tenir l'hora actual i poder afergir-la a la comanda 
-														int hora, minut;
-
-														hora = horaComanda.get(Calendar.HOUR_OF_DAY);
-														minut = horaComanda.get(Calendar.MINUTE);
-
-														nova.setHora(hora);
-														nova.setMinut(minut);
-														
-														llistaClients.afegirComandaClient(id, nova);
-														System.out.println(nova);
-														dispose(); 
-														
-													}
-												});	
-											}
-										});
-									}
-								});
-							}
-						});
 					}
 				});
+				continuar.addActionListener(new ActionListener() {
+							
+						public void actionPerformed(ActionEvent ae){
+							producte = campText1.getText(); 
+							quantitat = true;
+							if (quantitat){
+								etiqueta4.setVisible(true);
+								campText2.setVisible(true);
+								posar.setVisible(true); 
+						}
+						}
+				});
+				posar.addActionListener(new ActionListener() {
+									
+						public void actionPerformed(ActionEvent ae){
+										
+								auxt = campText2.getText();
+								aux = Integer.parseInt(auxt); 
+								aux = nova.afegirElement(producte, llistaProducte, aux, preferent); //afegim un nou element a la comanda 
+
+								if (aux == -1) {
+									System.out.println("No hi ha l'element"); // si l'element no existeix, informo al client 
+								}
+								auxt = "";
+								aux = 0; 
+								etiqueta4.setVisible(false);
+								campText2.setVisible(false);
+								posar.setVisible(false);
+						}
+						});
+								
+				fer.addActionListener(new ActionListener() {
+										
+						public void actionPerformed(ActionEvent ae){
+								textArea.setVisible(false);
+								etiqueta3.setVisible(false);
+								campText1.setVisible(false);
+								continuar.setVisible(false);
+								confComanda.setVisible(true);
+											
+								Calendar horaComanda = new GregorianCalendar();  // crido aixo per tenir l'hora actual i poder afergir-la a la comanda 
+								int hora, minut;
+
+								hora = horaComanda.get(Calendar.HOUR_OF_DAY);
+								minut = horaComanda.get(Calendar.MINUTE);
+
+								nova.setHora(hora);
+								nova.setMinut(minut);
+												
+								new Fines_MostrarComanda(nova); 
+						}
+				});
+				confComanda.addActionListener(new ActionListener() {
+													
+					public void actionPerformed(ActionEvent ae){
+														
+														
+						llistaClients.afegirComandaClient(id, nova);
+						System.out.println(nova);
+						dispose(); 
+														
+					}
+				});	
+					
+				System.out.println(nova);
 				setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Per a poder tancar la finestra atual sense afectar la
 																   // finestra principal
-				setSize(900, 600); // Mida de la finestra
+				setSize(650, 500); // Mida de la finestra
 				setVisible(true);					
 					
-		 }
+		 
+	
+	}
+	}
+	
+	//Classe que mostra la comanda per a poder confirmar-la
+		class Fines_MostrarComanda extends JFrame {
+
+			private static final long serialVersionUID = 1L;
+
+			// Constructor
+			public Fines_MostrarComanda(Comanda nova) {
+				// Contenidor de la fiestra principal, cont� 2 panels horitzontals
+				Container contenidor = getContentPane();
+				contenidor.setLayout(new BorderLayout(10, 10));
+				
+				// Panel 1
+				JPanel panel1 = new JPanel(new BorderLayout());
+				contenidor.add(panel1, BorderLayout.PAGE_START);
+				JLabel etiqueta = new JLabel("Els productes de la teva comanda son aquests:", SwingConstants.CENTER);
+				panel1.add(etiqueta, SwingConstants.CENTER);
+				JButton boto = new JButton("Finalitzar");
+				contenidor.add(boto, BorderLayout.PAGE_END);
+				
+				// Panel 2
+				JPanel panel2 = new JPanel(new GridBagLayout());		
+				
+				// Afegin un objecte de GridBagConstraints per definir les limitacions dels components en el panel
+				GridBagConstraints limit = new GridBagConstraints();
+				limit.anchor = GridBagConstraints.CENTER;
+				limit.insets = new Insets(10, 10, 10, 10);
+				limit.gridx = 0;
+				limit.gridy = 1;
+				JTextArea textArea = new JTextArea();
+				panel2.add(textArea, limit);
+				JScrollPane scroll = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+				
+				
+				contenidor.add(panel2, BorderLayout.CENTER);
+				
+				//LLAMAR AL TO STRING DE LAS COMANDAS Y IMPRIMIRLO
+				textArea.append(nova.toString()); // Mostro la informacio
+				contenidor.add(scroll);
+				
+				// Accions del bot�
+				boto.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent ae) {
+						dispose();
+					}
+				});
+				
+				setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);	// Per a poder tancar la finestra atual sense afectar la
+																	// finestra principal
+				setSize(500, 400); // Mida de la finestra
+				setVisible(true);
+			}
+		}
+
+	//Classe que mostra els productes 
+	class Fines_MostrarProductes extends JFrame {
+
+		private static final long serialVersionUID = 1L;
+
+		// Constructor
+		public Fines_MostrarProductes(LlistaProducte llistaproducte) {
+			// Contenidor de la fiestra principal, cont� 2 panels horitzontals
+			Container contenidor = getContentPane();
+			contenidor.setLayout(new BorderLayout(10, 10));
+			
+			// Panel 1
+			JPanel panel1 = new JPanel(new BorderLayout());
+			contenidor.add(panel1, BorderLayout.PAGE_START);
+			JLabel etiqueta = new JLabel("Els productes son els seguents", SwingConstants.CENTER);
+			panel1.add(etiqueta, SwingConstants.CENTER);
+			JButton boto = new JButton("Finalitzar");
+			contenidor.add(boto, BorderLayout.PAGE_END);
+			
+			// Panel 2
+			JPanel panel2 = new JPanel(new GridBagLayout());		
+			
+			// Afegin un objecte de GridBagConstraints per definir les limitacions dels components en el panel
+			GridBagConstraints limit = new GridBagConstraints();
+			limit.anchor = GridBagConstraints.CENTER;
+			limit.insets = new Insets(10, 10, 10, 10);
+			limit.gridx = 0;
+			limit.gridy = 1;
+			JTextArea textArea = new JTextArea();
+			panel2.add(textArea, limit);
+			JScrollPane scroll = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+			
+			
+			contenidor.add(panel2, BorderLayout.CENTER);
+			
+			//LLAMAR AL TO STRING DE LAS COMANDAS Y IMPRIMIRLO
+			textArea.append(llistaproducte.toString()); // Mostro la informacio
+			contenidor.add(scroll);
+			
+			// Accions del bot�
+			boto.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent ae) {
+					dispose();
+				}
+			});
+			
+			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);	// Per a poder tancar la finestra atual sense afectar la
+																// finestra principal
+			setSize(500, 400); // Mida de la finestra
+			setVisible(true);
+		}
 	}
 	
 
@@ -706,7 +815,7 @@ class Contrasenya extends JFrame{
 			limit.gridy = 2;
 			panel2.add(entrar, limit); 
 			
-			//TODO WST 
+			
 			contenidor.add(panel2, BorderLayout.CENTER);
 			//accio del boto ENTRAR
 			entrar.addActionListener(new ActionListener() { // ENTRAR
@@ -805,6 +914,190 @@ class noCorrecte extends JFrame {
 	}
 }
 
+////// COPIAR COMANDA ///////
+class ContrasenyaComanda extends JFrame{
+	
+	private static final long serialVersionUID = 1L;
+	
+	ContrasenyaComanda (String titol, LlistaClients llistaClients, LlistaProducte llistaProducte, LlistaComanda llistaComanda) {
+	
+		Container contenidor = getContentPane();
+		contenidor.setLayout(new BorderLayout(10, 10));
+		
+		//panel 1
+		JPanel panel1 = new JPanel(new BorderLayout());
+		contenidor.add(panel1, BorderLayout.PAGE_START);
+		JLabel etiqueta = new JLabel("Autentifica't", SwingConstants.CENTER);
+		panel1.add(etiqueta, SwingConstants.CENTER);
+		
+		//panel 2 
+		JPanel panel2 = new JPanel(new GridBagLayout()); 
+		
+		
+		JLabel etiqueta1 = new JLabel("Usuari:");
+		JLabel etiqueta2 = new JLabel("Contrasenya (numeros):");
+		
+		JTextField campText = new JTextField(10);
+		JTextField campText2 = new JTextField(10);
+		
+		JButton entrar = new JButton ( "Entrar"); 
+		entrar.setForeground(Color.blue);
+		// Afegin un objecte de GridBagConstraints per definir les limitacions dels components en el panel
+		GridBagConstraints limit = new GridBagConstraints();
+		limit.anchor = GridBagConstraints.WEST;
+		limit.insets = new Insets(10, 10, 10, 10);
+		limit.gridx = 0;
+		limit.gridy = 0;
+		panel2.add(etiqueta1, limit);
+		limit.gridx = 1;
+		panel2.add(campText, limit);
+		limit.gridx = 0;
+		limit.gridy = 1;
+		panel2.add(etiqueta2, limit);
+		limit.gridx = 1;
+		panel2.add(campText2, limit);
+		limit.gridx = 0;
+		limit.gridy = 2;
+		panel2.add(entrar, limit); 
+		
+		 
+		contenidor.add(panel2, BorderLayout.CENTER);
+		//accio del boto ENTRAR
+		entrar.addActionListener(new ActionListener() { // ENTRAR
+			
+			public void actionPerformed(ActionEvent ae) {
+				boolean existeix1, existeix2; 
+				existeix1=false; 
+				existeix2=false;
+				 
+				int i = 0; 
+				int j = 0; 
+				int id = 0;
+				String usuari = campText.getText(); 
+				String aux = campText2.getText(); 
+				int contrasenya = Integer.parseInt(aux);
+				
+				while ((i < llistaClients.getnClients()) && ((!existeix1) && (!existeix2))) {
+
+					if (usuari.equals(llistaClients.getLlista()[i].getUsuari())) {
+						existeix1 = true;
+					}
+					if (contrasenya == (llistaClients.getLlista()[i].getContrasenya())) {
+						existeix2 = true;
+					}
+					j=i; 
+					i++;
+				}
+				
+				if( existeix1 && existeix2){
+					
+					id = llistaClients.getLlista()[j].getIdentificador();
+					new CopiarComanda( llistaClients, llistaComanda, llistaProducte, id ); 
+				}
+				
+				else {
+					
+					new noCorrecte (); 
+					
+				}
+				
+			}
+		
+		});
+		
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Per a poder tancar la finestra actual sense afectar la
+		// finestra principal
+		setSize(400, 400); // Mida de la finestra
+		setVisible(true);		
+		
+	}
+}
+//classe principal
+class CopiarComanda extends JFrame { 
+	private static final long serialVersionUID = 1L; 
+	int aux = 0; 
+	String auxt=""; 
+	public CopiarComanda ( LlistaClients llistaClients, LlistaComanda llistaComanda, LlistaProducte llistaProducte, int id) {
+			Container contenidor = getContentPane();
+			contenidor.setLayout(new BorderLayout(10, 10));
+			
+			// Panel 1
+			JPanel panel1 = new JPanel(new BorderLayout());
+			contenidor.add(panel1, BorderLayout.PAGE_START);
+			JLabel etiqueta = new JLabel("** Copiar comanda ** ", SwingConstants.CENTER);
+			
+			// PANEL 2
+			JPanel panel2 = new JPanel(new GridBagLayout());
+			JLabel etiqueta2 = new JLabel("Si apreta el boto de ´veure´, se li mostrara la seva llista de comandes:"); 
+			JLabel etiqueta3 = new JLabel("Introdueixi el identificador de la comanda que vol copiar"); 
+			// PART Copiar comanda
+			JButton veure = new JButton("Veure"); 
+			JButton copiar = new JButton ("Copiar"); 
+			JTextField campText = new JTextField(3); 
+			
+			
+			// DEFINIM LIMITACIONS DEL PANEL 
+			GridBagConstraints limit = new GridBagConstraints();
+			// ANEM POSANT ELS DIFERENTS ELEMENTS 
+			limit.anchor = GridBagConstraints.WEST;
+			limit.insets = new Insets(10, 10, 10, 10);
+			limit.gridx = 0;
+			limit.gridy = 0;
+			panel2.add(etiqueta, limit);
+			limit.gridx = 0;
+			limit.gridy = 1;
+			panel2.add(etiqueta2,limit);
+			limit.gridx = 1; 
+			panel2.add(veure,limit); 
+			limit.gridx = 0;
+			limit.gridy = 2;
+			panel2.add(etiqueta3,limit);
+			limit.gridx = 0; 
+			limit.gridy = 3;
+			panel2.add( campText, limit); 
+			limit.gridx = 1; 
+			panel2.add(copiar, limit); 
+			campText.setVisible(false);
+			copiar.setVisible(false);
+			etiqueta3.setVisible(false);
+			
+			
+			contenidor.add(panel2, BorderLayout.CENTER);
+			//FUNCIONS DELS DIFERENTS BOTONS 
+			
+			veure.addActionListener(new ActionListener() {
+			
+				public void actionPerformed(ActionEvent ae){
+
+					
+					new Fines_MostrarComandes(llistaClients.consultar_Comandes(id));
+					campText.setVisible(true);
+					copiar.setVisible(true);
+					etiqueta3.setVisible(true);
+					
+				}
+			});
+			copiar.addActionListener(new ActionListener () {
+				
+				public void actionPerformed (ActionEvent ae){
+					
+					auxt = campText.getText();
+					aux = Integer.parseInt(auxt); 
+					llistaClients.copiar_Comanda(id, aux);
+					dispose(); 
+				}
+				
+			}); 
+			
+			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Per a poder tancar la finestra actual sense afectar la
+			// finestra principal
+			setSize(600,300); // Mida de la finestra
+			setVisible(true);		
+			
+			
+}
+
+}
 
 //////////////////////////////////CREAR CLIENT//////////////////////////////////////////////////////
 

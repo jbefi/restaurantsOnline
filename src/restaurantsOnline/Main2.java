@@ -498,7 +498,7 @@ public class Main2 {
 		tel = teclat.nextLine();
 		System.out.print("\n\n\tIndica el nom d'usuari del client:\t");
 		usuari = teclat.nextLine();
-		System.out.print("\n\n\tIndica el Contrasenya:  del client:\t");
+		System.out.print("\n\n\tIndica la contrasenya del client (numeros):\t");
 		contr = teclat.nextInt();
 
 		teclat.nextLine();
