@@ -1,7 +1,15 @@
-package restaurantsOnline;
+package fase2;
 
 import java.io.*;
 import java.util.*;
+
+import restaurantsOnline.Beguda;
+import restaurantsOnline.Clients;
+import restaurantsOnline.Comanda;
+import restaurantsOnline.LlistaClients;
+import restaurantsOnline.LlistaComanda;
+import restaurantsOnline.LlistaProducte;
+import restaurantsOnline.Plat;
 
 public class Main2 {
 
@@ -13,7 +21,7 @@ public class Main2 {
 
 	/**
 	 * Mètode estàtica per llegir els productes a partir del fitxer, on el seu nom es passa pel paràmetre.
-	 *
+	 * @author Enyu Lin
 	 * @param nomFitxer
 	 *            el nom del fitxer
 	 * @return la llista de tots els productes del fitxer.
