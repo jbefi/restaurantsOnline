@@ -398,39 +398,25 @@ public class Main {
 	private static void copiarComanda()
 
 	{
-		int iden, id = 0;
-		System.out.println("Usuari:");
-		String usuari = teclat.nextLine();
-		boolean exist1 = false, exist2 = false;
-		int posusuari = 0;
-
-		System.out.println("Contrasenya:");
-		int pas = teclat.nextInt();
-		teclat.nextLine();
+		int id;
+		String usuari;
 		int i = 0;
+		System.out.println("Indica el Usuari del Client:");
+		usuari = teclat.nextLine();
+		System.out.println("Indica la contrasenya:");
+		int contra = teclat.nextInt();
+		teclat.nextLine();
 
-		while ((i < llistaClients.getnClients()) && (!exist1) && (!exist2)) {
+		i = llistaClients.consultar_Client(usuari);
+		if ((i == -1) || (llistaClients.getLlista()[i].getContrasenya()) != contra) {
+			System.out.println("L'usuari o la contrasenya son incorrectes");
 
-			if (usuari.equals(llistaClients.getLlista()[i].getUsuari())) {
-				exist1 = true;
-			}
-			if (pas == (llistaClients.getLlista()[i].getContrasenya())) {
-				exist2 = true;
-			}
-
-			if (exist1 && exist2) {
-				posusuari = i;
-
-			}
-			i++;
-		}
-
-		if (exist1 && exist2) {
-			id = llistaClients.getLlista()[posusuari].getIdentificador();
+		} else {
+			id = llistaClients.getLlista()[i].getIdentificador();
 
 			System.out.println(llistaClients.consultar_Comandes(id));
 			System.out.print("\n\n\tIndica el identificador  de la comanda que vols copiar :\t");
-			iden = teclat.nextInt();
+			int iden = teclat.nextInt();
 			teclat.nextLine();
 
 			int j = llistaClients.copiar_Comanda(id, iden);
@@ -439,10 +425,7 @@ public class Main {
 			} else {
 				System.out.print("\n\n\tNo s'ha trobat la comanda \t");
 			}
-		} else {
-			System.out.println("No existeix aquest usuari amb aquesta contrasenya!\n ");
 		}
-
 	}
 
 	/**
