@@ -11,7 +11,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
- * Clase per crear la finestra principal on conté un desplegable de totes les opcions del menú
+ * Clase per crear la finestra principal on contï¿½ un desplegable de totes les opcions del menï¿½
  * 
  * @author Enyu Lin
  */
@@ -23,9 +23,9 @@ class Finestra extends JFrame {
 	 * Constructor
 	 * 
 	 * @param titol
-	 *            el títol de la finestra
+	 *            el tï¿½tol de la finestra
 	 * @param llistaProducte
-	 *            la llista on conté tots els productes.
+	 *            la llista on contï¿½ tots els productes.
 	 * @param llistaComandes
 	 *            la llista de totes les comandes.
 	 * @param llistaClients
@@ -121,7 +121,7 @@ class Fines_AfegirProducte extends JFrame {
 	 * Constructor
 	 * 
 	 * @param titol
-	 *            el títol de la finestra.
+	 *            el tï¿½tol de la finestra.
 	 * @param llistProds
 	 *            la llista de tots els productes.
 	 */
@@ -409,11 +409,11 @@ class Fines_InfoProducte extends JFrame {
 }
 
 
-
+// ****** ELIMINAR PRODUCTE DE LA LLISTA *******
 /**
  * Classe per crear la finestra que serveix per eliminar un producte de la llista.
  * 
- * @author Zineb Jaadi
+ * @author Catalin-Mihai Salvan
  *
  */
 class Fines_eliminarProducte extends JFrame {
@@ -426,7 +426,7 @@ class Fines_eliminarProducte extends JFrame {
 	 * @param titol
 	 * @param llistProds
 	 */
-	public Fines_eliminarProducte(String titol, LlistaProducte llistProds) {
+	public Fines_eliminarProducte(String titol, LlistaProducte llistaProducte) {
 		super(titol);
 
 		Container cont = getContentPane();
@@ -436,9 +436,12 @@ class Fines_eliminarProducte extends JFrame {
 		cont.add(panel1, BorderLayout.PAGE_START);
 		// Panel 2
 		JPanel panel2 = new JPanel(new GridBagLayout());
-		JLabel et2 = new JLabel("Indiqui el codi del producte que vol eliminar (1-" + llistProds.getnElem() + "):");
+		JLabel et2 = new JLabel("Introdueixi el codi del producte de la finestra que vol eliminar ");
+		JButton veure = new JButton("Veure llista"); 
 		JTextField campText = new JTextField(5);
-		JButton boto = new JButton("Cerca");
+		JButton boto = new JButton("Eliminar");
+		boto.setForeground(Color.red);
+		veure.setForeground(Color.blue);
 
 		GridBagConstraints limit = new GridBagConstraints();
 		limit.anchor = GridBagConstraints.WEST;
@@ -446,24 +449,28 @@ class Fines_eliminarProducte extends JFrame {
 		limit.gridx = 0;
 		limit.gridy = 0;
 		panel2.add(et2, limit);
-		limit.gridx = 1;
-		panel2.add(campText, limit);
-		limit.gridx = 2;
-		panel2.add(boto, limit);
-		limit.gridx = 0;
 		limit.gridy = 1;
-		JTextArea textArea = new JTextArea();
-		panel2.add(textArea, limit);
-
+		panel2.add(campText, limit);
+		limit.gridy = 2;
+		panel2.add(boto, limit);
+		limit.gridx = 1;
+		limit.gridy = 4; 
+		panel2.add(veure,limit);
+		
 		cont.add(panel2, BorderLayout.CENTER);
-
+		
 		boto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				String valor = campText.getText(); //
 				int codi = Integer.parseInt(valor);
-				textArea.setText("");
-				textArea.append("S'ha eliminat el producte amb exit");
-				llistProds.eliminarProducte(codi); // eliminar producte
+				llistaProducte.eliminarProducte(codi); // eliminar producte
+				dispose(); 
+			}
+		});
+		
+		veure.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				new Fines_MostrarProductes(llistaProducte);
 			}
 		});
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -795,7 +802,7 @@ class Fines_MostrarProductes extends JFrame {
 }
 
 /**
- * Classe que crea una finestra per l'autentificació del client.
+ * Classe que crea una finestra per l'autentificaciï¿½ del client.
  * 
  * @author Catalin-Mihai Salvan
  *
@@ -905,7 +912,7 @@ class Contrasenya extends JFrame {
 	}
 }
 /**
- * Classe per crear la finestra per informar que l'autentificació del client és incorrecte.
+ * Classe per crear la finestra per informar que l'autentificaciï¿½ del client ï¿½s incorrecte.
  * @author Catalin-Mihai Salvan
  *
  */
@@ -958,7 +965,7 @@ class noCorrecte extends JFrame {
 
 ////// COPIAR COMANDA ///////
 /**
- * Classe per crear la finestra per demanar l'autentificació del client
+ * Classe per crear la finestra per demanar l'autentificaciï¿½ del client
  * @author Catalin-Mihai Salvan
  *
  */
@@ -1166,7 +1173,7 @@ class CopiarComanda extends JFrame {
 
 //////////////////////////////////CONSULTAR CLIENT//////////////////////////////////////////////////////
 /**
- * Classe per crear la finestra per consultar la informació d'un client.
+ * Classe per crear la finestra per consultar la informaciï¿½ d'un client.
  * 
  * @author Pablo Paradinas Prieto
  *
@@ -1370,7 +1377,7 @@ class Fines_CreaClient extends JFrame {
 
 	/**
 	 * Constructor
-	 * @param titol
+	 * @param titolya 
 	 * @param llistacl
 	 */
 	public Fines_CreaClient(String titol, LlistaClients llistacl) {
@@ -1593,7 +1600,7 @@ class Fines_Restriccions extends JFrame {
 }
 
 /**
- *  Classe per crear la finestra  pwer registrar un client.
+ *  Classe per crear la finestra  per registrar un client.
  * @author Pablo Paradinas Prieto
  *
  */
@@ -1795,7 +1802,7 @@ class Fines_MostrarComandes extends JFrame {
 }
 
 /**
- * Classe per crear la finestra on s'informa que el registre del client és incorrecte.
+ * Classe per crear la finestra on s'informa que el registre del client ï¿½s incorrecte.
  * @author  Catalin-Mihai Salvan
  *
  */
@@ -1853,7 +1860,7 @@ class Fines_Incorrecte extends JFrame {
 }
 
 /**
- * Classe principal que inicilitza la primera finestra, on conté un desplegable per mostrar totes opcions del menú.
+ * Classe principal que inicilitza la primera finestra, on contï¿½ un desplegable per mostrar totes opcions del menï¿½.
  * @author Enyu Lin
  */
 public class Main3 {
