@@ -2,13 +2,7 @@
 
 import java.util.*;
 
-import restaurantsOnline.Beguda;
-import restaurantsOnline.Clients;
-import restaurantsOnline.Comanda;
-import restaurantsOnline.LlistaClients;
-import restaurantsOnline.LlistaComanda;
-import restaurantsOnline.LlistaProducte;
-import restaurantsOnline.Plat;
+import restaurantsOnline.*;
 
 /**
  * Classe principal per validar tot el funcionament del programa.

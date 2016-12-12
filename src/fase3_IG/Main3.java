@@ -5,14 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import restaurantsOnline.Beguda;
-import restaurantsOnline.Clients;
-import restaurantsOnline.Comanda;
-import restaurantsOnline.LlistaClients;
-import restaurantsOnline.LlistaComanda;
-import restaurantsOnline.LlistaProducte;
-import restaurantsOnline.Plat;
-import restaurantsOnline.Producte;
+import restaurantsOnline.*;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
