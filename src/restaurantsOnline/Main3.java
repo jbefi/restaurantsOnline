@@ -28,6 +28,7 @@ class Finestra extends JFrame {
 		JPanel panel1 = new JPanel(new BorderLayout());
 		JLabel etiqueta = new JLabel("BENVIGUT AL NOSTRE RESTAURANT!", SwingConstants.CENTER);
 		panel1.add(etiqueta);
+		
 		contenidor.add(panel1, BorderLayout.PAGE_START);
 		// Panel 2
 		JPanel panel2 = new JPanel(new GridBagLayout());
