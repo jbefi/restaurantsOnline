@@ -9,6 +9,8 @@ import restaurantsOnline.Beguda;
 import restaurantsOnline.LlistaProducte;
 import restaurantsOnline.Plat;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Objects;
 
 
@@ -484,10 +486,12 @@ class Fines_eliminarProducte extends JFrame {
 	class afegirComanda extends JFrame {
 		
 		private static final long serialVersionUID = 1L;
-	
-		
+		boolean quantitat=false;
+		String producte, auxt; 
+		int num,aux; 
+		Comanda nova = new Comanda(new LlistaProducte(50), 0, 0, 0); // creo una nova comanda buida 
 		 afegirComanda(String titol, LlistaProducte llistaProducte, LlistaComanda llistaComandes,
-			LlistaClients llistaClients, boolean preferent){
+			LlistaClients llistaClients, boolean preferent, int id){
 			 super(titol); 
 
 			 	Container contenidor = getContentPane();
@@ -501,19 +505,28 @@ class Fines_eliminarProducte extends JFrame {
 				contenidor.add(panel1, BorderLayout.PAGE_START);
 				// PANEL 2
 				JPanel panel2 = new JPanel(new GridBagLayout());
-				JLabel etiqueta2 = new JLabel("Triï una opció per a veure la nostra disponibilitat de productes i escollir-los :"); 
-				//BOTONS DEL MENU PRINCIPAL DE BEGUDES Y PLATS
-				JButton plats = new JButton("Plats"); 
-				JButton begudes = new JButton("Begudes"); 
-				// PART CONFIRMAR COMANDA 
-				JLabel etiqueta3 = new JLabel ("Quan acabi d'escollir els productes, per confirmar la comanda ha d'apretar el boto de confirmar, si no, eliminar ** ");
-				JButton confirmar = new JButton ("Confirmar"); 
-				confirmar.setForeground(Color.GREEN);
-				JButton eliminar = new JButton ("Eliminar/Tancar"); 
-				eliminar.setForeground(Color.RED);
-				// COLOR LLETRES BOTONS
-				plats.setForeground(Color.BLUE);
-				begudes.setForeground(Color.BLUE);
+				JLabel etiqueta2 = new JLabel("Si apreta el boto de ´veure´, se li mostrara una llista de productes:"); 
+				// PART VEURE PRODUCTES 
+				JButton veure = new JButton("Veure"); 
+				JTextArea textArea = new JTextArea();
+//				JScrollPane jScrollPane=new JScrollPane();
+//				jScrollPane.setViewportView(textArea);
+				// PART CREAR COMANDA
+				
+				JLabel etiqueta3 = new JLabel ("Esculli un producte de la llista (nom)");
+				JTextField campText1 = new JTextField(10);
+				JButton continuar = new JButton ("Continuar"); 
+				continuar.setForeground(Color.blue);
+				JLabel etiqueta4 = new JLabel ("Quantitat del producte? ");
+				JTextField campText2 = new JTextField(10);
+				JButton posar = new JButton ("Posar al carro"); 
+				posar.setForeground(Color.green);
+				JButton fer = new JButton ("Fer Comanda"); 
+				fer.setForeground(Color.green);
+				JTextArea textArea1 = new JTextArea(); 
+				JButton confComanda = new JButton("Confirmar Comanda"); 
+				confComanda.setForeground(Color.green);
+				
 				// DEFINIM LIMITACIONS DEL PANEL 
 				GridBagConstraints limit = new GridBagConstraints();
 				// ANEM POSANT ELS DIFERENTS ELEMENTS 
@@ -522,246 +535,138 @@ class Fines_eliminarProducte extends JFrame {
 				limit.gridx = 0;
 				limit.gridy = 0;
 				panel2.add(etiqueta2, limit);
-				limit.gridx = 0;
+				limit.gridx = 1;
+				limit.gridy = 0;
+				panel2.add(veure,limit); 
+				limit.gridx = 1; 
 				limit.gridy = 1;
-				panel2.add(plats,limit); 
+				panel2.add(textArea,limit);
+				etiqueta2.setVisible(true); 
+				veure.setVisible(true);
+				textArea.setVisible(true);
+				limit.gridx = 0;
+				panel2.add(etiqueta3,limit); 
+				limit.gridy = 2; 
+				panel2.add(campText1,limit); 
+				limit.gridy = 3;
+				panel2.add(continuar,limit); 
+				etiqueta3.setVisible(false);
+				campText1.setVisible(false);
+				continuar.setVisible(false);
+				limit.gridy = 4; 
+				panel2.add(etiqueta4,limit);
+				limit.gridy = 5; 
+				panel2.add(campText2,limit);
+				limit.gridy = 6; 
+				panel2.add(posar,limit);
+				etiqueta4.setVisible(false);
+				campText2.setVisible(false);
+				posar.setVisible(false);
+				limit.gridx = 1; 
+				limit.gridy = 8; 
+				panel2.add(fer,limit); 
+				fer.setVisible(false); 
+				limit.gridx = 0; 
+				limit.gridy = 1; 
+				panel2.add(confComanda); 
 				limit.gridx = 1; 
 				limit.gridy = 1; 
-				panel2.add(begudes,limit); 
-				limit.gridx = 0; 
-				limit.gridy = 2; 
-				panel2.add(etiqueta3,limit); 
-				limit.gridx = 0; 
-				limit.gridy = 3; 
-				panel2.add(confirmar,limit);
-				limit.gridx = 1;
-				limit.gridy = 3; 
-				panel2.add(eliminar,limit);
+				panel2.add(textArea1,limit); 
+				confComanda.setVisible(false);
+				textArea1.setVisible(false); 
 				
 				contenidor.add(panel2, BorderLayout.CENTER);
 				//FUNCIONS DELS DIFERENTS BOTONS 
-				plats.addActionListener(new ActionListener() { //obro la finestra dels plats despres d'apretar el boto 
-					public void actionPerformed(ActionEvent ae) {
-						new Plats ("Menú dels plats", llistaProducte, llistaComandes); 
-					}
-				});
-				begudes.addActionListener(new ActionListener() { // obro la finestra de les begudes despres d'apretar el boto
-					public void actionPerformed(ActionEvent ae) {
-						new Begudes ("Menú de les begudes", llistaProducte, llistaComandes); 
-					}
-				});
-				confirmar.addActionListener(new ActionListener(){ 
-					public void actionPerformed(ActionEvent ae){
-						
-						//llistaClients.afegirComandaClient(id, nova);
-						
-					}
-				});
-				eliminar.addActionListener(new ActionListener(){ 
-					public void actionPerformed(ActionEvent ae){
-						dispose(); 
-					}
 				
+				veure.addActionListener(new ActionListener() {
+					int i=0; 
+					public void actionPerformed(ActionEvent ae){
+
+						textArea.append(llistaProducte.getLlista()[i].toString());	
+						etiqueta3.setVisible(true);
+						campText1.setVisible(true);
+						continuar.setVisible(true);
+						fer.setVisible(true);
+						
+						continuar.addActionListener(new ActionListener() {
+							
+							public void actionPerformed(ActionEvent ae){
+								producte = campText1.getText(); 
+								quantitat = true;
+								if (quantitat){
+									etiqueta4.setVisible(true);
+									campText2.setVisible(true);
+									posar.setVisible(true); 
+								}
+								posar.addActionListener(new ActionListener() {
+									
+									public void actionPerformed(ActionEvent ae){
+										
+										auxt = campText2.getText();
+										aux = Integer.parseInt(auxt); 
+										aux = nova.afegirElement(producte, llistaProducte, aux, preferent); //afegim un nou element a la comanda 
+
+										if (aux == -1) {
+											System.out.println("No hi ha l'element"); // si l'element no existeix, informo al client 
+										}
+										etiqueta4.setVisible(false);
+										campText2.setVisible(false);
+										posar.setVisible(false);
+										
+										fer.addActionListener(new ActionListener() {
+											
+											public void actionPerformed(ActionEvent ae){
+												textArea.setVisible(false);
+												etiqueta3.setVisible(false);
+												campText1.setVisible(false);
+												continuar.setVisible(false);
+												confComanda.setVisible(true);
+												textArea1.setVisible(true);
+												textArea1.append(nova.toString()); //TODO hacer scroll
+												
+
+												confComanda.addActionListener(new ActionListener() {
+													
+													public void actionPerformed(ActionEvent ae){
+														
+														Calendar horaComanda = new GregorianCalendar();  // crido aixo per tenir l'hora actual i poder afergir-la a la comanda 
+														int hora, minut;
+
+														hora = horaComanda.get(Calendar.HOUR_OF_DAY);
+														minut = horaComanda.get(Calendar.MINUTE);
+
+														nova.setHora(hora);
+														nova.setMinut(minut);
+														
+														llistaClients.afegirComandaClient(id, nova);
+														System.out.println(nova);
+														dispose(); 
+														
+													}
+												});	
+											}
+										});
+									}
+								});
+							}
+						});
+					}
 				});
-				
 				setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Per a poder tancar la finestra atual sense afectar la
 																   // finestra principal
-				setSize(1000, 350); // Mida de la finestra
+				setSize(900, 600); // Mida de la finestra
 				setVisible(true);					
 					
 		 }
 	}
-	// PLATS 
-	class Plats extends JFrame{
-		
-		private static final long serialVersionUID = 1L;
-		
-		Plats (String titol, LlistaProducte llistaProducte, LlistaComanda llistaComanda) {
-			
-			Container contenidor = getContentPane();
-			contenidor.setLayout(new BorderLayout(10, 10));
-			contenidor.setBackground(Color.black);
-			JPanel panel1 = new JPanel(new BorderLayout());
-			JLabel etiqueta = new JLabel("Els plats del menu aniran apareixent un a un, selecciona ''posar al carro'' si vols el producte  ", SwingConstants.LEFT);
-			panel1.add(etiqueta); // poso la etiqueta del titol etiqueta del titol 
-			contenidor.add(panel1, BorderLayout.PAGE_START);
-			// PART DE POSAR UN NOU PRODUCTE 
-			JButton carro = new JButton("Posar al carro"); // boto de posar al carro
-			carro.setForeground(Color.green);
-			JButton seguent = new JButton ( "Següent"); 
-			seguent.setForeground(Color.blue);
-			// Panel 2
-			JPanel panel2 = new JPanel(new GridBagLayout());
-			panel1.setBackground(Color.black);
-
-			// Afegin un objecte de GridBagConstraints per definir les limitacions dels components en el panel
-			GridBagConstraints limit = new GridBagConstraints();
-			limit.anchor = GridBagConstraints.WEST;
-			limit.insets = new Insets(5, 5, 5, 5);
-			limit.gridx = 0;
-			limit.gridy = 0;
-			panel2.add(etiqueta, limit);  // etiqueta del titol 
-			limit.gridx = 0; 
-			limit.gridy = 1; 
-			panel2.add(seguent,limit); 
-			limit.gridx = 0; 
-			limit.gridy = 2;  
-			panel2.add(carro,limit); 
-			limit.gridy = 3; 
-			JTextArea textArea = new JTextArea();
-			panel2.add(textArea, limit);
-			contenidor.add(panel2, BorderLayout.CENTER);
-			
-			//accio del boto SEGUENT
-			seguent.addActionListener(new ActionListener() {
-				int i=0; 
-				int num=0; 
-				public void actionPerformed(ActionEvent ae) {
-					System.out.println(i);
-				textArea.setText(""); 
-				LlistaProducte llistaplats= new LlistaProducte(llistaProducte.getnElem()); 
-				int k=0; 
-				for ( int j=0; j<llistaProducte.getnElem();j++){
-					if (llistaProducte.getLlista()[j] instanceof Plat){
-						llistaplats.getLlista()[k]= llistaProducte.getLlista()[j];
-						k++; 
-					}
-					
-				}
-					textArea.append(llistaplats.getLlista()[i].toString());
-						if( i<= llistaplats.getnElem()){
-							num=i;
-							llistaComanda.setAyudaIG(num); 
-							i++;
-						}
-						else{
-							i=0; 
-						}
-			
-				}
-			});
-			
-			carro.addActionListener(new ActionListener() { // CARRO 
-				
-				public void actionPerformed (ActionEvent ae) {
-					
-					textArea.setText("");
-					textArea.append("Has d'introduir la quantitat");
-					int num = llistaComanda.getAyudaIG(); 
-					new Quantitat( num, llistaProducte);
-				}
-			}); 
-
-					
-				
-			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Per a poder tancar la finestra actual sense afectar la
-			// finestra principal
-			setSize(600, 600); // Mida de la finestra
-			setVisible(true);		
-		} 
-		
-	}
-	//BEGUDES 
-	class Begudes extends JFrame{
-		
-		private static final long serialVersionUID = 1L;
-		
-		Begudes (String titol, LlistaProducte llistaProducte, LlistaComanda llistaComanda) {
 	
-			
-			Container contenidor = getContentPane();
-			contenidor.setLayout(new BorderLayout(10, 10));
-			contenidor.setBackground(Color.black);
-			JPanel panel1 = new JPanel(new BorderLayout());
-			JLabel etiqueta = new JLabel("Les begudes del menu aniran apareixent un a un, selecciona ''posar al carro'' si vols el producte  ", SwingConstants.LEFT);
-			panel1.add(etiqueta); // poso la etiqueta del titol etiqueta del titol 
-			contenidor.add(panel1, BorderLayout.PAGE_START);
-			// PART DE POSAR UN NOU PRODUCTE 
-			JButton carro = new JButton("Posar al carro"); // boto de posar al carro
-			carro.setForeground(Color.green);
-			JButton seguent = new JButton ( "Següent"); 
-			seguent.setForeground(Color.blue);
-			// Panel 2
-			JPanel panel2 = new JPanel(new GridBagLayout());
-			panel1.setBackground(Color.black);
-
-			// Afegin un objecte de GridBagConstraints per definir les limitacions dels components en el panel
-			GridBagConstraints limit = new GridBagConstraints();
-			limit.anchor = GridBagConstraints.WEST;
-			limit.insets = new Insets(5, 5, 5, 5);
-			limit.gridx = 0;
-			limit.gridy = 0;
-			panel2.add(etiqueta, limit);  // etiqueta del titol 
-			limit.gridx = 0; 
-			limit.gridy = 1; 
-			panel2.add(seguent,limit); 
-			limit.gridx = 0; 
-			limit.gridy = 2;  
-			panel2.add(carro,limit); 
-			limit.gridy = 3; 
-			JTextArea textArea = new JTextArea();
-			panel2.add(textArea, limit);
-			
-			contenidor.add(panel2, BorderLayout.CENTER);
-			
-			//accio del boto SEGUENT
-			seguent.addActionListener(new ActionListener() {
-				int i=0; 
-				int num= 0;
-				public void actionPerformed(ActionEvent ae) {
-					System.out.println(i);
-				textArea.setText(""); 
-				LlistaProducte llistaplats= new LlistaProducte(llistaProducte.getnElem()); 
-				int k=0; 
-				for ( int j=0; j<llistaProducte.getnElem();j++){
-					if (llistaProducte.getLlista()[j] instanceof Beguda){
-						llistaplats.getLlista()[k]= llistaProducte.getLlista()[j];
-						k++; 
-					}
-					
-				}
-					textArea.append(llistaplats.getLlista()[i].toString());
-						if( i<= llistaplats.getnElem()){
-							num=i; 
-							llistaComanda.setAyudaIG(num); 
-							i++;
-						}
-						else{
-							i=0; 
-						}
-					
-				}
-			
-			});
-			
-			carro.addActionListener(new ActionListener() { // CARRO 
-				
-				public void actionPerformed (ActionEvent ae) {
-					
-					textArea.setText("");
-					textArea.append("Has d'introduir la quantitat");
-					int num = llistaComanda.getAyudaIG(); 
-					new Quantitat( num, llistaProducte);
-				}
-			}); 
-			//accio del boto CARRO
-		
-			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Per a poder tancar la finestra actual sense afectar la
-			// finestra principal
-			setSize(600, 600); // Mida de la finestra
-			setVisible(true);		
-		} 
-		
-	}
 
 class Contrasenya extends JFrame{
 		
 		private static final long serialVersionUID = 1L;
 		
 		Contrasenya (String titol, LlistaClients llistaClients, LlistaProducte llistaProducte, LlistaComanda llistaComanda) {
-			
-			LlistaProducte llista = new LlistaProducte (50); 
-			Comanda nova = new Comanda(llista, 0, 0, 0);
+		
 			Container contenidor = getContentPane();
 			contenidor.setLayout(new BorderLayout(10, 10));
 			
@@ -801,7 +706,7 @@ class Contrasenya extends JFrame{
 			limit.gridy = 2;
 			panel2.add(entrar, limit); 
 			
-			
+			//TODO WST 
 			contenidor.add(panel2, BorderLayout.CENTER);
 			//accio del boto ENTRAR
 			entrar.addActionListener(new ActionListener() { // ENTRAR
@@ -813,6 +718,7 @@ class Contrasenya extends JFrame{
 					preferent=false; 
 					int i = 0; 
 					int j = 0; 
+					int id = 0;
 					String usuari = campText.getText(); 
 					String aux = campText2.getText(); 
 					int contrasenya = Integer.parseInt(aux);
@@ -830,8 +736,9 @@ class Contrasenya extends JFrame{
 					}
 					
 					if( existeix1 && existeix2){
-						preferent = llistaClients.getLlista()[j].getPreferent(); 
-						new afegirComanda("Afegir Comanda", llistaProducte, llistaComanda, llistaClients, preferent ); 
+						preferent = llistaClients.getLlista()[j].getPreferent();
+						id = llistaClients.getLlista()[j].getIdentificador();
+						new afegirComanda("Afegir Comanda", llistaProducte, llistaComanda, llistaClients, preferent, id ); 
 					}
 					
 					else {
@@ -898,57 +805,7 @@ class noCorrecte extends JFrame {
 	}
 }
 
-class Quantitat extends JFrame {
 
-private static final long serialVersionUID = 1L; 
-	
-	public Quantitat(int num, LlistaProducte llistaProducte){
-		Container contenidor = getContentPane();
-		contenidor.setLayout(new BorderLayout(10, 10));
-		
-		// Panel 1
-		JPanel panel1 = new JPanel(new BorderLayout());
-		contenidor.add(panel1, BorderLayout.PAGE_START);
-		JLabel etiqueta = new JLabel("Quantitat", SwingConstants.CENTER);
-		panel1.add(etiqueta, SwingConstants.CENTER);
-		// Panel 2
-		JPanel panel2 = new JPanel(new GridBagLayout());
-		JLabel etiqueta2 = new JLabel("Introdueix la quantitat: ");
-		JTextField campText = new JTextField(10);
-		JButton eliminar = new JButton ( "Tancar"); 
-		JButton seleccionar = new JButton ( "Seleccionar ");
-		eliminar.setForeground(Color.RED);
-		
-		GridBagConstraints limit = new GridBagConstraints();
-		limit.anchor = GridBagConstraints.WEST;
-		limit.insets = new Insets(10, 10, 10, 10);
-		limit.gridx = 0;
-		limit.gridy = 0;
-		panel2.add(etiqueta2, limit);
-		limit.gridy = 1;
-		panel2.add(campText,limit); 
-		limit.gridx = 1;
-		limit.gridy = 2; 
-		panel2.add(eliminar, limit); 
-		limit.gridx = 0; 
-		panel2.add(seleccionar,limit);
-		contenidor.add(panel2, BorderLayout.WEST);
-		
-		eliminar.addActionListener(new ActionListener(){ 
-			public void actionPerformed(ActionEvent ae){
-				dispose(); 
-			}
-		
-		});
-		
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Per a poder tancar la finestra actual sense afectar la
-		// finestra principal
-		setSize(400, 200); // Mida de la finestra
-		setVisible(true);		
-		
-		
-	}
-}
 //////////////////////////////////CREAR CLIENT//////////////////////////////////////////////////////
 
 //Classe per crear la finestra que serveix per crear un nou client
