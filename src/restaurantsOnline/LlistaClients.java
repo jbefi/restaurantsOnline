@@ -201,7 +201,7 @@ public class LlistaClients {
 	public boolean passa_Preferent (Clients Client)
 	{
 		
-		if (Client.getComandes().getnElem() > 1)
+		if (Client.getComandes().getnElem() > 5)
 		{
 			Client.setPreferent(true);
 			return true;
