@@ -11,6 +11,7 @@ public class Main {
 	public static LlistaComanda llistaComandes; // llista de totes les comandes.
 	public static LlistaClients llistaClients; // llista de tots els clients.
 	public static Scanner teclat = new Scanner(System.in);
+	
 
 	/**
 	 * Mètode estàtica per mostra les opcions del menú per la consola.
