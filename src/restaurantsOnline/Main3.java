@@ -1126,7 +1126,7 @@ class Fines_CreaClient extends JFrame {
 		JLabel etiqueta3 = new JLabel("Adreca:");
 		JLabel etiqueta4 = new JLabel("Telefon:");
 		JLabel etiqueta5 = new JLabel("Usuari:");
-		JLabel etiqueta6 = new JLabel("Contrasenya:");
+		JLabel etiqueta6 = new JLabel("Contrasenya: (numeros)");
 		JLabel etiqueta7 = new JLabel("Restriccions");
 		JTextField campText2 = new JTextField(10);
 		JTextField campText3 = new JTextField(10);
