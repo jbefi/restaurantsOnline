@@ -408,65 +408,7 @@ class Fines_InfoProducte extends JFrame {
 	}
 }
 
-/**
- * Classe per crear la finestra per consultar la informació d'un client.
- * 
- * @author Zineb Jaadi
- *
- */
-class Fines_consultarClient extends JFrame {
 
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * Constructor
-	 * 
-	 * @param titol
-	 * @param llistClient
-	 */
-	public Fines_consultarClient(String titol, LlistaClients llistClient) {
-
-		Container cont = getContentPane();
-		cont.setLayout(new BorderLayout(10, 10));
-		// Panel 1
-		JPanel panel1 = new JPanel(new BorderLayout());
-		cont.add(panel1, BorderLayout.PAGE_START);
-		// Panel 2
-		JPanel panel2 = new JPanel(new GridBagLayout());
-		JLabel et2 = new JLabel("Indiqui el id del client que vol consultar (1-" + llistClient.getnClients() + "):");
-		JTextField campText = new JTextField(5);
-		JButton boto = new JButton("Cerca");
-
-		GridBagConstraints limit = new GridBagConstraints();
-		limit.anchor = GridBagConstraints.WEST;
-		limit.insets = new Insets(10, 10, 10, 10);
-		limit.gridx = 0;
-		limit.gridy = 0;
-		panel2.add(et2, limit);
-		limit.gridx = 1;
-		panel2.add(campText, limit);
-		limit.gridx = 2;
-		panel2.add(boto, limit);
-		limit.gridx = 0;
-		limit.gridy = 1;
-		JTextArea textArea = new JTextArea();
-		panel2.add(textArea, limit);
-
-		cont.add(panel2, BorderLayout.CENTER);
-
-		boto.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) {
-				String val = campText.getText(); //
-				int id = Integer.parseInt(val);
-				textArea.setText("");
-				textArea.append(llistClient.imprimirClient(id)); // consultar client
-			}
-		});
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setSize(1000, 500);
-		setVisible(true);
-	}
-}
 
 /**
  * Classe per crear la finestra que serveix per eliminar un producte de la llista.
@@ -1220,6 +1162,213 @@ class CopiarComanda extends JFrame {
 	}
 
 }
+
+
+//////////////////////////////////CONSULTAR CLIENT//////////////////////////////////////////////////////
+/**
+ * Classe per crear la finestra per consultar la informació d'un client.
+ * 
+ * @author Pablo Paradinas Prieto
+ *
+ */
+class Fines_consultarClient extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Constructor
+	 * 
+	 * @param titol
+	 * @param llistClient
+	 */
+	public Fines_consultarClient(String titol, LlistaClients llistacl) {
+
+		//Contenidor de la fiestra principal, contï¿½ 2 panels horitzontals
+		Container contenidor = getContentPane();
+		contenidor.setLayout(new BorderLayout(10, 10));
+
+		// Panel 1
+		JPanel panel1 = new JPanel(new BorderLayout());
+		contenidor.add(panel1, BorderLayout.PAGE_START);
+		JLabel etiqueta = new JLabel("CONSULTAR COMANDES", SwingConstants.CENTER);
+		panel1.add(etiqueta, SwingConstants.CENTER);
+
+		// Panel 2
+		JPanel panel2 = new JPanel(new GridBagLayout());
+		JLabel etiqueta1 = new JLabel("Usuari:");
+		JLabel etiqueta2 = new JLabel("Contrasenya: (numeros)");
+		JTextField campText1 = new JTextField(10);
+		JTextField campText2 = new JTextField(10);
+		JButton boto = new JButton("CONSULTAR");
+
+		// Afegin un objecte de GridBagConstraints per definir les limitacions dels components en el panel
+		GridBagConstraints limit = new GridBagConstraints();
+		limit.anchor = GridBagConstraints.CENTER;
+		limit.insets = new Insets(10, 10, 10, 10);
+		limit.gridx = 0;
+		limit.gridy = 0;
+		panel2.add(etiqueta1, limit);
+		limit.gridx = 1;
+		panel2.add(campText1, limit);
+		limit.gridx = 0;
+		limit.gridy = 1;
+		panel2.add(etiqueta2, limit);
+		limit.gridx = 1;
+		panel2.add(campText2, limit);
+		limit.gridx = 3;
+		panel2.add(boto, limit);
+		limit.gridx = 3;
+		limit.gridy = 2;
+		JTextArea textArea = new JTextArea();
+		panel2.add(textArea, limit);
+
+		contenidor.add(panel2, BorderLayout.CENTER);
+
+		// Accions del botï¿½
+		boto.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent ae) {
+
+				String usu = campText1.getText(); // Agafo el nom
+				String contrasenya = campText2.getText(); // Agafo la contrasenya del camp de text
+				int pass = Integer.parseInt(contrasenya); // Agafo la contrasenya
+				// LLAMAR A UNA FUNCION QUE NOS DIGA LA POSICION DE LA LISTA DEL CLIENTE
+
+				int i = 0;
+				i = llistacl.consultar_Client(usu);
+				if ((i == -1) || (llistacl.getLlista()[i].getContrasenya()) != pass) {
+					new Fines_Incorrecte();
+
+				} else {
+					dispose();
+					new Fines_MuestraCliente(llistacl.getLlista()[i]);
+					
+//					boto.addActionListener(new ActionListener() {
+//						public void actionPerformed(ActionEvent ae) {
+//							String val = campText.getText(); //
+//							int id = Integer.parseInt(val);
+//							textArea.setText("");
+//							textArea.append(llistClient.imprimirClient(id)); // consultar client
+//						}
+//					});
+				}
+			}
+		});
+
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Per a poder tancar la finestra atual sense afectar la
+		// finestra principal
+		setSize(500, 400); // Mida de la finestra
+		setVisible(true);
+	}
+}
+
+
+/**
+ * Classe que mostra el client consultat
+ * @author Pablo Paradinas Prieto
+ *
+ */
+class Fines_MuestraCliente extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Constructor
+	 * @param titol
+	 * @param llistacl
+	 */
+	public Fines_MuestraCliente(Clients client) {
+
+		// Contenidor de la finestra principal, contï¿½ 2 panels horitzontals
+		Container contenidor = getContentPane();
+		contenidor.setLayout(new BorderLayout(10, 10));
+
+		// Panel 1
+		JPanel panel1 = new JPanel(new BorderLayout());
+		contenidor.add(panel1, BorderLayout.PAGE_START);
+		JLabel etiqueta = new JLabel("CLIENT", SwingConstants.CENTER);
+		panel1.add(etiqueta, SwingConstants.CENTER);
+		// Panel 2
+		JPanel panel2 = new JPanel(new GridBagLayout());
+		JLabel etiqueta2 = new JLabel("Nom:");
+		JLabel etiqueta3 = new JLabel("Adreca:");
+		JLabel etiqueta4 = new JLabel("Telefon:");
+		JLabel etiqueta5 = new JLabel("Usuari:");
+		JLabel etiqueta6 = new JLabel("Contrasenya:");
+		JLabel etiqueta7 = new JLabel("Restriccions:");
+		
+		JLabel nom = new JLabel(client.getNom_client());
+		JLabel adreca = new JLabel(client.getAdreca());
+		JLabel telefon = new JLabel(client.getTelefon());
+		JLabel usuari = new JLabel(client.getUsuari());
+		String contra = Integer.toString(client.getContrasenya());
+		JLabel contrasenya = new JLabel(contra);
+		String[] restr = client.getRestriccions();
+		JTextArea textArea = new JTextArea();
+		
+		
+		JButton boto = new JButton("Finalitzar");
+
+		// Afegin un objecte de GridBagConstraints per definir les limitacions dels components en el panel
+		GridBagConstraints limit = new GridBagConstraints();
+		limit.anchor = GridBagConstraints.WEST;
+		limit.insets = new Insets(10, 10, 10, 10);
+		limit.gridx = 0;
+		limit.gridy = 0;
+		panel2.add(etiqueta2, limit);
+		limit.gridx = 1;
+		panel2.add(nom, limit);
+		limit.gridx = 0;
+		limit.gridy = 1;
+		panel2.add(etiqueta3, limit);
+		limit.gridx = 1;
+		panel2.add(adreca, limit);
+		limit.gridx = 0;
+		limit.gridy = 2;
+		panel2.add(etiqueta4, limit);
+		limit.gridx = 1;
+		panel2.add(telefon, limit);
+		limit.gridx = 0;
+		limit.gridy = 3;
+		panel2.add(etiqueta5, limit);
+		limit.gridx = 1;
+		panel2.add(usuari, limit);
+		limit.gridx = 0;
+		limit.gridy = 4;
+		panel2.add(etiqueta6, limit);
+		limit.gridx = 1;
+		panel2.add(contrasenya, limit);
+		limit.gridx = 0;
+		limit.gridy = 5;
+		panel2.add(etiqueta7, limit);
+		limit.gridx = 1;
+		panel2.add(textArea, limit);
+		limit.gridx = 1;
+		limit.gridy = 6;
+		panel2.add(boto, limit);
+		
+		textArea.append(restr[0]+ "," +restr[1]+ "," +restr[1]);
+
+		contenidor.add(panel2, BorderLayout.WEST);
+
+
+
+		// Accions del botï¿½
+		boto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+
+				dispose();
+
+			}
+		});
+
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Per a poder tancar la finestra atual sense afectar la
+		// finestra principal
+		setSize(500, 400); // Mida de la finestra
+		setVisible(true);
+	}
+}
+
 
 ////////////////////////////////// CREAR CLIENT//////////////////////////////////////////////////////
 
