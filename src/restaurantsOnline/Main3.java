@@ -1032,7 +1032,9 @@ class CopiarComanda extends JFrame {
 			JLabel etiqueta3 = new JLabel("Introdueixi el identificador de la comanda que vol copiar"); 
 			// PART Copiar comanda
 			JButton veure = new JButton("Veure"); 
+			veure.setForeground(Color.blue);
 			JButton copiar = new JButton ("Copiar"); 
+			copiar.setForeground(Color.green);
 			JTextField campText = new JTextField(3); 
 			
 			
