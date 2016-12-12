@@ -156,7 +156,7 @@ public class Main2 {
 			f.write(clients.getLlista()[i].getAdreca() + ",");
 			f.write(clients.getLlista()[i].getTelefon() + ",");
 			f.write(clients.getLlista()[i].getUsuari() + ",");
-			f.write(clients.getLlista()[i].getContrasenya() + ",");
+			f.write(clients.getLlista()[i].getContrasenya() + "");
 
 			f.newLine();
 		}
