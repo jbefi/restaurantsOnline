@@ -276,9 +276,8 @@ public class Main2 {
 		System.out.println("\t10. Copiar  una comanda ");
 		System.out.println("\t11. Llistar  totes les comandes d'un client ");
 		System.out.println("\t12. Escriure els productes al fitxer");
-		System.out.println("\t13. Escriure les comandes al fitxer");
-		System.out.println("\t14. Escriure els clients al fitxer");
-		System.out.println("\t15. Sortir");
+		System.out.println("\t13. Escriure els clients al fitxer");
+		System.out.println("\t14. Sortir");
 		System.out.print("\n\t\t\tIndica opci�:\n");
 	}
 
@@ -867,19 +866,6 @@ public class Main2 {
 				}
 				break;
 			case 13:
-				if (carregarComandes) {
-					// TODO: Catalin
-					// try {
-					//
-					//
-					// } catch (IOException e) {
-					// System.out.println("Error en : " + e);
-					// }
-				} else {
-					System.out.println("No hi ha informacions dels productes per escriure al fitxer!");
-				}
-				break;
-			case 14:
 				if (carregarClients) {
 					try {
 						escriureFitxerClients(llistaClients);
@@ -891,7 +877,7 @@ public class Main2 {
 				}
 				break;
 			default:
-				if (opcio != 15)
+				if (opcio != 14)
 					System.out.println("Opci� tr�ada incorrecte!");
 				break;
 
