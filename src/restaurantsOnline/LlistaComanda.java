@@ -23,10 +23,7 @@ public class LlistaComanda {
     	nElem = 0; 
     }
     
-    public LlistaComanda(Comanda[] comandes){
-    	llista=comandes;
-        nElem=comandes.length;
-    }
+   
 
     //mètodes
 
